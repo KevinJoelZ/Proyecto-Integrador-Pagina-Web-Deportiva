@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planes y Precios | Entrenamiento Deportivo</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="entrenadores.html">Entrenadores</a></li>
+                <li><a href="planes.html" class="activo">Planes y Precios</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Planes y Precios</h1>
+        <table class="tabla-planes">
+            <tr>
+                <th>Plan</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+            </tr>
+            <tr>
+                <td>Básico</td>
+                <td>Acceso a rutinas personalizadas y seguimiento mensual.</td>
+                <td>$20/mes</td>
+            </tr>
+            <tr>
+                <td>Premium</td>
+                <td>Incluye asesoría directa con entrenadores y rutinas avanzadas.</td>
+                <td>$35/mes</td>
+            </tr>
+            <tr>
+                <td>Elite</td>
+                <td>Entrenamiento 1 a 1, seguimiento semanal y acceso a eventos exclusivos.</td>
+                <td>$50/mes</td>
+            </tr>
+        </table>
+    </main>
+    <footer>
+        <p>&copy; <span id="anio"></span> Plataforma de Entrenamiento Deportivo Personalizado</p>
+    </footer>
+    <script>
+        document.getElementById('anio').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html> 

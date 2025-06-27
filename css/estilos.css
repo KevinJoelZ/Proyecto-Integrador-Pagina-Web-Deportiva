@@ -1,0 +1,165 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f7fafc;
+    color: #222;
+}
+header {
+    background: #4fc3f7;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background: #4fc3f7;
+}
+nav ul li {
+    margin: 0 1.5rem;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 1rem 0.5rem;
+    transition: color 0.2s;
+}
+nav ul li a.activo, nav ul li a:hover {
+    color: #ffb74d;
+}
+main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+.bienvenida {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.bienvenida h1 {
+    color: #1976d2;
+    margin-bottom: 0.5rem;
+}
+.bienvenida .btn {
+    display: inline-block;
+    background: #81c784;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 1rem;
+    transition: background 0.2s;
+}
+.bienvenida .btn:hover {
+    background: #388e3c;
+}
+.mision-vision {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.mision-vision div {
+    background: #e3f2fd;
+    padding: 1.5rem;
+    border-radius: 10px;
+    flex: 1;
+}
+.servicio {
+    background: #fffde7;
+    border-left: 6px solid #ffb74d;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+.entrenador {
+    display: flex;
+    align-items: center;
+    background: #e0f7fa;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    gap: 1.5rem;
+}
+.entrenador img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #4fc3f7;
+}
+.tabla-planes {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+.tabla-planes th, .tabla-planes td {
+    border: 1px solid #bdbdbd;
+    padding: 1rem;
+    text-align: center;
+}
+.tabla-planes th {
+    background: #4fc3f7;
+    color: #fff;
+}
+.tabla-planes td {
+    background: #e3f2fd;
+}
+.form-contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto 2rem auto;
+}
+.form-contacto input, .form-contacto textarea {
+    padding: 0.75rem;
+    border: 1px solid #bdbdbd;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+.form-contacto button {
+    background: #ffb74d;
+    color: #fff;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.form-contacto button:hover {
+    background: #ffa726;
+}
+.redes-sociales {
+    text-align: center;
+    margin-top: 1rem;
+}
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background: #4fc3f7;
+    color: #fff;
+    margin-top: 2rem;
+    border-radius: 0 0 12px 12px;
+}
+@media (max-width: 700px) {
+    main {
+        padding: 0.5rem;
+    }
+    .mision-vision {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .entrenador {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+} 

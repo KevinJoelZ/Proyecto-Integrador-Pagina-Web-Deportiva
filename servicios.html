@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios | Entrenamiento Deportivo</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="servicios.html" class="activo">Servicios</a></li>
+                <li><a href="entrenadores.html">Entrenadores</a></li>
+                <li><a href="planes.html">Planes y Precios</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Servicios de Entrenamiento</h1>
+        <section class="servicio">
+            <h2>Volley</h2>
+            <p>Entrenamientos personalizados de voleibol para todos los niveles, enfocados en técnica, táctica y condición física.</p>
+        </section>
+        <section class="servicio">
+            <h2>Fitness</h2>
+            <p>Rutinas de fitness adaptadas a tus objetivos: pérdida de peso, tonificación, fuerza y bienestar general.</p>
+        </section>
+        <section class="servicio">
+            <h2>Otros Deportes</h2>
+            <p>Entrenamiento personalizado en deportes como fútbol, baloncesto, running y más. ¡Consúltanos!</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; <span id="anio"></span> Plataforma de Entrenamiento Deportivo Personalizado</p>
+    </footer>
+    <script>
+        document.getElementById('anio').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html> 
