@@ -33,11 +33,11 @@ nav ul li a {
     text-decoration: none;
     color: #fff;
     font-weight: 600;
-    padding: 0.9rem 1.2rem;
+    padding: 1.2rem 1.7rem; /* más alto y ancho */
     border-radius: 18px;
     transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-    font-size: 1.08rem;
-    letter-spacing: 0.02em;
+    font-size: 1.22rem; /* más grande */
+    letter-spacing: 0.025em;
 }
 nav ul li a.activo, nav ul li a:hover {
     color: #fff;
@@ -45,9 +45,9 @@ nav ul li a.activo, nav ul li a:hover {
     box-shadow: 0 2px 8px rgba(255,183,77,0.12);
 }
 main {
-    max-width: 950px;
+    max-width: 1030px; /* antes 950px, +4cm aprox */
     margin: 2.5rem auto;
-    padding: 2rem 2.5vw;
+    padding: 2.5rem 3.5vw; /* más espacio lateral */
     background: rgba(255,255,255,0.85);
     border-radius: 18px;
     box-shadow: 0 4px 32px rgba(33, 150, 243, 0.10);
@@ -149,30 +149,124 @@ main {
 }
 footer {
     text-align: center;
-    padding: 1.2rem 0;
+    padding: 0.7rem 0; /* menos padding */
     background: rgba(79, 195, 247, 0.92);
     color: #fff;
     margin-top: 2.5rem;
     border-radius: 0 0 18px 18px;
-    font-size: 1.05rem;
+    font-size: 0.95rem; /* más pequeño */
     letter-spacing: 0.01em;
     box-shadow: 0 -2px 12px rgba(33,150,243,0.07);
 }
+.titulo-entrenadores {
+    text-align: center;
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: #1976d2;
+    margin-bottom: 2.2rem;
+    letter-spacing: 0.01em;
+}
+.entrenadores-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
 .entrenador {
-    display: flex;
-    align-items: center;
-    background: #e0f7fa;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    border-radius: 8px;
-    gap: 1.5rem;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(33, 150, 243, 0.10);
+    padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+    transition: transform 0.18s, box-shadow 0.18s;
+    border: 1.5px solid #e3f2fd;
+    text-align: center;
+    position: relative;
+}
+.entrenador:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(33, 150, 243, 0.16);
+    border-color: #90caf9;
 }
 .entrenador img {
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #4fc3f7;
+    border: 4px solid #4fc3f7;
+    margin-bottom: 1.1rem;
+    box-shadow: 0 2px 12px rgba(33,150,243,0.10);
+    background: #e3f2fd;
+}
+.entrenador h2 {
+    color: #1976d2;
+    font-size: 1.22rem;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+}
+.entrenador p {
+    color: #444;
+    font-size: 1.05rem;
+    margin-bottom: 0;
+}
+.titulo-planes {
+    text-align: center;
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: #1976d2;
+    margin-bottom: 2.2rem;
+    letter-spacing: 0.01em;
+}
+.planes-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+.plan-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(33, 150, 243, 0.10);
+    padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+    transition: transform 0.18s, box-shadow 0.18s;
+    border: 1.5px solid #e3f2fd;
+    text-align: center;
+    position: relative;
+}
+.plan-card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(33, 150, 243, 0.16);
+    border-color: #90caf9;
+}
+.plan-card h2 {
+    color: #1976d2;
+    font-size: 1.35rem;
+    margin-bottom: 0.7rem;
+    font-weight: 600;
+}
+.plan-precio {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #43e97b;
+    margin-bottom: 1.1rem;
+}
+.plan-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.plan-card ul li {
+    font-size: 1.08rem;
+    color: #444;
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.2em;
+}
+.plan-card ul li::before {
+    content: '✔';
+    color: #43e97b;
+    position: absolute;
+    left: 0;
+    font-size: 1.1em;
 }
 .tabla-planes {
     width: 100%;
@@ -238,6 +332,45 @@ footer {
 .redes-sociales {
     text-align: center;
     margin-top: 1rem;
+}
+.titulo-servicios {
+    text-align: center;
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: #1976d2;
+    margin-bottom: 2.2rem;
+    letter-spacing: 0.01em;
+}
+.servicios-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+.servicio {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(33, 150, 243, 0.10);
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    transition: transform 0.18s, box-shadow 0.18s;
+    border: 1.5px solid #e3f2fd;
+    text-align: center;
+}
+.servicio:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(33, 150, 243, 0.16);
+    border-color: #90caf9;
+}
+.servicio h2 {
+    color: #1976d2;
+    font-size: 1.35rem;
+    margin-bottom: 0.7rem;
+    font-weight: 600;
+}
+.servicio p {
+    color: #444;
+    font-size: 1.08rem;
+    margin-bottom: 0;
 }
 @media (max-width: 900px) {
     main {
