@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrenamiento Deportivo Personalizado</title>
+    <title>DeporteFit - Plataforma de Entrenamiento Deportivo</title>
     <link rel="stylesheet" href="css/estilos.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
         <nav>
+            <div class="logo">
+                <i class="fas fa-dumbbell"></i>
+                <span>DeporteFit</span>
+            </div>
             <ul>
                 <li><a href="index.html" class="activo">Inicio</a></li>
                 <li><a href="servicios.html">Servicios</a></li>
@@ -18,41 +23,288 @@
             </ul>
         </nav>
     </header>
+
     <main>
-        <section class="bienvenida">
-            <h1 style="font-size:2rem; font-weight:600; margin-bottom:0.5em;">¡Bienvenido a la Plataforma de Entrenamiento Deportivo Personalizado!</h1>
-            <p style="font-size:1.2rem; max-width:700px; margin:0 auto 1em auto;">En nuestra plataforma, te acompañamos a alcanzar tu máximo potencial físico y mental a través de programas de entrenamiento diseñados por profesionales, adaptados a tus objetivos y necesidades. Descubre una experiencia única de crecimiento, motivación y resultados.</p>
-            <a href="servicios.html" class="btn">Descubre nuestros servicios</a>
-        </section>
-        <section class="sobre-nosotros">
-            <h2>Sobre Nosotros</h2>
-            <p>Somos un equipo de entrenadores certificados y apasionados por el deporte, comprometidos con el desarrollo integral de cada usuario. Nuestra misión es guiarte en el camino hacia una vida más activa, saludable y plena, brindando atención personalizada y acompañamiento constante.</p>
-        </section>
-        <section class="objetivos">
-            <h2>Nuestros Objetivos</h2>
-            <ul>
-                <li>Ofrecer entrenamientos personalizados y efectivos para todos los niveles.</li>
-                <li>Fomentar hábitos saludables y el bienestar integral.</li>
-                <li>Crear una comunidad motivadora y de apoyo mutuo.</li>
-                <li>Impulsar el crecimiento personal y deportivo de nuestros usuarios.</li>
-            </ul>
-        </section>
-        <section class="mision-vision">
-            <div>
-                <h2>Misión</h2>
-                <p>Brindar entrenamientos personalizados de alta calidad para potenciar el rendimiento y bienestar de nuestros usuarios.</p>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Transforma tu vida con entrenamiento deportivo profesional</h1>
+                <p class="hero-subtitle">La plataforma web líder en entrenamiento personalizado para múltiples deportes. Accede a cursos certificados, entrenadores expertos y programas diseñados para alcanzar tus objetivos deportivos desde cualquier lugar del mundo.</p>
+                <div class="hero-buttons">
+                    <a href="planes.html" class="btn btn-primary">Comenzar Ahora</a>
+                    <a href="servicios.html" class="btn btn-secondary">Ver Deportes</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Deportes</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Entrenadores</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">1000+</span>
+                        <span class="stat-label">Alumnos</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Certificados</span>
+                    </div>
+                </div>
+                <!-- NOTA: Los datos anteriores son ejemplos. Modificar según datos reales de la empresa -->
             </div>
-            <div>
-                <h2>Visión</h2>
-                <p>Ser la plataforma líder en entrenamiento deportivo personalizado, reconocida por la excelencia y resultados de nuestros clientes.</p>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Entrenamiento deportivo">
+            </div>
+        </section>
+
+        <!-- Deportes Disponibles -->
+        <section class="deportes">
+            <div class="container">
+                <h2>Deportes y Disciplinas</h2>
+                <p class="section-subtitle">Explora nuestra amplia gama de deportes y disciplinas con entrenamiento profesional y certificaciones reconocidas</p>
+                
+                <div class="deportes-grid">
+                    <div class="deporte-card">
+                        <i class="fas fa-running"></i>
+                        <h3>Running & Maratón</h3>
+                        <p>Programas de entrenamiento para corredores de todos los niveles</p>
+                        <span class="certificacion">Certificación IAAF</span>
+                    </div>
+                    <div class="deporte-card">
+                        <i class="fas fa-dumbbell"></i>
+                        <h3>Fitness & Musculación</h3>
+                        <p>Entrenamiento de fuerza y acondicionamiento físico</p>
+                        <span class="certificacion">Certificación ACE</span>
+                    </div>
+                    <div class="deporte-card">
+                        <i class="fas fa-swimming-pool"></i>
+                        <h3>Natación</h3>
+                        <p>Técnicas avanzadas y entrenamiento de resistencia</p>
+                        <span class="certificacion">Certificación FINA</span>
+                    </div>
+                    <div class="deporte-card">
+                        <i class="fas fa-bicycle"></i>
+                        <h3>Ciclismo</h3>
+                        <p>Entrenamiento para ciclistas de ruta y montaña</p>
+                        <span class="certificacion">Certificación UCI</span>
+                    </div>
+                    <div class="deporte-card">
+                        <i class="fas fa-yoga"></i>
+                        <h3>Yoga & Pilates</h3>
+                        <p>Flexibilidad, equilibrio y bienestar mental</p>
+                        <span class="certificacion">Certificación RYT</span>
+                    </div>
+                    <div class="deporte-card">
+                        <i class="fas fa-futbol"></i>
+                        <h3>Fútbol</h3>
+                        <p>Técnica, táctica y preparación física</p>
+                        <span class="certificacion">Certificación FIFA</span>
+                    </div>
+                </div>
+                <!-- NOTA: Los deportes y certificaciones anteriores son ejemplos. Modificar según deportes y certificaciones reales ofrecidas -->
+            </div>
+        </section>
+
+        <!-- Por Qué Elegirnos -->
+        <section class="por-que-elegirnos">
+            <div class="container">
+                <h2>¿Por Qué Elegir DeporteFit?</h2>
+                <div class="beneficios-grid">
+                    <div class="beneficio">
+                        <i class="fas fa-certificate"></i>
+                        <h3>Certificaciones Oficiales</h3>
+                        <p>Todos nuestros cursos cuentan con certificaciones reconocidas internacionalmente por federaciones deportivas y organizaciones profesionales.</p>
+                    </div>
+                    <div class="beneficio">
+                        <i class="fas fa-users"></i>
+                        <h3>Entrenadores Expertos</h3>
+                        <p>Equipo de entrenadores certificados con amplia experiencia en competición y enseñanza deportiva.</p>
+                    </div>
+                    <div class="beneficio">
+                        <i class="fas fa-laptop"></i>
+                        <h3>Plataforma Digital</h3>
+                        <p>Accede a tu entrenamiento desde cualquier dispositivo, con seguimiento en tiempo real y contenido multimedia.</p>
+                    </div>
+                    <div class="beneficio">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Progreso Personalizado</h3>
+                        <p>Seguimiento detallado de tu evolución con métricas avanzadas y ajustes automáticos del programa.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonios -->
+        <section class="testimonios">
+            <div class="container">
+                <h2>Lo Que Dicen Nuestros Alumnos</h2>
+                <div class="testimonios-grid">
+                    <div class="testimonio">
+                        <div class="testimonio-content">
+                            <p>"Gracias a DeporteFit logré completar mi primera maratón. Los entrenadores son increíbles y la plataforma es muy fácil de usar."</p>
+                        </div>
+                        <div class="testimonio-autor">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="María González">
+                            <div>
+                                <h4>María González</h4>
+                                <span>Corredora Amateur</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonio">
+                        <div class="testimonio-content">
+                            <p>"La certificación en fitness que obtuve aquí me abrió las puertas para trabajar en gimnasios de prestigio. Excelente formación."</p>
+                        </div>
+                        <div class="testimonio-autor">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Carlos Rodríguez">
+                            <div>
+                                <h4>Carlos Rodríguez</h4>
+                                <span>Entrenador Personal</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonio">
+                        <div class="testimonio-content">
+                            <p>"Como nadador profesional, encontré en esta plataforma el entrenamiento perfecto para mejorar mi técnica y rendimiento."</p>
+                        </div>
+                        <div class="testimonio-autor">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Ana Martínez">
+                            <div>
+                                <h4>Ana Martínez</h4>
+                                <span>Nadadora Profesional</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- NOTA: Los testimonios anteriores son ejemplos. Reemplazar con testimonios reales de clientes -->
+            </div>
+        </section>
+
+        <!-- Estadísticas -->
+        <section class="estadisticas">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">15,000+</div>
+                        <div class="stat-label">Alumnos Activos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Tasa de Éxito</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">Cursos Disponibles</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Soporte Técnico</div>
+                    </div>
+                </div>
+                <!-- NOTA: Los datos anteriores son ejemplos. Modificar según datos reales de la empresa -->
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="container">
+                <h2>¿Listo para Transformar tu Vida Deportiva?</h2>
+                <p>Únete a miles de deportistas que ya han alcanzado sus objetivos con nuestras certificaciones profesionales</p>
+                <div class="cta-buttons">
+                    <a href="planes.html" class="btn btn-primary">Ver Planes</a>
+                    <a href="contacto.html" class="btn btn-secondary">Contactar</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog/Noticias -->
+        <section class="blog">
+            <div class="container">
+                <h2>Últimas Noticias y Consejos</h2>
+                <div class="blog-grid">
+                    <article class="blog-card">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Entrenamiento">
+                        <div class="blog-content">
+                            <h3>5 Consejos para Mejorar tu Resistencia</h3>
+                            <p>Descubre las técnicas más efectivas para aumentar tu capacidad aeróbica y anaeróbica...</p>
+                            <a href="#" class="read-more">Leer más</a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Nutrición">
+                        <div class="blog-content">
+                            <h3>Nutrición para Deportistas</h3>
+                            <p>Guía completa sobre alimentación para optimizar tu rendimiento deportivo...</p>
+                            <a href="#" class="read-more">Leer más</a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Tecnología">
+                        <div class="blog-content">
+                            <h3>Tecnología en el Deporte</h3>
+                            <p>Cómo la tecnología está revolucionando el entrenamiento deportivo moderno...</p>
+                            <a href="#" class="read-more">Leer más</a>
+                        </div>
+                    </article>
+                </div>
+                <!-- NOTA: Los artículos del blog anteriores son ejemplos. Reemplazar con contenido real del blog -->
             </div>
         </section>
     </main>
+
     <footer>
-        <p>Plataforma de Entrenamiento Deportivo Personalizado &copy; 2025</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>DeporteFit</h3>
+                <p>La plataforma líder en entrenamiento deportivo personalizado con certificaciones profesionales.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Servicios</h4>
+                <ul>
+                    <li><a href="#">Entrenamiento Personal</a></li>
+                    <li><a href="#">Cursos Certificados</a></li>
+                    <li><a href="#">Planes de Nutrición</a></li>
+                    <li><a href="#">Asesoría Deportiva</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Deportes</h4>
+                <ul>
+                    <li><a href="#">Running</a></li>
+                    <li><a href="#">Fitness</a></li>
+                    <li><a href="#">Natación</a></li>
+                    <li><a href="#">Ciclismo</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <p><i class="fas fa-envelope"></i> info@deportefit.com</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt"></i> Calle Deportiva 123, Ciudad</p>
+                <!-- NOTA: Los datos de contacto anteriores son ejemplos. Modificar según información real de la empresa -->
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 DeporteFit. Todos los derechos reservados.</p>
+        </div>
     </footer>
+
     <script>
-        document.getElementById('anio').textContent = new Date().getFullYear();
+        // Año actual en el footer
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearElement = document.querySelector('.footer-bottom p');
+            if (yearElement) {
+                yearElement.innerHTML = yearElement.innerHTML.replace('2025', new Date().getFullYear());
+            }
+        });
     </script>
 </body>
 </html> 
