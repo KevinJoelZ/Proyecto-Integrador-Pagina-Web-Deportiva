@@ -107,6 +107,116 @@
             </div>
         </section>
 
+        <!-- Servicios -->
+        <section class="servicios">
+            <div class="container">
+                <h2>Nuestros Servicios</h2>
+                <p class="section-subtitle">Soluciones integrales para tu desarrollo deportivo, físico y mental</p>
+                <div class="servicios-grid mejorado">
+                    <div class="servicio-card mejorado">
+                        <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=400&q=80" alt="Entrenamiento Personalizado">
+                        <div class="servicio-info">
+                            <i class="fas fa-user-check"></i>
+                            <h3>Entrenamiento Personalizado</h3>
+                            <p>Programas adaptados a tus objetivos, nivel y disciplina, con seguimiento individual de tu progreso.</p>
+                            <a href="servicios.html#entrenamiento-personal" class="btn btn-secondary">Ver más</a>
+                        </div>
+                    </div>
+                    <div class="servicio-card mejorado">
+                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Cursos Certificados">
+                        <div class="servicio-info">
+                            <i class="fas fa-certificate"></i>
+                            <h3>Cursos Certificados</h3>
+                            <p>Capacítate con cursos avalados por federaciones y obtén certificaciones reconocidas internacionalmente.</p>
+                            <a href="servicios.html#cursos-certificados" class="btn btn-secondary">Ver más</a>
+                        </div>
+                    </div>
+                    <div class="servicio-card mejorado">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Planes de Nutrición">
+                        <div class="servicio-info">
+                            <i class="fas fa-apple-alt"></i>
+                            <h3>Planes de Nutrición</h3>
+                            <p>Asesoría nutricional profesional para complementar tu entrenamiento y mejorar tu rendimiento.</p>
+                            <a href="servicios.html#nutricion" class="btn btn-secondary">Ver más</a>
+                        </div>
+                    </div>
+                    <div class="servicio-card mejorado">
+                        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Asesoría Deportiva">
+                        <div class="servicio-info">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <h3>Asesoría Deportiva</h3>
+                            <p>Consultoría especializada para deportistas, clubes y empresas que buscan optimizar resultados.</p>
+                            <a href="servicios.html#asesoria" class="btn btn-secondary">Ver más</a>
+                        </div>
+                    </div>
+                    <div class="servicio-card mejorado">
+                        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Seguimiento Online">
+                        <div class="servicio-info">
+                            <i class="fas fa-laptop-medical"></i>
+                            <h3>Seguimiento Online</h3>
+                            <p>Monitoreo remoto de tu entrenamiento y salud, con reportes y ajustes en tiempo real.</p>
+                            <a href="servicios.html#seguimiento" class="btn btn-secondary">Ver más</a>
+                        </div>
+                    </div>
+                    <div class="servicio-card mejorado">
+                        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=400&q=80" alt="Evaluación Física">
+                        <div class="servicio-info">
+                            <i class="fas fa-heartbeat"></i>
+                            <h3>Evaluación Física</h3>
+                            <p>Diagnóstico completo de tu condición física para diseñar el mejor plan de acción.</p>
+                            <a href="servicios.html#evaluacion" class="btn btn-secondary">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Preguntas Frecuentes (FAQ) -->
+        <section class="faq">
+            <div class="container">
+                <h2>Preguntas Frecuentes</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <button class="faq-question">¿Qué tipo de certificaciones ofrecen en 2025?</button>
+                        <div class="faq-answer">Ofrecemos certificaciones avaladas por federaciones internacionales y organismos reconocidos, actualizadas a los estándares de 2025 en deportes, nutrición y entrenamiento.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">¿Puedo acceder a los cursos desde cualquier país?</button>
+                        <div class="faq-answer">Sí, nuestra plataforma es 100% online y puedes acceder desde cualquier parte del mundo, en cualquier dispositivo.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">¿Cómo es el seguimiento personalizado?</button>
+                        <div class="faq-answer">Cada usuario cuenta con un entrenador asignado que realiza un seguimiento semanal, con reportes y ajustes en tiempo real según tu progreso.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">¿Qué métodos de pago aceptan?</button>
+                        <div class="faq-answer">Aceptamos tarjetas de crédito, débito, PayPal y transferencias bancarias internacionales.</div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">¿Puedo solicitar una asesoría gratuita?</button>
+                        <div class="faq-answer">Sí, ofrecemos una sesión de asesoría gratuita para nuevos usuarios. Puedes solicitarla desde la sección de contacto.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script>
+        // Acordeón para FAQ
+        document.addEventListener('DOMContentLoaded', function() {
+            const questions = document.querySelectorAll('.faq-question');
+            questions.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    if (answer.style.display === 'block') {
+                        answer.style.display = 'none';
+                    } else {
+                        document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+                        answer.style.display = 'block';
+                    }
+                });
+            });
+        });
+        </script>
+
         <!-- Por Qué Elegirnos -->
         <section class="por-que-elegirnos">
             <div class="container">
@@ -146,7 +256,7 @@
                             <p>"Gracias a DeporteFit logré completar mi primera maratón. Los entrenadores son increíbles y la plataforma es muy fácil de usar."</p>
                         </div>
                         <div class="testimonio-autor">
-                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="María González">
+                            <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80" alt="María González">
                             <div>
                                 <h4>María González</h4>
                                 <span>Corredora Amateur</span>
@@ -225,7 +335,7 @@
                 <h2>Últimas Noticias y Consejos</h2>
                 <div class="blog-grid">
                     <article class="blog-card">
-                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Entrenamiento">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Consejo de Entrenamiento">
                         <div class="blog-content">
                             <h3>5 Consejos para Mejorar tu Resistencia</h3>
                             <p>Descubre las técnicas más efectivas para aumentar tu capacidad aeróbica y anaeróbica...</p>
@@ -233,7 +343,7 @@
                         </div>
                     </article>
                     <article class="blog-card">
-                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Nutrición">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Noticia Nutrición">
                         <div class="blog-content">
                             <h3>Nutrición para Deportistas</h3>
                             <p>Guía completa sobre alimentación para optimizar tu rendimiento deportivo...</p>
@@ -241,7 +351,7 @@
                         </div>
                     </article>
                     <article class="blog-card">
-                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Tecnología">
+                        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Noticia Tecnología">
                         <div class="blog-content">
                             <h3>Tecnología en el Deporte</h3>
                             <p>Cómo la tecnología está revolucionando el entrenamiento deportivo moderno...</p>
@@ -307,4 +417,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
