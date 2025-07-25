@@ -1003,7 +1003,261 @@ main {
     line-height: 1.7;
 }
 
-/* Responsive Design */
+/* === Fondo y contenedor especial para la sección de servicios === */
+.servicios {
+  background: linear-gradient(120deg, #eafaf7 0%, #f8fcfa 100%);
+  padding: 4.5rem 0 4rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.servicios::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(180deg, #1abc9c22 0%, transparent 100%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.servicios .container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.95);
+  border-radius: 28px;
+  box-shadow: 0 8px 40px rgba(26,188,156,0.08);
+  padding: 2.5rem 2rem 2.5rem 2rem;
+}
+
+.servicios h2 {
+  color: #1abc9c;
+  font-size: 2.6rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 8px #1abc9c11;
+}
+.servicios .section-subtitle {
+  text-align: center;
+  color: #16a085;
+  font-size: 1.25rem;
+  margin-bottom: 2.2rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Cards de servicios aún más impactantes */
+.servicios-grid.mejorado {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.7rem;
+  margin-top: 2.7rem;
+  animation: fadeInUp 1s cubic-bezier(.4,2,.6,1);
+}
+
+/* Ajuste de sombra para las cards de servicios */
+.servicio-card.mejorado {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 10px 40px rgba(26,188,156,0.13);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.28s cubic-bezier(.4,2,.6,1), box-shadow 0.28s, border 0.28s;
+  border: 2.5px solid transparent;
+  position: relative;
+  min-height: 420px;
+}
+.servicio-card.mejorado:hover {
+  transform: translateY(-16px) scale(1.045);
+  box-shadow: 0 18px 60px rgba(26,188,156,0.22);
+  border: 2.5px solid #1abc9c;
+  z-index: 2;
+}
+.servicio-card.mejorado img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 2.5px solid #eafaf7;
+  transition: filter 0.3s;
+}
+.servicio-card.mejorado:hover img {
+  filter: brightness(0.93) saturate(1.13);
+}
+.servicio-info {
+  padding: 1.8rem 1.4rem 1.4rem 1.4rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+.servicio-info i {
+  font-size: 2.5rem;
+  color: #1abc9c;
+  margin-bottom: 0.7rem;
+  transition: color 0.2s;
+  filter: drop-shadow(0 2px 6px #1abc9c22);
+}
+.servicio-card.mejorado:hover .servicio-info i {
+  color: #16a085;
+}
+.servicio-info h3 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1.45rem;
+  color: #222;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+.servicio-info p {
+  color: #555;
+  margin-bottom: 1.1rem;
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+.servicio-info .btn {
+  margin-top: auto;
+  background: linear-gradient(90deg, #1abc9c 60%, #16a085 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.08rem;
+  font-weight: 700;
+  box-shadow: 0 2px 12px rgba(26,188,156,0.13);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  outline: none;
+}
+.servicio-info .btn:hover {
+  background: linear-gradient(90deg, #16a085 60%, #1abc9c 100%);
+  box-shadow: 0 6px 24px rgba(26,188,156,0.22);
+  transform: scale(1.06);
+}
+
+/* Detalles decorativos para la sección servicios */
+.servicios .container::after {
+  content: '';
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, #1abc9c22 0%, transparent 80%);
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+}
+.servicios .container::before {
+  content: '';
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, #16a08522 0%, transparent 80%);
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Responsividad mejorada */
+@media (max-width: 1100px) {
+  .servicios .container {
+    padding: 2rem 0.5rem 2rem 0.5rem;
+  }
+}
+@media (max-width: 900px) {
+  .servicios-grid.mejorado {
+    gap: 1.5rem;
+  }
+  .servicio-card.mejorado img {
+    height: 150px;
+  }
+  .servicios .container {
+    padding: 1.2rem 0.2rem 1.2rem 0.2rem;
+  }
+}
+@media (max-width: 700px) {
+  .servicios-grid.mejorado {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .servicio-card.mejorado img {
+    height: 110px;
+  }
+  .servicio-info {
+    padding: 1rem 0.5rem 0.7rem 0.5rem;
+  }
+  .servicios h2 {
+    font-size: 1.5rem;
+  }
+  .servicios .section-subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* === FAQ (Preguntas Frecuentes) === */
+.faq {
+  background: #f8f9fa;
+  padding: 3rem 0 2rem 0;
+}
+.faq h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #1abc9c;
+}
+.faq-grid {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.faq-item {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  text-align: left;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.faq-question:hover {
+  background: #eafaf7;
+}
+.faq-answer {
+  display: none;
+  padding: 0 1.5rem 1.2rem 1.5rem;
+  color: #444;
+  font-size: 1rem;
+  border-top: 1px solid #eee;
+  animation: fadeIn 0.3s;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* === Responsividad avanzada === */
 @media (max-width: 900px) {
     main {
         margin: 1.5rem auto;
