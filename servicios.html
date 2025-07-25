@@ -120,10 +120,54 @@
         </section>
     </main>
     <footer>
-        <p>Plataforma de Entrenamiento Deportivo Personalizado &copy; 2025</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>DeporteFit</h3>
+                <p>La plataforma líder en entrenamiento deportivo personalizado con certificaciones profesionales.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Servicios</h4>
+                <ul>
+                    <li><a href="#">Entrenamiento Personal</a></li>
+                    <li><a href="#">Cursos Certificados</a></li>
+                    <li><a href="#">Planes de Nutrición</a></li>
+                    <li><a href="#">Asesoría Deportiva</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Deportes</h4>
+                <ul>
+                    <li><a href="#">Running</a></li>
+                    <li><a href="#">Fitness</a></li>
+                    <li><a href="#">Natación</a></li>
+                    <li><a href="#">Ciclismo</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <p><i class="fas fa-envelope"></i> info@deportefit.com</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt"></i> Calle Deportiva 123, Ciudad Quito</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 DeporteFit. Todos los derechos reservados.</p>
+        </div>
     </footer>
     <script>
-        document.getElementById('anio').textContent = new Date().getFullYear();
+        // Año actual en el footer
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearElement = document.querySelector('.footer-bottom p');
+            if (yearElement) {
+                yearElement.innerHTML = yearElement.innerHTML.replace('2025', new Date().getFullYear());
+            }
+        });
     </script>
 </body>
-</html> 
+</html>
