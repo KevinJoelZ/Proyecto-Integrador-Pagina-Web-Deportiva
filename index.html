@@ -35,21 +35,23 @@
                     <a href="servicios.html" class="btn btn-secondary">Ver Deportes</a>
                 </div>
                 <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-number">10+</span>
-                        <span class="stat-label">Deportes</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">30+</span>
-                        <span class="stat-label">Entrenadores</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">200+</span>
-                        <span class="stat-label">Alumnos</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">250+</span>
-                        <span class="stat-label">Alumnos Activos</span>
+                    <div style="display: flex; justify-content: center; width: 100%; gap: 2rem; flex-wrap: wrap;">
+                        <div class="stat">
+                            <span class="stat-number">10+</span>
+                            <span class="stat-label">Deportes</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">30+</span>
+                            <span class="stat-label">Entrenadores</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">200+</span>
+                            <span class="stat-label">Alumnos</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">250+</span>
+                            <span class="stat-label">Alumnos Activos</span>
+                        </div>
                     </div>
                 </div>
                 <!-- NOTA: Los datos anteriores son ejemplos. Modificar según datos reales de la empresa -->
@@ -328,7 +330,7 @@
                 <p>Únete a miles de deportistas que ya han alcanzado sus objetivos con nuestras certificaciones profesionales</p>
                 <div class="cta-buttons">
                     <a href="planes.html" class="btn btn-primary">Ver Planes</a>
-                    <a href="contacto.html" class="btn btn-secondary">Contactar</a>
+                    <a href="contacto.html" class="btn btn-secondary" style="background: linear-gradient(90deg, #ff9800 0%, #ffb74d 100%); color: #fff; border: none;">Contactar</a>
                 </div>
             </div>
         </section>
@@ -343,7 +345,15 @@
                         <div class="blog-content">
                             <h3>5 Consejos para Mejorar tu Resistencia</h3>
                             <p>Descubre las técnicas más efectivas para aumentar tu capacidad aeróbica y anaeróbica...</p>
-                            <a href="#" class="read-more">Leer más</a>
+                            <a href="#" class="read-more" onclick="event.preventDefault(); document.getElementById('blog1').style.display = (document.getElementById('blog1').style.display === 'block' ? 'none' : 'block');">Leer más</a>
+                            <div id="blog1" class="blog-more" style="display:none; margin-top:0.7rem; color:#444;">
+                                <ul>
+                                    <li>Incluye intervalos de alta intensidad y descansos activos.</li>
+                                    <li>La importancia de la hidratación y la alimentación antes y después del entrenamiento.</li>
+                                    <li>Cómo planificar una rutina semanal equilibrada para evitar lesiones.</li>
+                                    <li>Consejos para mantener la motivación y medir tu progreso.</li>
+                                </ul>
+                            </div>
                         </div>
                     </article>
                     <article class="blog-card">
@@ -351,7 +361,15 @@
                         <div class="blog-content">
                             <h3>Nutrición para Deportistas</h3>
                             <p>Guía completa sobre alimentación para optimizar tu rendimiento deportivo...</p>
-                            <a href="#" class="read-more">Leer más</a>
+                            <a href="#" class="read-more" onclick="event.preventDefault(); document.getElementById('blog2').style.display = (document.getElementById('blog2').style.display === 'block' ? 'none' : 'block');">Leer más</a>
+                            <div id="blog2" class="blog-more" style="display:none; margin-top:0.7rem; color:#444;">
+                                <ul>
+                                    <li>Macronutrientes esenciales: carbohidratos, proteínas y grasas saludables.</li>
+                                    <li>La importancia de la hidratación y los electrolitos en el rendimiento.</li>
+                                    <li>Ejemplos de menús para antes y después del entrenamiento.</li>
+                                    <li>Errores comunes en la dieta deportiva y cómo evitarlos.</li>
+                                </ul>
+                            </div>
                         </div>
                     </article>
                     <article class="blog-card">
@@ -359,7 +377,15 @@
                         <div class="blog-content">
                             <h3>Tecnología en el Deporte</h3>
                             <p>Cómo la tecnología está revolucionando el entrenamiento deportivo moderno...</p>
-                            <a href="#" class="read-more">Leer más</a>
+                            <a href="#" class="read-more" onclick="event.preventDefault(); document.getElementById('blog3').style.display = (document.getElementById('blog3').style.display === 'block' ? 'none' : 'block');">Leer más</a>
+                            <div id="blog3" class="blog-more" style="display:none; margin-top:0.7rem; color:#444;">
+                                <ul>
+                                    <li>Uso de wearables y apps para monitorear el rendimiento y la salud.</li>
+                                    <li>Plataformas online para entrenamientos personalizados y seguimiento remoto.</li>
+                                    <li>La inteligencia artificial en la prevención de lesiones y análisis de datos.</li>
+                                    <li>Ventajas de la realidad virtual y aumentada en la preparación deportiva.</li>
+                                </ul>
+                            </div>
                         </div>
                     </article>
                 </div>
