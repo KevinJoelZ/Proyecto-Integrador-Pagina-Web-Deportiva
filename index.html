@@ -7,23 +7,22 @@
     <link rel="stylesheet" href="css/estilos.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body>
-    <header>
-        <nav>
-            <div class="logo">
-                <i class="fas fa-dumbbell"></i>
-                <span>DeporteFit</span>
+<body style="background: linear-gradient(180deg, #f7fbff 0%, #e3f0ff 100%);">
+    <header style="background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%); box-shadow: 0 2px 16px rgba(25, 118, 210, 0.08); border-radius: 0 0 1.2rem 1.2rem;">
+        <nav style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0.7rem 1.5rem 0.7rem 1.5rem; flex-wrap: wrap;">
+            <div class="logo" style="display: flex; align-items: center; gap: 0.7rem; font-size: 2rem; color: #fff; font-weight: 700; letter-spacing: 1px;">
+                <i class="fas fa-dumbbell" style="font-size: 2.2rem; color: #ffb74d;"></i>
+                <span style="font-size: 1.5rem; color: #fff; font-weight: 700; letter-spacing: 1px;">DeporteFit</span>
             </div>
-            <ul>
-                <li><a href="index.html" class="activo">Inicio</a></li>
-                <li><a href="servicios.html">Servicios</a></li>
-                <li><a href="entrenadores.html">Entrenadores</a></li>
-                <li><a href="planes.html">Planes y Precios</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
+            <ul style="display: flex; gap: 2.2rem; list-style: none; margin: 0; padding: 0; align-items: center; font-size: 1.08rem; font-weight: 500;">
+                <li><a href="index.html" class="activo" style="color: #fff; text-decoration: none; padding: 0.3em 0.8em; border-radius: 0.7em; background: linear-gradient(90deg, #ff9800 0%, #ffb74d 100%); color: #fff; font-weight: 700;">Inicio</a></li>
+                <li><a href="servicios.html" style="color: #fff; text-decoration: none; padding: 0.3em 0.8em; border-radius: 0.7em; transition: background 0.2s;">Servicios</a></li>
+                <li><a href="entrenadores.html" style="color: #fff; text-decoration: none; padding: 0.3em 0.8em; border-radius: 0.7em; transition: background 0.2s;">Entrenadores</a></li>
+                <li><a href="planes.html" style="color: #fff; text-decoration: none; padding: 0.3em 0.8em; border-radius: 0.7em; transition: background 0.2s;">Planes y Precios</a></li>
+                <li><a href="contacto.html" style="color: #fff; text-decoration: none; padding: 0.3em 0.8em; border-radius: 0.7em; transition: background 0.2s;">Contacto</a></li>
             </ul>
         </nav>
     </header>
-
     <main>
         <!-- Hero Section -->
         <section class="hero">
@@ -64,7 +63,6 @@
             <div class="container">
                 <h2>Deportes y Disciplinas</h2>
                 <p class="section-subtitle">Explora nuestra amplia gama de deportes y disciplinas con entrenamiento profesional y certificaciones reconocidas</p>
-                
                 <div class="deportes-grid">
                     <div class="deporte-card">
                         <i class="fas fa-running"></i>
@@ -105,6 +103,7 @@
                 </div>
                 <!-- NOTA: Los deportes y certificaciones anteriores son ejemplos. Modificar según deportes y certificaciones reales ofrecidas -->
             </div>
+        </section>
         </section>
 
         <!-- Servicios -->
@@ -199,23 +198,7 @@
                 </div>
             </div>
         </section>
-        <script>
-        // Acordeón para FAQ
-        document.addEventListener('DOMContentLoaded', function() {
-            const questions = document.querySelectorAll('.faq-question');
-            questions.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const answer = this.nextElementSibling;
-                    if (answer.style.display === 'block') {
-                        answer.style.display = 'none';
-                    } else {
-                        document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
-                        answer.style.display = 'block';
-                    }
-                });
-            });
-        });
-        </script>
+        <!-- Script duplicado eliminado para evitar conflictos -->
 
         <!-- Por Qué Elegirnos -->
         <section class="por-que-elegirnos">
@@ -225,22 +208,24 @@
                     <div class="beneficio">
                         <i class="fas fa-certificate"></i>
                         <h3>Certificaciones Oficiales</h3>
-                        <p>Todos nuestros cursos cuentan con certificaciones reconocidas internacionalmente por federaciones deportivas y organizaciones profesionales.</p>
+                        <p style="text-align: justify;">Todos nuestros cursos cuentan con certificaciones reconocidas internacionalmente por federaciones deportivas y organizaciones profesionales.</p>
                     </div>
                     <div class="beneficio">
                         <i class="fas fa-users"></i>
                         <h3>Entrenadores Expertos</h3>
-                        <p>Equipo de entrenadores certificados con amplia experiencia en competición y enseñanza deportiva.</p>
+                        <p style="text-align: justify;">Equipo de entrenadores certificados con amplia experiencia en competición y enseñanza deportiva.</p>
                     </div>
                     <div class="beneficio">
                         <i class="fas fa-laptop"></i>
                         <h3>Plataforma Digital</h3>
-                        <p>Accede a tu entrenamiento desde cualquier dispositivo, con seguimiento en tiempo real y contenido multimedia.</p>
+                        <p style="text-align: justify;">Accede a tu entrenamiento desde cualquier dispositivo, con seguimiento en tiempo real y contenido multimedia.</p>
                     </div>
-                    <div class="beneficio">
+                </div>
+                <div style="display: flex; justify-content: center; margin-top: 2rem;">
+                    <div class="beneficio" style="max-width: 340px;">
                         <i class="fas fa-chart-line"></i>
                         <h3>Progreso Personalizado</h3>
-                        <p>Seguimiento detallado de tu evolución con métricas avanzadas y ajustes automáticos del programa.</p>
+                        <p style="text-align: justify;">Seguimiento detallado de tu evolución con métricas avanzadas y ajustes automáticos del programa.</p>
                     </div>
                 </div>
             </div>
@@ -250,40 +235,41 @@
         <section class="testimonios">
             <div class="container">
                 <h2>Lo Que Dicen Nuestros Alumnos</h2>
-                <div class="testimonios-grid">
-                    <div class="testimonio">
+                <!-- Aquí no debe ir la card de Progreso Personalizado -->
+                <div class="testimonios-row" style="display: flex; flex-wrap: nowrap; gap: 2rem; justify-content: center; align-items: stretch;">
+                    <div class="testimonio" style="flex:1 1 320px; max-width: 370px; min-width: 280px;">
                         <div class="testimonio-content">
-                            <p>"Gracias a DeporteFit logré completar mi primera maratón. Los entrenadores son increíbles y la plataforma es muy fácil de usar."</p>
-                        </div>
-                        <div class="testimonio-autor">
-                            <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80" alt="María González">
-                            <div>
-                                <h4>María González</h4>
-                                <span>Corredora Amateur</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonio">
-                        <div class="testimonio-content">
-                            <p>"La certificación en fitness que obtuve aquí me abrió las puertas para trabajar en gimnasios de prestigio. Excelente formación."</p>
-                        </div>
-                        <div class="testimonio-autor">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Carlos Rodríguez">
-                            <div>
-                                <h4>Carlos Rodríguez</h4>
-                                <span>Entrenador Personal</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonio">
-                        <div class="testimonio-content">
-                            <p>"Como nadador profesional, encontré en esta plataforma el entrenamiento perfecto para mejorar mi técnica y rendimiento."</p>
+                            <p style="text-align: justify;">"Como nadador profesional, encontré en esta plataforma el entrenamiento perfecto para mejorar mi técnica y rendimiento."</p>
                         </div>
                         <div class="testimonio-autor">
                             <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Ana Martínez">
                             <div>
                                 <h4>Ana Martínez</h4>
                                 <span>Nadadora Profesional</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonio" style="flex:1 1 320px; max-width: 370px; min-width: 280px;">
+                        <div class="testimonio-content">
+                            <p style="text-align: justify;">"Gracias a DeporteFit logré superar mis marcas en ciclismo y ahora participo en competencias internacionales. El acompañamiento es excelente."</p>
+                        </div>
+                        <div class="testimonio-autor">
+                            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80" alt="Carlos Pérez">
+                            <div>
+                                <h4>Carlos Pérez</h4>
+                                <span>Ciclista Amateur</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonio" style="flex:1 1 320px; max-width: 370px; min-width: 280px;">
+                        <div class="testimonio-content">
+                            <p style="text-align: justify;">"La variedad de cursos y la calidad de los entrenadores me ayudaron a mantenerme motivada y alcanzar mis objetivos de salud y bienestar."</p>
+                        </div>
+                        <div class="testimonio-autor">
+                            <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=400&q=80" alt="Lucía Gómez">
+                            <div>
+                                <h4>Lucía Gómez</h4>
+                                <span>Estudiante Universitaria</span>
                             </div>
                         </div>
                     </div>
@@ -312,39 +298,40 @@
             <div class="container">
                 <h2 style="text-align:center; color:#fff; font-size:2.2rem; margin-bottom:2rem; background:#1976d2; border-radius:1rem; padding:0.7rem 0;">Estadísticas DeporteFit 2025</h2>
                 <div class="stats-grid">
-                    <div class="stat-item">
+                    <div class="stat-item" style="display: flex; flex-direction: column; align-items: center;">
                         <div class="stat-number">10+</div>
-                        <div class="stat-label">Deportes</div>
+                        <div class="stat-label" style="margin-top: 0.3em;">Deportes</div>
                     </div>
-                    <div class="stat-item">
+                    <div class="stat-item" style="display: flex; flex-direction: column; align-items: center;">
                         <div class="stat-number">30+</div>
-                        <div class="stat-label">Entrenadores</div>
+                        <div class="stat-label" style="margin-top: 0.3em;">Entrenadores</div>
                     </div>
-                    <div class="stat-item">
+                    <div class="stat-item" style="display: flex; flex-direction: column; align-items: center;">
                         <div class="stat-number">200+</div>
-                        <div class="stat-label">Alumnos</div>
+                        <div class="stat-label" style="margin-top: 0.3em;">Alumnos</div>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap;">
-                    <div class="stat-item" style="min-width: 180px;">
+                    <div class="stat-item" style="min-width: 180px; display: flex; flex-direction: column; align-items: center;">
                         <div class="stat-number">250+</div>
-                        <div class="stat-label">Alumnos Activos</div>
+                        <div class="stat-label" style="margin-top: 0.3em;">Alumnos Activos</div>
                     </div>
-                    <div class="stat-item" style="min-width: 180px;">
+                    <div class="stat-item" style="min-width: 180px; display: flex; flex-direction: column; align-items: center;">
                         <div class="stat-number">24/7</div>
-                        <div class="stat-label">Soporte Técnico</div>
+                        <div class="stat-label" style="margin-top: 0.3em;">Soporte Técnico</div>
                     </div>
                 </div>
                 <!-- NOTA: Los datos anteriores son ejemplos. Modificar según datos reales de la empresa -->
             </div>
+        </div>
         </section>
 
         <!-- CTA Section -->
         <section class="cta">
-            <div class="container">
+            <div class="container" style="text-align: center;">
                 <h2>¿Listo para Transformar tu Vida Deportiva?</h2>
-                <p>Únete a miles de deportistas que ya han alcanzado sus objetivos con nuestras certificaciones profesionales</p>
-                <div class="cta-buttons">
+                <p style="text-align: center;">Únete a miles de deportistas que ya han alcanzado sus objetivos con nuestras certificaciones profesionales</p>
+                <div class="cta-buttons" style="justify-content: center; display: flex; gap: 1.5rem; margin-top: 1.5rem;">
                     <a href="planes.html" class="btn btn-primary">Ver Planes</a>
                     <a href="contacto.html" class="btn btn-secondary" style="background: linear-gradient(90deg, #ff9800 0%, #ffb74d 100%); color: #fff; border: none;">Contactar</a>
                 </div>
@@ -360,7 +347,7 @@
                         <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Consejo de Entrenamiento">
                         <div class="blog-content">
                             <h3>5 Consejos para Mejorar tu Resistencia</h3>
-                            <p>Descubre las técnicas más efectivas para aumentar tu capacidad aeróbica y anaeróbica.</p>
+                            <p style="text-align: justify;">Descubre las técnicas más efectivas para aumentar tu capacidad aeróbica y anaeróbica.</p>
                             <a href="#" class="read-more">Leer más</a>
                             <div id="blog1" class="blog-more" style="display:none; margin-top:0.7rem; color:#444;">
                                 <p>Incluye intervalos de alta intensidad, descansos activos, hidratación adecuada y una rutina semanal equilibrada para evitar lesiones y mantener la motivación.</p>
@@ -370,14 +357,15 @@
                                     <li>Cómo planificar una rutina semanal equilibrada para evitar lesiones.</li>
                                     <li>Consejos para mantener la motivación y medir tu progreso.</li>
                                 </ul>
+                                <p style="margin-top:1em; color:#1976d2; font-weight:bold;">¡Recuerda! La constancia y el descanso son claves para mejorar tu resistencia. Consulta siempre con un profesional para personalizar tu rutina.</p>
                             </div>
                         </div>
                     </article>
                     <article class="blog-card">
-                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Noticia Nutrición">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Nutrición para Deportistas">
                         <div class="blog-content">
                             <h3>Nutrición para Deportistas</h3>
-                            <p>Guía completa sobre alimentación para optimizar tu rendimiento deportivo.</p>
+                            <p style="text-align: justify;">Guía completa sobre alimentación para optimizar tu rendimiento deportivo.</p>
                             <a href="#" class="read-more">Leer más</a>
                             <div id="blog2" class="blog-more" style="display:none; margin-top:0.7rem; color:#444;">
                                 <p>Aprende sobre macronutrientes, hidratación, menús recomendados y cómo evitar errores comunes en la dieta deportiva.</p>
@@ -387,6 +375,7 @@
                                     <li>Ejemplos de menús para antes y después del entrenamiento.</li>
                                     <li>Errores comunes en la dieta deportiva y cómo evitarlos.</li>
                                 </ul>
+                                <p style="margin-top:1em; color:#1976d2; font-weight:bold;">Una buena nutrición ayuda a la recuperación y mejora el rendimiento. Consulta a un nutricionista deportivo para adaptar tu dieta a tus necesidades y objetivos.</p>
                             </div>
                         </div>
                     </article>
@@ -394,7 +383,7 @@
                         <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Noticia Tecnología">
                         <div class="blog-content">
                             <h3>Tecnología en el Deporte</h3>
-                            <p>Descubre cómo la tecnología está revolucionando el entrenamiento deportivo moderno.</p>
+                            <p style="text-align: justify;">Descubre cómo la tecnología está revolucionando el entrenamiento deportivo moderno.</p>
                             <a href="#" class="read-more">Leer más</a>
                             <div id="blog3" class="blog-more" style="display:none; margin-top:0.7rem; color:#444;">
                                 <p>Wearables, apps, inteligencia artificial y realidad virtual para mejorar el rendimiento y prevenir lesiones.</p>
@@ -404,6 +393,7 @@
                                     <li>La inteligencia artificial en la prevención de lesiones y análisis de datos.</li>
                                     <li>Ventajas de la realidad virtual y aumentada en la preparación deportiva.</li>
                                 </ul>
+                                <p style="margin-top:1em; color:#1976d2; font-weight:bold;">La tecnología permite un entrenamiento más eficiente y seguro. ¡Aprovecha las herramientas digitales para potenciar tu progreso!</p>
                             </div>
                         </div>
                     </article>
@@ -412,88 +402,96 @@
             </div>
         </section>
     </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>DeporteFit</h3>
-                <p>La plataforma líder en entrenamiento deportivo personalizado con certificaciones profesionales.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h4>Servicios</h4>
-                <ul>
-                    <li><a href="#">Entrenamiento Personal</a></li>
-                    <li><a href="#">Cursos Certificados</a></li>
-                    <li><a href="#">Planes de Nutrición</a></li>
-                    <li><a href="#">Asesoría Deportiva</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Deportes</h4>
-                <ul>
-                    <li><a href="#">Running</a></li>
-                    <li><a href="#">Fitness</a></li>
-                    <li><a href="#">Natación</a></li>
-                    <li><a href="#">Ciclismo</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Contacto</h4>
-                <p><i class="fas fa-envelope"></i> info@deportefit.com</p>
-                <p><i class="fas fa-phone"></i> (593) 98 765 4321</p>
-                <p><i class="fas fa-map-marker-alt"></i> Calle Deportiva 123, Ciudad Quito</p>
-                <!-- NOTA: Los datos de contacto anteriores son ejemplos. Modificar según información real de la empresa -->
-        <script>
-        // Acordeón para FAQ
-        document.addEventListener('DOMContentLoaded', function() {
-            const questions = document.querySelectorAll('.faq-question');
-            questions.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const answer = this.nextElementSibling;
-                    if (answer.style.display === 'block') {
-                        answer.style.display = 'none';
-                    } else {
-                        document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
-                        answer.style.display = 'block';
-                    }
+    <script>
+    // Acordeón para FAQ y Blog/Noticias (solo una respuesta/card abierta a la vez)
+    window.addEventListener('load', function() {
+        // FAQ acordeón: solo una respuesta visible a la vez
+        var questions = document.querySelectorAll('.faq-question');
+        questions.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var answer = this.nextElementSibling;
+                document.querySelectorAll('.faq-answer').forEach(function(a) {
+                    a.style.display = 'none';
                 });
-            });
-
-            // Blog/Noticias: solo una card abierta a la vez
-            const readMoreLinks = document.querySelectorAll('.read-more');
-            readMoreLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    // Obtener el div .blog-more más cercano dentro de la misma tarjeta
-                    const blogCard = this.closest('.blog-card');
-                    const thisMore = blogCard.querySelector('.blog-more');
-                    // Cerrar todos y restaurar texto
-                    document.querySelectorAll('.blog-more').forEach(div => {
-                        if (div !== thisMore) {
-                            div.style.display = 'none';
-                        }
-                    });
-                    document.querySelectorAll('.read-more').forEach(a => {
-                        if (a !== this) {
-                            a.textContent = 'Leer más';
-                        }
-                    });
-                    // Alternar solo el de esta tarjeta y cambiar texto
-                    if (thisMore.style.display === 'block') {
-                        thisMore.style.display = 'none';
-                        this.textContent = 'Leer más';
-                    } else {
-                        thisMore.style.display = 'block';
-                        this.textContent = 'Leer menos';
-                    }
+                document.querySelectorAll('.faq-question').forEach(function(q) {
+                    q.classList.remove('active');
                 });
+                if (answer.style.display === 'block' || answer.style.display === 'flex') {
+                    answer.style.display = 'none';
+                    this.classList.remove('active');
+                } else {
+                    answer.style.display = 'block';
+                    this.classList.add('active');
+                }
             });
         });
-        </script>
-</html>
+
+        // Blog/Noticias: solo una card abierta a la vez
+        var readMoreLinks = document.querySelectorAll('.read-more');
+        readMoreLinks.forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                var blogCard = this.closest('.blog-card');
+                var thisMore = blogCard.querySelector('.blog-more');
+                document.querySelectorAll('.blog-more').forEach(function(div) {
+                    if (div !== thisMore) {
+                        div.style.display = 'none';
+                    }
+                });
+                document.querySelectorAll('.read-more').forEach(function(a) {
+                    if (a !== link) {
+                        a.textContent = 'Leer más';
+                    }
+                });
+                if (thisMore.style.display === 'block') {
+                    thisMore.style.display = 'none';
+                    this.textContent = 'Leer más';
+                } else {
+                    thisMore.style.display = 'block';
+                    this.textContent = 'Leer menos';
+                }
+            });
+        });
+    });
+    </script>
+
+    <footer>
+        <div class="footer-content" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; max-width: 1200px; margin: 0 auto; padding: 2.5rem 1rem 0 1rem; background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%); border-radius: 1.2rem 1.2rem 0 0; box-shadow: 0 -2px 16px rgba(25, 118, 210, 0.08); color: #fff;">
+            <div class="footer-section" style="flex: 1 1 220px; min-width: 200px; max-width: 260px;">
+                <h3 style="font-weight: 700; letter-spacing: 1px;">DeporteFit</h3>
+                <p style="margin-bottom: 1.2rem;">La plataforma líder en entrenamiento deportivo personalizado con certificaciones profesionales.</p>
+                <div class="social-links" style="margin-top: 1rem; display: flex; gap: 1rem;">
+                    <a href="#" style="color: #fff; font-size: 1.3rem;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color: #fff; font-size: 1.3rem;"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color: #fff; font-size: 1.3rem;"><i class="fab fa-twitter"></i></a>
+                    <a href="#" style="color: #fff; font-size: 1.3rem;"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section" style="flex: 1 1 220px; min-width: 200px; max-width: 260px;">
+                <h4 style="font-weight: 600; margin-bottom: 1rem;">Servicios</h4>
+                <ul style="padding-left: 0; list-style: none; line-height: 2;">
+                    <li><a href="#" style="color: #fff; text-decoration: none;">Entrenamiento Personal</a></li>
+                    <li><a href="#" style="color: #fff; text-decoration: none;">Cursos Certificados</a></li>
+                    <li><a href="#" style="color: #fff; text-decoration: none;">Planes de Nutrición</a></li>
+                    <li><a href="#" style="color: #fff; text-decoration: none;">Asesoría Deportiva</a></li>
+                </ul>
+            </div>
+            <div class="footer-section" style="flex: 1 1 220px; min-width: 200px; max-width: 260px;">
+                <h4 style="font-weight: 600; margin-bottom: 1rem;">Deportes</h4>
+                <ul style="padding-left: 0; list-style: none; line-height: 2;">
+                    <li><a href="#" style="color: #fff; text-decoration: none;">Running</a></li>
+                    <li><a href="#" style="color: #fff; text-decoration: none;">Fitness</a></li>
+                    <li><a href="#" style="color: #fff; text-decoration: none;">Natación</a></li>
+                    <li><a href="#" style="color: #fff; text-decoration: none;">Ciclismo</a></li>
+                </ul>
+            </div>
+            <div class="footer-section" style="flex: 1 1 220px; min-width: 200px; max-width: 260px;">
+                <h4 style="font-weight: 600; margin-bottom: 1rem;">Contacto</h4>
+                <p style="margin:0.2em 0;"><i class="fas fa-envelope"></i> info@deportefit.com</p>
+                <p style="margin:0.2em 0;"><i class="fas fa-phone"></i> (593) 98 765 4321</p>
+                <p style="margin:0.2em 0;"><i class="fas fa-map-marker-alt"></i> Calle Deportiva 123, Ciudad Quito</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 0; padding: 1.2rem 0 0.5rem 0; color: #fff; font-size: 1.08rem; letter-spacing: 0.5px; background: linear-gradient(90deg, #1565c0 0%, #42a5f5 100%); border-radius: 0 0 1.2rem 1.2rem; box-shadow: 0 2px 12px rgba(25, 118, 210, 0.08);">
+            &copy; 2025 DeporteFit. Todos los derechos reservados.
+        </div>

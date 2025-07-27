@@ -1,3 +1,26 @@
+/* Justificar texto solo en párrafos generales, no en cards ni títulos destacados */
+p, .faq-answer {
+    text-align: justify;
+}
+.deporte-card p,
+.beneficio p,
+.testimonio-content p,
+.blog-content p,
+.section-subtitle,
+.stat-label {
+    text-align: left;
+}
+.beneficio h3,
+.deporte-card h3,
+.testimonio-content h4,
+.blog-content h3 {
+    text-align: center;
+}
+/* Quitar sombra del contenedor principal */
+.container {
+    box-shadow: none !important;
+}
+/* (Eliminado override global de box-shadow:none; restaurar sombras originales en la web) */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 body {
@@ -131,12 +154,12 @@ nav ul li a.activo, nav ul li a:hover {
 .btn-primary {
     background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
     color: #fff;
-    box-shadow: 0 4px 15px rgba(67, 233, 123, 0.3);
+    box-shadow: none;
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(67, 233, 123, 0.4);
+    box-shadow: none;
 }
 
 .btn-secondary {
@@ -1005,22 +1028,14 @@ main {
 
 /* === Fondo y contenedor especial para la sección de servicios === */
 .servicios {
-  background: linear-gradient(120deg, #eafaf7 0%, #f8fcfa 100%);
+  background: #fff;
   padding: 4.5rem 0 4rem 0;
   position: relative;
   z-index: 1;
 }
 
 .servicios::before {
-  content: '';
-  position: absolute;
-  top: -60px;
-  left: 0;
-  width: 100%;
-  height: 120px;
-  background: linear-gradient(180deg, #1abc9c22 0%, transparent 100%);
-  z-index: 0;
-  pointer-events: none;
+  display: none;
 }
 
 .servicios .container {
@@ -1065,7 +1080,7 @@ main {
 .servicio-card.mejorado {
   background: #fff;
   border-radius: 22px;
-  box-shadow: 0 10px 40px rgba(26,188,156,0.13);
+  box-shadow: none;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1076,7 +1091,7 @@ main {
 }
 .servicio-card.mejorado:hover {
   transform: translateY(-16px) scale(1.045);
-  box-shadow: 0 18px 60px rgba(26,188,156,0.22);
+  box-shadow: none;
   border: 2.5px solid #1abc9c;
   z-index: 2;
 }
@@ -1130,7 +1145,7 @@ main {
   padding: 0.8rem 1.6rem;
   font-size: 1.08rem;
   font-weight: 700;
-  box-shadow: 0 2px 12px rgba(26,188,156,0.13);
+  box-shadow: none;
   transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
   text-decoration: none;
@@ -1139,7 +1154,7 @@ main {
 }
 .servicio-info .btn:hover {
   background: linear-gradient(90deg, #16a085 60%, #1abc9c 100%);
-  box-shadow: 0 6px 24px rgba(26,188,156,0.22);
+  box-shadow: none;
   transform: scale(1.06);
 }
 
