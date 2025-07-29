@@ -213,26 +213,9 @@
         const yearElement = document.querySelector('.footer-bottom p');
         if (yearElement) {
             yearElement.innerHTML = yearElement.innerHTML.replace('2025', new Date().getFullYear());
-
-
-</body>
-</html>
-        faqQuestions.forEach(function(btn) {
-            btn.addEventListener('click', function() {
-                const answer = btn.nextElementSibling;
-                if (answer.style.display === 'block') {
-                    answer.style.display = 'none';
-                } else {
-                    // Cierra otros abiertos
-                    document.querySelectorAll('.faq-answer').forEach(function(a) {
-                        a.style.display = 'none';
-                    });
-                    answer.style.display = 'block';
-                }
-            });
-        });
+        }
     });
     </script>
 
 </body>
-    </footer>
+</html>
