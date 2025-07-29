@@ -1,3 +1,13 @@
+/* Grid de planes alineados horizontalmente como entrenadores */
+.planes-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2.7rem;
+  margin: 2.5rem auto 2rem auto;
+  max-width: 1200px;
+}
 /* Justificar texto solo en párrafos generales, no en cards ni títulos destacados */
 p, .faq-answer {
     text-align: justify;
