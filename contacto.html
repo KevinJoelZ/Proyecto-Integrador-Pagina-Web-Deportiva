@@ -119,29 +119,30 @@
         </section>
         <script>
         // Validación y mensajes del formulario (solo frontend)
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('.form-contacto');
-            const exito = document.querySelector('.mensaje-exito');
-            const error = document.querySelector('.mensaje-error');
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    // Validación simple: todos los campos requeridos
-                    const nombre = form.nombre.value.trim();
-                    const email = form.email.value.trim();
-                    const motivo = form.motivo.value.trim();
-                    const privacidad = form.privacidad.checked;
-                    if (nombre && email && motivo && privacidad) {
-                        exito.style.display = 'block';
-                        error.style.display = 'none';
-                        form.reset();
-                    } else {
-                        exito.style.display = 'none';
-                        error.style.display = 'block';
-                    }
-                });
-            }
-        });
+        // Eliminar la prevención del envío para que el formulario se procese en guardar.php
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     const form = document.querySelector('.form-contacto');
+        //     const exito = document.querySelector('.mensaje-exito');
+        //     const error = document.querySelector('.mensaje-error');
+        //     if (form) {
+        //         form.addEventListener('submit', function(e) {
+        //             e.preventDefault();
+        //             // Validación simple: todos los campos requeridos
+        //             const nombre = form.nombre.value.trim();
+        //             const email = form.email.value.trim();
+        //             const motivo = form.motivo.value.trim();
+        //             const privacidad = form.privacidad.checked;
+        //             if (nombre && email && motivo && privacidad) {
+        //                 exito.style.display = 'block';
+        //                 error.style.display = 'none';
+        //                 form.reset();
+        //             } else {
+        //                 exito.style.display = 'none';
+        //                 error.style.display = 'block';
+        //             }
+        //         });
+        //     }
+        // });
         </script>
     </main>
     <footer>
