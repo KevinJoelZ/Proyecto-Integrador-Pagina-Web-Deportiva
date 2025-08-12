@@ -8,39 +8,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body style="background: linear-gradient(180deg, #f7fbff 0%, #e3f0ff 100%);">
-    <!-- Formulario para contactar entrenadores y guardar en la base de datos -->
-    <section id="formulario-entrenadores" style="background: #fff; border-radius: 1.1rem; box-shadow: 0 2px 12px rgba(25,118,210,0.07); max-width: 600px; margin: 3rem auto 2rem auto; padding: 2.5rem 1.5rem;">
-        <h2 style="color: #1976d2; margin-bottom: 1.2rem;">Contactar Entrenador</h2>
-        <form action="guardar.php" method="POST">
-            <div style="margin-bottom: 1rem;">
-                <label for="nombre" style="display: block; margin-bottom: 0.3rem;">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
-            </div>
-            <div style="margin-bottom: 1rem;">
-                <label for="email" style="display: block; margin-bottom: 0.3rem;">Correo electrónico:</label>
-                <input type="email" id="email" name="email" required style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
-            </div>
-            <div style="margin-bottom: 1rem;">
-                <label for="telefono" style="display: block; margin-bottom: 0.3rem;">Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" placeholder="Ej: 0991234567" style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
-            </div>
-            <div style="margin-bottom: 1rem;">
-                <label for="motivo" style="display: block; margin-bottom: 0.3rem;">Motivo de contacto:</label>
-                <select id="motivo" name="motivo" required style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
-                    <option value="">Selecciona una opción</option>
-                    <option value="informacion">Solicitar información</option>
-                    <option value="soporte">Soporte técnico</option>
-                    <option value="entrenadores">Contactar entrenador</option>
-                    <option value="otros">Otros</option>
-                </select>
-            </div>
-            <div style="margin-bottom: 1rem;">
-                <label for="mensaje" style="display: block; margin-bottom: 0.3rem;">Mensaje:</label>
-                <textarea id="mensaje" name="mensaje" rows="3" required style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
-    </section>
     <header style="background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%); box-shadow: 0 2px 16px rgba(25, 118, 210, 0.08); border-radius: 0 0 1.2rem 1.2rem;">
         <nav style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0.7rem 1.5rem 0.7rem 1.5rem; flex-wrap: wrap;">
             <div class="logo" style="display: flex; align-items: center; gap: 0.7rem; font-size: 2rem; color: #fff; font-weight: 700; letter-spacing: 1px;">
@@ -155,6 +122,41 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Formulario para contactar entrenadores y guardar en la base de datos -->
+                <section id="formulario-entrenadores" style="background: #fff; border-radius: 1.1rem; box-shadow: 0 2px 12px rgba(25,118,210,0.07); max-width: 600px; margin: 3rem auto 2rem auto; padding: 2.5rem 1.5rem;">
+                    <h2 style="color: #1976d2; margin-bottom: 1.2rem;">Contactar Entrenador</h2>
+                    <form action="guardar.php" method="POST">
+                        <div style="margin-bottom: 1rem;">
+                            <label for="nombre" style="display: block; margin-bottom: 0.3rem;">Nombre:</label>
+                            <input type="text" id="nombre" name="nombre" required style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label for="email" style="display: block; margin-bottom: 0.3rem;">Correo electrónico:</label>
+                            <input type="email" id="email" name="email" required style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label for="telefono" style="display: block; margin-bottom: 0.3rem;">Teléfono:</label>
+                            <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" placeholder="Ej: 0991234567" style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label for="motivo" style="display: block; margin-bottom: 0.3rem;">Motivo de contacto:</label>
+                            <select id="motivo" name="motivo" required style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
+                                <option value="">Selecciona una opción</option>
+                                <option value="informacion">Solicitar información</option>
+                                <option value="soporte">Soporte técnico</option>
+                                <option value="entrenadores">Contactar entrenador</option>
+                                <option value="otros">Otros</option>
+                            </select>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label for="mensaje" style="display: block; margin-bottom: 0.3rem;">Mensaje:</label>
+                            <textarea id="mensaje" name="mensaje" rows="3" required style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                </section>
+
                 <!-- Bloque de Preguntas Frecuentes (FAQ) -->
                 <section class="faq">
                     <h2>Preguntas Frecuentes sobre Nuestros Entrenadores</h2>
@@ -173,7 +175,7 @@
                         </div>
                         <div class="faq-item">
                             <button class="faq-question">¿Puedo contactar directamente a un entrenador?</button>
-                            <div class="faq-answer">Sí, utiliza el botón “Contactar” en el perfil de cada entrenador o escríbenos desde la página de contacto.</div>
+                            <div class="faq-answer">Sí, utiliza el botón "Contactar" en el perfil de cada entrenador o escríbenos desde la página de contacto.</div>
                         </div>
                     </div>
                 </section>
