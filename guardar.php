@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Ajusta el nombre de la tabla y los campos según tu base de datos
-    $sql = "INSERT INTO contactos (nombre, email, telefono, motivo, mensaje, fecha_creacion) VALUES (?, ?, ?, ?, ?, NOW())";
+    
+    $sql = "INSERT INTO contactos (nombre, email, telefono, motivo, mensaje, fecha_creacion) VALUES (NOW())";
     $stmt = mysqli_prepare($conexion, $sql);
     
     if ($stmt) {
