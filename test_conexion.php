@@ -1,68 +1,87 @@
 <?php
-// Archivo de prueba para verificar conexión y estructura de la base de datos
+// Archivo de prueba para verificar la conexión a la base de datos
 include 'conexión.php';
 
-echo "<h2>Prueba de Conexión a la Base de Datos</h2>";
+echo "<h2>Prueba de Conexión a Base de Datos</h2>";
 
 if ($conexion) {
     echo "<p style='color: green;'>✅ Conexión exitosa a la base de datos</p>";
     
-    // Verificar si la tabla contactos existe
-    $sql_check_table = "SHOW TABLES LIKE 'contactos'";
-    $result = mysqli_query($conexion, $sql_check_table);
+    // Verificar si las tablas existen
+    $tablas = ['contactos', 'solicitudes_info'];
     
-    if (mysqli_num_rows($result) > 0) {
-        echo "<p style='color: green;'>✅ La tabla 'contactos' existe</p>";
+    foreach ($tablas as $tabla) {
+        $sql = "SHOW TABLES LIKE '$tabla'";
+        $resultado = mysqli_query($conexion, $sql);
         
-        // Mostrar estructura de la tabla
-        $sql_structure = "DESCRIBE contactos";
-        $result_structure = mysqli_query($conexion, $sql_structure);
-        
-        if ($result_structure) {
-            echo "<h3>Estructura de la tabla 'contactos':</h3>";
-            echo "<table border='1' style='border-collapse: collapse; width: 100%;'>";
-            echo "<tr><th>Campo</th><th>Tipo</th><th>Nulo</th><th>Llave</th><th>Default</th><th>Extra</th></tr>";
+        if (mysqli_num_rows($resultado) > 0) {
+            echo "<p style='color: green;'>✅ Tabla '$tabla' existe</p>";
             
-            while ($row = mysqli_fetch_assoc($result_structure)) {
-                echo "<tr>";
-                echo "<td>" . $row['Field'] . "</td>";
-                echo "<td>" . $row['Type'] . "</td>";
-                echo "<td>" . $row['Null'] . "</td>";
-                echo "<td>" . $row['Key'] . "</td>";
-                echo "<td>" . $row['Default'] . "</td>";
-                echo "<td>" . $row['Extra'] . "</td>";
-                echo "</tr>";
+            // Contar registros en la tabla
+            $count_sql = "SELECT COUNT(*) as total FROM $tabla";
+            $count_result = mysqli_query($conexion, $count_sql);
+            if ($count_result) {
+                $row = mysqli_fetch_assoc($count_result);
+                echo "<p>📊 Registros en '$tabla': " . $row['total'] . "</p>";
             }
-            echo "</table>";
+        } else {
+            echo "<p style='color: red;'>❌ Tabla '$tabla' NO existe</p>";
         }
-        
-        // Contar registros existentes
-        $sql_count = "SELECT COUNT(*) as total FROM contactos";
-        $result_count = mysqli_query($conexion, $sql_count);
-        if ($result_count) {
-            $row = mysqli_fetch_assoc($result_count);
-            echo "<p><strong>Total de registros en la tabla: " . $row['total'] . "</strong></p>";
-        }
-        
-    } else {
-        echo "<p style='color: red;'>❌ La tabla 'contactos' NO existe</p>";
-        echo "<p>Necesitas crear la tabla con la siguiente estructura:</p>";
-        echo "<pre>
-CREATE TABLE contactos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    telefono VARCHAR(20),
-    motivo VARCHAR(100) NOT NULL,
-    mensaje TEXT NOT NULL,
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-        </pre>";
     }
+    
+    // Probar inserción de datos de prueba
+    echo "<h3>Insertando datos de prueba...</h3>";
+    
+    $test_sql = "INSERT INTO contactos (nombre, email, telefono, motivo, mensaje, fecha_creacion) VALUES (?, ?, ?, ?, ?, NOW())";
+    $stmt = mysqli_prepare($conexion, $test_sql);
+    
+    if ($stmt) {
+        $nombre = "Usuario Prueba";
+        $email = "prueba@test.com";
+        $telefono = "0999999999";
+        $motivo = "prueba";
+        $mensaje = "Este es un mensaje de prueba para verificar la funcionalidad.";
+        
+        mysqli_stmt_bind_param($stmt, "sssss", $nombre, $email, $telefono, $motivo, $mensaje);
+        
+        if (mysqli_stmt_execute($stmt)) {
+            echo "<p style='color: green;'>✅ Inserción de prueba exitosa</p>";
+            
+            // Obtener el ID insertado
+            $id_insertado = mysqli_insert_id($conexion);
+            echo "<p>🆔 ID del registro insertado: $id_insertado</p>";
+            
+            // Eliminar el registro de prueba
+            $delete_sql = "DELETE FROM contactos WHERE id = ?";
+            $delete_stmt = mysqli_prepare($conexion, $delete_sql);
+            if ($delete_stmt) {
+                mysqli_stmt_bind_param($delete_stmt, "i", $id_insertado);
+                if (mysqli_stmt_execute($delete_stmt)) {
+                    echo "<p style='color: blue;'>🗑️ Registro de prueba eliminado</p>";
+                }
+                mysqli_stmt_close($delete_stmt);
+            }
+        } else {
+            echo "<p style='color: red;'>❌ Error en inserción de prueba: " . mysqli_stmt_error($stmt) . "</p>";
+        }
+        
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "<p style='color: red;'>❌ Error preparando consulta de prueba: " . mysqli_error($conexion) . "</p>";
+    }
+    
+    mysqli_close($conexion);
+    echo "<p style='color: blue;'>🔌 Conexión cerrada</p>";
     
 } else {
     echo "<p style='color: red;'>❌ Error de conexión: " . mysqli_connect_error() . "</p>";
 }
 
-mysqli_close($conexion);
+echo "<hr>";
+echo "<p><strong>Instrucciones:</strong></p>";
+echo "<ul>";
+echo "<li>Si ves errores de tablas, ejecuta el archivo 'crear_tablas.sql' en tu base de datos</li>";
+echo "<li>Si ves errores de conexión, verifica los datos en 'conexión.php'</li>";
+echo "<li>Si todo funciona, puedes eliminar este archivo de prueba</li>";
+echo "</ul>";
 ?>

@@ -28,7 +28,7 @@
                         <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=430&q=80" alt="Formulario de Contacto" style="height: 110px; object-fit: cover; border-radius: 12px 12px 0 0;">
                         <div class="servicio-info" style="padding: 1.1rem 1rem;">
                             <h3 style="font-size: 1.15rem; margin-bottom: 0.7rem;">Formulario de Contacto</h3>
-                            <form class="form-contacto" action="guardar.php" method="POST" style="padding: 0.7rem 0.2rem; max-width: 100%;">
+                            <form class="form-contacto" action="procesar_formularios.php" method="POST" style="padding: 0.7rem 0.2rem; max-width: 100%;">
                                 <label for="nombre" style="font-size: 0.98rem;">Nombre:</label>
                                 <input type="text" id="nombre" name="nombre" required style="padding: 0.6rem; font-size: 0.98rem; margin-bottom: 0.7rem;">
                                 <label for="email" style="font-size: 0.98rem;">Correo electrónico:</label>
@@ -118,28 +118,30 @@
             </div>
         </section>
         <script>
-        // Validación y mensajes del formulario (solo frontend)
-        // Eliminar la prevención del envío para que el formulario se procese en guardar.php
-         document.addEventListener('DOMContentLoaded', function() {
+        // Validación del formulario antes del envío
+        document.addEventListener('DOMContentLoaded', function() {
             const form = document.querySelector('.form-contacto');
-             const exito = document.querySelector('.mensaje-exito');
+            const exito = document.querySelector('.mensaje-exito');
             const error = document.querySelector('.mensaje-error');
+            
             if (form) {
                 form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                   // Validación simple: todos los campos requeridos
+                    // Validación simple: todos los campos requeridos
                     const nombre = form.nombre.value.trim();
                     const email = form.email.value.trim();
-                     const motivo = form.motivo.value.trim();
+                    const motivo = form.motivo.value.trim();
                     const privacidad = form.privacidad.checked;
-                     if (nombre && email && motivo && privacidad) {
-                         exito.style.display = 'block';
-                        error.style.display = 'none';
-                       form.reset();
-                   } else {
+                    
+                    if (!nombre || !email || !motivo || !privacidad) {
+                        e.preventDefault();
                         exito.style.display = 'none';
                         error.style.display = 'block';
-                   }
+                        return false;
+                    }
+                    
+                    // Si todo está bien, permitir el envío
+                    exito.style.display = 'none';
+                    error.style.display = 'none';
                 });
             }
         });
