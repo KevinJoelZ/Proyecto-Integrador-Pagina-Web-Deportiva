@@ -1,3 +1,206 @@
+/* === RESPONSIVIDAD GLOBAL === */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 100vw;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .main-header, .main-footer {
+        max-width: 100vw;
+        border-radius: 0;
+    }
+}
+@media (max-width: 900px) {
+    .container {
+        max-width: 98vw;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+    .servicios-grid, .deportes-grid, .beneficios-grid, .testimonios-row, .blog-grid, .footer-content {
+        grid-template-columns: 1fr 1fr !important;
+        flex-direction: column !important;
+        gap: 1rem;
+    }
+    .servicio-card, .deporte-card, .beneficio, .testimonio, .blog-card {
+        min-width: 0;
+        max-width: 100%;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+@media (max-width: 700px) {
+    .container {
+        max-width: 100vw;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    .servicios-grid, .deportes-grid, .beneficios-grid, .testimonios-row, .blog-grid, .footer-content {
+        grid-template-columns: 1fr !important;
+        flex-direction: column !important;
+        gap: 0.7rem;
+    }
+    .servicio-card, .deporte-card, .beneficio, .testimonio, .blog-card {
+        min-width: 0;
+        max-width: 100%;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    h1, h2, h3 {
+        font-size: 1.1em;
+    }
+}
+@media (max-width: 480px) {
+    .container {
+        max-width: 100vw;
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
+    }
+    .main-header, .main-footer {
+        border-radius: 0;
+        padding: 0.5rem 0.2rem;
+    }
+    h1, h2, h3 {
+        font-size: 1em;
+    }
+    .servicio-card img, .deporte-card img, .blog-card img {
+        height: 80px !important;
+    }
+}
+.container {
+            max-width: calc(1200px + 12cm);
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    main.container {
+                    margin-top: 2cm;
+                    margin-bottom: 1cm;
+                    padding: 0;
+}
+@media (max-width: 1400px) {
+    .container {
+        max-width: 100vw;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+.servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+.servicio-card {
+    background: #fff;
+    border-radius: 1.2rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+}
+.servicio-card:hover {
+    transform: translateY(-6px) scale(1.03);
+}
+.servicio-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 1.2rem 1.2rem 0 0;
+}
+.servicio-info {
+    padding: 1.2rem 1rem 1rem 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+.servicio-info h3 {
+    font-size: 1.2rem;
+    color: #1976d2;
+    margin-bottom: 0.3rem;
+}
+.servicio-info p {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 0.5rem;
+}
+.servicio-info i {
+    font-size: 1.5rem;
+    color: #ff9800;
+}
+@media (max-width: 900px) {
+    .servicios-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+    }
+    .servicio-card img {
+        height: 140px;
+    }
+}
+@media (max-width: 700px) {
+    .servicios-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .servicio-card img {
+        height: 110px;
+    }
+    .servicio-info {
+        padding: 1rem 0.5rem 0.7rem 0.5rem;
+    }
+    .servicio-info h3 {
+        font-size: 1rem;
+    }
+}
+.faq-grid {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+        padding: 2cm;
+        max-width: 1200px;
+    height: 110%;
+}
+.faq-item {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    overflow: hidden;
+}
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    text-align: left;
+    padding: 1.2rem 1.5rem;
+    font-size: 1.1rem;
+        text-align: center;
+        color: #42a5f5;
+    transition: background 0.2s;
+}
+.faq-question:hover {
+    background: #eafaf7;
+}
+.faq-answer {
+    display: none;
+    padding: 0 1.5rem 1.2rem 1.5rem;
+    color: #444;
+    font-size: 1rem;
+    border-top: 1px solid #eee;
+    animation: fadeIn 0.3s;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 /* Grid de planes alineados horizontalmente como entrenadores */
 .planes-grid {
   display: flex;
@@ -6,7 +209,7 @@
   align-items: stretch;
   gap: 2.7rem;
   margin: 2.5rem auto 2rem auto;
-  max-width: 1200px;
+    max-width: 1400px;
 }
 /* Justificar texto solo en párrafos generales, no en cards ni títulos destacados */
 p, .faq-answer {
@@ -125,7 +328,7 @@ nav ul li a.activo, nav ul li a:hover {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #fff;
     margin: 0;
-    border-radius: 0;
+    border-radius: 2.5rem;
     min-height: 80vh;
 }
 
@@ -270,12 +473,14 @@ nav ul li a.activo, nav ul li a:hover {
     font-weight: 600;
     color: #1976d2;
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 .deporte-card p {
     color: #666;
     margin-bottom: 1.5rem;
     line-height: 1.6;
+    text-align: justify;
 }
 
 .certificacion {
@@ -331,6 +536,7 @@ nav ul li a.activo, nav ul li a:hover {
     font-weight: 600;
     color: #1976d2;
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 .beneficio p {
@@ -398,27 +604,31 @@ nav ul li a.activo, nav ul li a:hover {
 
 /* Estadísticas */
 .estadisticas {
-    padding: 4rem 0;
+    padding: 0.3rem 0;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #fff;
+    min-height: 120px;
+    max-width: 700px;
+    margin: 0 auto;
+    border-radius: 25px;
 }
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.2rem;
     text-align: center;
 }
 
 .stat-item .stat-number {
-    font-size: 3rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: #ffb74d;
     display: block;
 }
 
 .stat-item .stat-label {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     opacity: 0.9;
 }
 
@@ -505,6 +715,7 @@ nav ul li a.activo, nav ul li a:hover {
     color: #666;
     margin-bottom: 1rem;
     line-height: 1.6;
+    text-align: justify;
 }
 
 .read-more {
@@ -590,9 +801,9 @@ footer {
 
 .footer-bottom {
     text-align: center;
-    padding-top: 2rem;
+    padding-top: 1rem;
     border-top: 1px solid #34495e;
-    margin-top: 2rem;
+    margin-top: 0;
     color: #bdc3c7;
 }
 
@@ -697,10 +908,13 @@ main {
 }
 
 .mision-vision div {
+    /* === HEADER Y NAV PRINCIPAL === */
+    .main-header {
     background: rgba(227,242,253,0.95);
     padding: 1.5rem 1.2rem;
     border-radius: 12px;
     flex: 1;
+    .main-nav {
     box-shadow: 0 2px 12px rgba(33,150,243,0.06);
 }
 
@@ -709,6 +923,7 @@ main {
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
     font-weight: 600;
+    .logo {
 }
 
 .mision-vision p {
@@ -717,6 +932,7 @@ main {
 }
 
 .titulo-entrenadores {
+    .main-menu {
     text-align: center;
     font-size: 2.3rem;
     font-weight: 700;
@@ -726,16 +942,20 @@ main {
 }
 
 .entrenadores-lista {
+    .main-menu a {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 2rem;
     margin-bottom: 2.5rem;
 }
 
+    .main-menu .activo,
+    .main-menu a.activo {
 .entrenador {
     background: #fff;
     border-radius: 18px;
     box-shadow: 0 4px 24px rgba(33, 150, 243, 0.10);
+    @media (max-width: 900px) {
     padding: 2.2rem 1.5rem 1.5rem 1.5rem;
     transition: transform 0.18s, box-shadow 0.18s;
     border: 1.5px solid #e3f2fd;
@@ -751,6 +971,7 @@ main {
 
 .entrenador img {
     width: 110px;
+    @media (max-width: 700px) {
     height: 110px;
     border-radius: 50%;
     object-fit: cover;
@@ -765,6 +986,8 @@ main {
     font-size: 1.4rem;
     margin-bottom: 0.5rem;
     font-weight: 600;
+    /* === FOOTER PRINCIPAL === */
+    .main-footer {
 }
 
 .entrenador p {
@@ -773,25 +996,31 @@ main {
     line-height: 1.5;
 }
 
+    .main-footer .footer-section {
 .titulo-planes {
     text-align: center;
     font-size: 2.3rem;
     font-weight: 700;
+    .main-footer h3, .main-footer h4 {
     color: #1976d2;
     margin-bottom: 2.2rem;
     letter-spacing: 0.01em;
+    .main-footer ul {
 }
 
 .planes-lista {
     display: grid;
+    .main-footer .social-links {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin-bottom: 2.5rem;
 }
+    .main-footer a {
 
 .plan-card {
     background: #fff;
     border-radius: 18px;
+    @media (max-width: 900px) {
     box-shadow: 0 4px 24px rgba(33, 150, 243, 0.10);
     padding: 2rem 1.5rem;
     transition: transform 0.18s, box-shadow 0.18s;
@@ -801,6 +1030,7 @@ main {
 
 .plan-card:hover {
     transform: translateY(-6px) scale(1.03);
+    @media (max-width: 700px) {
     box-shadow: 0 8px 32px rgba(33, 150, 243, 0.16);
     border-color: #90caf9;
 }
@@ -809,6 +1039,7 @@ main {
     color: #1976d2;
     font-size: 1.5rem;
     margin-bottom: 1rem;
+    body, main {
     font-weight: 600;
 }
 
@@ -861,7 +1092,7 @@ main {
     font-weight: 600;
 }
 
-.tabla-planes td {
+        padding: 0 0 calc(1rem - 2cm) 0;
     color: #666;
 }
 
@@ -965,9 +1196,9 @@ main {
     max-width: 1100px;
     box-shadow: 0 4px 24px rgba(33, 150, 243, 0.08);
 }
-.detalle-planes h2 {
+    width: 115%;
     text-align: center;
-    color: #1976d2;
+        text-align: justify;
     font-size: 2.2rem;
     margin-bottom: 2rem;
     font-weight: 700;
@@ -1063,7 +1294,7 @@ main {
   color: #1abc9c;
   font-size: 2.6rem;
   font-weight: 900;
-  text-align: center;
+    text-align: center;
   margin-bottom: 0.7rem;
   letter-spacing: 0.01em;
   text-shadow: 0 2px 8px #1abc9c11;
@@ -1241,11 +1472,10 @@ main {
   color: #1abc9c;
 }
 .faq-grid {
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    display: block;
+    gap: 0;
 }
 .faq-item {
   background: #fff;
@@ -1399,4 +1629,4 @@ main {
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-} 
+}

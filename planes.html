@@ -8,18 +8,18 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body style="background: linear-gradient(180deg, #f7fbff 0%, #e3f0ff 100%);">
-    <header style="background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%); box-shadow: 0 2px 16px rgba(25, 118, 210, 0.08); border-radius: 0 0 1.2rem 1.2rem;">
-        <nav style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0.7rem 1.5rem 0.7rem 1.5rem; flex-wrap: wrap;">
-            <div class="logo" style="display: flex; align-items: center; gap: 0.7rem; font-size: 2rem; color: #fff; font-weight: 700; letter-spacing: 1px;">
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="logo">
                 <i class="fas fa-dumbbell" style="font-size: 2.2rem; color: #ffb74d;"></i>
                 <span style="font-size: 1.5rem; color: #fff; font-weight: 700; letter-spacing: 1px;">DeporteFit</span>
             </div>
-            <ul style="display: flex; gap: 2.2rem; list-style: none; margin: 0; padding: 0; align-items: center; font-size: 1.08rem; font-weight: 500;">
-                <li><a href="index.html" style="color: #fff; text-decoration: none; padding: 0.3em 0.8em; border-radius: 0.7em; transition: background 0.2s;">Inicio</a></li>
-                <li><a href="servicios.html" style="color: #fff; text-decoration: none; padding: 0.3em 0.8em; border-radius: 0.7em; transition: background 0.2s;">Servicios</a></li>
-                <li><a href="entrenadores.html" style="color: #fff; text-decoration: none; padding: 0.3em 0.8em; border-radius: 0.7em; transition: background 0.2s;">Entrenadores</a></li>
-                <li><a href="planes.html" class="activo" style="color: #fff; text-decoration: none; padding: 0.3em 0.8em; border-radius: 0.7em; background: linear-gradient(90deg, #ff9800 0%, #ffb74d 100%); color: #fff; font-weight: 700;">Planes y Precios</a></li>
-                <li><a href="contacto.html" style="color: #fff; text-decoration: none; padding: 0.3em 0.8em; border-radius: 0.7em; transition: background 0.2s;">Contacto</a></li>
+            <ul class="main-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="entrenadores.html">Entrenadores</a></li>
+                <li><a href="planes.html" class="activo">Planes y Precios</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -160,76 +160,67 @@
             </form>
         </section>
     </main>
-    <footer>
-        <div class="footer-content" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; max-width: 1200px; margin: 0 auto; padding: 2.5rem 1rem 0 1rem; background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%); border-radius: 1.2rem 1.2rem 0 0; box-shadow: 0 -2px 16px rgba(25, 118, 210, 0.08); color: #fff;">
-            <div class="footer-section" style="flex: 1 1 220px; min-width: 200px; max-width: 260px;">
-                <h3 style="font-weight: 700; letter-spacing: 1px;">DeporteFit</h3>
-                <p style="margin-bottom: 1.2rem;">La plataforma líder en entrenamiento deportivo personalizado con certificaciones profesionales.</p>
-                <div class="social-links" style="margin-top: 1rem; display: flex; gap: 1rem;">
-                    <a href="#" style="color: #fff; font-size: 1.3rem;"><i class="fab fa-facebook"></i></a>
-                    <a href="#" style="color: #fff; font-size: 1.3rem;"><i class="fab fa-instagram"></i></a>
-                    <a href="#" style="color: #fff; font-size: 1.3rem;"><i class="fab fa-twitter"></i></a>
-                    <a href="#" style="color: #fff; font-size: 1.3rem;"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-            <div class="footer-section" style="flex: 1 1 220px; min-width: 200px; max-width: 260px;">
-                <h4 style="font-weight: 600; margin-bottom: 1rem;">Servicios</h4>
-                <ul style="padding-left: 0; list-style: none; line-height: 2;">
-                    <li><a href="#" style="color: #fff; text-decoration: none;">Entrenamiento Personal</a></li>
-                    <li><a href="#" style="color: #fff; text-decoration: none;">Cursos Certificados</a></li>
-                    <li><a href="#" style="color: #fff; text-decoration: none;">Planes de Nutrición</a></li>
-                    <li><a href="#" style="color: #fff; text-decoration: none;">Asesoría Deportiva</a></li>
-                </ul>
-            </div>
-            <div class="footer-section" style="flex: 1 1 220px; min-width: 200px; max-width: 260px;">
-                <h4 style="font-weight: 600; margin-bottom: 1rem;">Deportes</h4>
-                <ul style="padding-left: 0; list-style: none; line-height: 2;">
-                    <li><a href="#" style="color: #fff; text-decoration: none;">Running</a></li>
-                    <li><a href="#" style="color: #fff; text-decoration: none;">Fitness</a></li>
-                    <li><a href="#" style="color: #fff; text-decoration: none;">Natación</a></li>
-                    <li><a href="#" style="color: #fff; text-decoration: none;">Ciclismo</a></li>
-                </ul>
-            </div>
-            <div class="footer-section" style="flex: 1 1 220px; min-width: 200px; max-width: 260px;">
-                <h4 style="font-weight: 600; margin-bottom: 1rem;">Contacto</h4>
-                <p style="margin:0.2em 0;"><i class="fas fa-envelope"></i> info@deportefit.com</p>
-                <p style="margin:0.2em 0;"><i class="fas fa-phone"></i> (593) 98 765 4321</p>
-                <p style="margin:0.2em 0;"><i class="fas fa-map-marker-alt"></i> Calle Deportiva 123, Ciudad Quito</p>
+  <footer class="main-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>DeporteFit</h3>
+            <p>La plataforma líder en entrenamiento deportivo personalizado con certificaciones profesionales.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
-        <div style="text-align: center; margin-top: 0; padding: 1.2rem 0 0.5rem 0; color: #fff; font-size: 1.08rem; letter-spacing: 0.5px; background: linear-gradient(90deg, #1565c0 0%, #42a5f5 100%); border-radius: 0 0 1.2rem 1.2rem; box-shadow: 0 2px 12px rgba(25, 118, 210, 0.08);">
-            &copy; 2025 DeporteFit. Todos los derechos reservados.
+        <div class="footer-section">
+            <h4>Servicios</h4>
+            <ul>
+                <li><a href="#">Entrenamiento Personal</a></li>
+                <li><a href="#">Cursos Certificados</a></li>
+                <li><a href="#">Planes de Nutrición</a></li>
+                <li><a href="#">Asesoría Deportiva</a></li>
+            </ul>
         </div>
-    </footer>
+        <div class="footer-section">
+            <h4>Deportes</h4>
+            <ul>
+                <li><a href="#">Running</a></li>
+                <li><a href="#">Fitness</a></li>
+                <li><a href="#">Natación</a></li>
+                <li><a href="#">Ciclismo</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Contacto</h4>
+            <p><i class="fas fa-envelope"></i> info@deportefit.com</p>
+            <p><i class="fas fa-phone"></i> (593) 98 765 4321</p>
+            <p><i class="fas fa-map-marker-alt"></i> Calle Deportiva 123, Ciudad Quito</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2025 DeporteFit. Todos los derechos reservados.
+    </div>
+</footer>
     <script>
-        // Año actual en el footer
-        document.addEventListener('DOMContentLoaded', function() {
-            const yearElement = document.querySelector('.footer-bottom p');
-            if (yearElement) {
-                yearElement.innerHTML = yearElement.innerHTML.replace('2025', new Date().getFullYear());
-            }
-            // Mostrar sección de confirmación al hacer clic en Elegir Plan
-            document.querySelectorAll('.btn.btn-primary[href^="#confirmar-"]').forEach(function(btn) {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    document.querySelectorAll('section[id^="confirmar-"]').forEach(function(sec) {
-                        sec.style.display = 'none';
-                    });
-                    var target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.style.display = 'block';
-                        target.scrollIntoView({behavior:'smooth', block:'center'});
-                    }
+        // Función para mostrar la sección de confirmación del plan seleccionado
+        function confirmarPlan(plan) {
+            alert(`Has confirmado el ${plan}. Nos pondremos en contacto contigo pronto.`);
+            // Aquí podrías agregar lógica adicional, como enviar la selección al servidor
+        }
+
+        // Mostrar la sección de confirmación correspondiente al hacer clic en "Elegir Plan"
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = button.getAttribute('href').substring(1);
+                document.querySelectorAll('section[id^="confirmar-"]').forEach(section => {
+                    section.style.display = 'none';
                 });
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
             });
         });
-        // Confirmar plan seleccionado
-        function confirmarPlan(plan) {
-            alert('¡Has confirmado el Plan ' + plan + '! Nos pondremos en contacto contigo para finalizar el proceso.');
-            document.querySelectorAll('section[id^="confirmar-"]').forEach(function(sec) {
-                sec.style.display = 'none';
-            });
-        }
     </script>
-</body>
-</html>
