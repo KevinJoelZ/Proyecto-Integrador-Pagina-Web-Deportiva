@@ -1,3 +1,45 @@
+/* Animación fade-in para títulos */
+.hero-content h1,
+.deportes h2,
+.por-que-elegirnos h2,
+.testimonios h2,
+.blog h2,
+.cta h2 {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInTitle 1.5s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+@keyframes fadeInTitle {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animación zoom-in para imagen principal */
+.hero-image img {
+  opacity: 0;
+  transform: scale(0.96);
+  animation: zoomInImg 1.7s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+@keyframes zoomInImg {
+  from { opacity: 0; transform: scale(0.96); }
+  80% { opacity: 0.8; transform: scale(1.03); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Animación fade-in desde abajo para el footer */
+footer {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInFooter 2.6s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+@keyframes fadeInFooter {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* === RESPONSIVIDAD GLOBAL === */
 @media (max-width: 1200px) {
     .container {
@@ -73,15 +115,15 @@
     }
 }
 .container {
-            max-width: calc(1200px + 12cm);
+    max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
         width: 100%;
         box-sizing: border-box;
     }
     main.container {
-                    margin-top: 2cm;
-                    margin-bottom: 1cm;
+                    margin-top: 2rem;
+                    margin-bottom: 1rem;
                     padding: 0;
 }
 @media (max-width: 1400px) {
@@ -105,6 +147,15 @@
     display: flex;
     flex-direction: column;
     transition: transform 0.2s;
+    opacity: 0;
+    animation: fadeInCard 4.45s cubic-bezier(.4,0,.05,1) forwards;
+}
+
+@keyframes fadeInCard {
+    from { opacity: 0; transform: translateY(80px) scale(0.95); }
+    90% { opacity: 0.9; transform: translateY(16px) scale(1.04); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
 }
 .servicio-card:hover {
     transform: translateY(-6px) scale(1.03);
@@ -242,7 +293,7 @@ body {
     padding: 0;
     background: linear-gradient(120deg, #e0e7ff 0%, #f7fafc 100%);
     color: #222;
-    min-height: 100vh;
+    min-height: 0;
 }
 
 /* Header y Navegación */
@@ -625,6 +676,9 @@ nav ul li a.activo, nav ul li a:hover {
     font-weight: 700;
     color: #ffb74d;
     display: block;
+    opacity: 0;
+    transform: translateX(-40px) scale(0.95);
+    animation: slideInStat 5.3s cubic-bezier(.4,0,.05,1) forwards;
 }
 
 .stat-item .stat-label {
@@ -632,6 +686,11 @@ nav ul li a.activo, nav ul li a:hover {
     opacity: 0.9;
 }
 
+@keyframes slideInStat {
+    from { opacity: 0; transform: translateX(-40px) scale(0.95); }
+    90% { opacity: 0.9; transform: translateX(8px) scale(1.04); }
+    to { opacity: 1; transform: translateX(0) scale(1); }
+}
 /* CTA Section */
 .cta {
     padding: 5rem 0;
