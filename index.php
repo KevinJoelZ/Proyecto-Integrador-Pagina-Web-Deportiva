@@ -3,8 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SportConnect - Acceso Deportivo</title>
+    <title>DeporteFit - Acceso Deportivo</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iOCIgZmlsbD0iIzRDQUY1MCIvPgo8Y2lyY2xlIGN4PSI4IiBjeT0iMTYiIHI9IjQiIGZpbGw9IiM0Q0FGNTAiLz4KPGNpcmNsZSBjeD0iMjQiIGN5PSIxNiIgcj0iNCIgZmlsbD0iIzRDQUY1MCIvPgo8L3N2Zz4K">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Firebase SDK -->
+    <script type="module">
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js';
+      import { getAuth, signInWithPopup, GoogleAuthProvider } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js';
+      
+      const firebaseConfig = {
+        apiKey: "AIzaSyBZoUGrSk3V-yFW6QHxXLeXQfPMgnYUeQo",
+        authDomain: "proyectoweb-fc2d2.firebaseapp.com",
+        projectId: "proyectoweb-fc2d2",
+        storageBucket: "proyectoweb-fc2d2.appspot.com",
+        messagingSenderId: "508269230145",
+        appId: "1:508269230145:web:d183a7c70873785487eec0"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const provider = new GoogleAuthProvider();
+      
+      // Exponer para script global
+      window.auth = auth;
+      window.provider = provider;
+      window.signInWithPopup = signInWithPopup;
+      window.GoogleAuthProvider = GoogleAuthProvider;
+    </script>
     <style>
         * {
             margin: 0;
@@ -127,8 +152,10 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            background: white;
-            color: #757575;
+            background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853, #4285F4);
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease infinite;
+            color: white;
             padding: 14px 28px;
             border-radius: 8px;
             font-size: 1.1rem;
@@ -141,6 +168,11 @@
             margin-top: 2rem;
             position: relative;
             overflow: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
         
         .google-btn::before {
@@ -171,6 +203,7 @@
         .google-icon {
             width: 22px;
             height: 22px;
+            color: white; /* Blanco para contraste con gradiente */
         }
         
         .footer {
@@ -201,7 +234,7 @@
     <div class="container">
         <div class="logo">
             <i class="fas fa-running logo-icon"></i>
-            <span class="logo-text">SportConnect</span>
+            <span class="logo-text">DeporteFit</span>
         </div>
         
         <div class="hero">
@@ -232,12 +265,12 @@
         </div>
         
         <button class="google-btn">
-            <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google logo">
+            <i class="fab fa-google google-icon"></i>
             Iniciar sesión con Google
         </button>
         
         <div class="footer">
-            <p>© 2023 SportConnect. Todos los derechos reservados.</p>
+            <p>© 2025 DeporteFit. Todos los derechos reservados.</p>
         </div>
     </div>
 
@@ -335,6 +368,36 @@
                 },
                 "retina_detect": true
             });
+        // Agregar event listener para el botón de Google
+        const googleBtn = document.querySelector('.google-btn');
+        googleBtn.addEventListener('click', async () => {
+            try {
+                const result = await signInWithPopup(window.auth, window.provider);
+                const credential = window.GoogleAuthProvider.credentialFromResult(result);
+                const idToken = credential.idToken;
+
+                const response = await fetch('auth.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id_token: idToken })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    window.location.href = data.redirect;
+                } else {
+                    alert('Error en autenticación: ' + data.error);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al iniciar sesión con Google: ' + error.message);
+            }
+        });
+        
+        // Cerrar DOMContentLoaded
         });
     </script>
 </body>

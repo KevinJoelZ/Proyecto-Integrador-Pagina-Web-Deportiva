@@ -1,6 +1,6 @@
 <?php
 // Archivo para procesar formularios según la página de origen
-include 'conexión.php';
+include '../conexión.php';
 
 // Verificar que la conexión esté activa
 if (!$conexion) {
@@ -9,7 +9,30 @@ if (!$conexion) {
 
 // Verifica que los datos lleguen por POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Obtener la página de origen
+    // Verificar form_type hidden si existe
+    if (isset($_POST['form_type'])) {
+        switch ($_POST['form_type']) {
+            case 'planes':
+                procesarFormularioPlanes($conexion);
+                mysqli_close($conexion);
+                exit;
+            case 'servicios':
+                procesarFormularioServicios($conexion);
+                mysqli_close($conexion);
+                exit;
+            case 'entrenadores':
+                procesarFormularioEntrenadores($conexion);
+                mysqli_close($conexion);
+                exit;
+            case 'contacto':
+                procesarFormularioContacto($conexion);
+                mysqli_close($conexion);
+                exit;
+            // Agregar más cases si se implementan hidden fields en otros formularios
+        }
+    }
+
+    // Fallback a referer si no hay form_type
     $referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
     
     // Determinar qué tipo de formulario es y procesarlo
@@ -44,12 +67,12 @@ function procesarFormularioContacto($conexion) {
 
     // Validaciones básicas
     if (empty($nombre) || empty($email) || empty($motivo) || empty($mensaje) || !$privacidad) {
-        echo "<script>alert('Por favor, complete todos los campos obligatorios y acepte la política de privacidad.'); window.history.back();</script>";
+        header("Location: ../contacto.html?error=1");
         exit;
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "<script>alert('Por favor, ingrese un email válido.'); window.history.back();</script>";
+        header("Location: ../contacto.html?error=1");
         exit;
     }
 
@@ -66,20 +89,21 @@ function procesarFormularioContacto($conexion) {
         // Ejecutar la consulta
         if (mysqli_stmt_execute($stmt)) {
             if (mysqli_stmt_affected_rows($stmt) > 0) {
-                echo "<script>
-                    alert('¡Éxito! Tu mensaje de contacto ha sido enviado correctamente. Te contactaremos pronto.');
-                    window.location.href = 'contacto.html';
-                </script>";
+                header("Location: ../contacto.html?success=1");
+                exit;
             } else {
-                echo "<script>alert('Error: No se pudo enviar el mensaje. Por favor, inténtalo de nuevo.'); window.history.back();</script>";
+                header("Location: ../contacto.html?error=1");
+                exit;
             }
         } else {
-            echo "<script>alert('Error al enviar el mensaje: " . mysqli_stmt_error($stmt) . "'); window.history.back();</script>";
+            header("Location: ../contacto.html?error=1");
+            exit;
         }
         
         mysqli_stmt_close($stmt);
     } else {
-        echo "<script>alert('Error en el sistema: " . mysqli_error($conexion) . "'); window.history.back();</script>";
+        header("Location: ../contacto.html?error=1");
+        exit;
     }
 }
 
@@ -93,12 +117,12 @@ function procesarFormularioEntrenadores($conexion) {
 
     // Validaciones básicas
     if (empty($nombre) || empty($email) || empty($motivo) || empty($mensaje)) {
-        echo "<script>alert('Por favor, complete todos los campos obligatorios.'); window.history.back();</script>";
+        header("Location: ../entrenadores.html?error=1");
         exit;
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "<script>alert('Por favor, ingrese un email válido.'); window.history.back();</script>";
+        header("Location: ../entrenadores.html?error=1");
         exit;
     }
 
@@ -115,20 +139,21 @@ function procesarFormularioEntrenadores($conexion) {
         // Ejecutar la consulta
         if (mysqli_stmt_execute($stmt)) {
             if (mysqli_stmt_affected_rows($stmt) > 0) {
-                echo "<script>
-                    alert('¡Éxito! Tu solicitud para contactar entrenadores ha sido enviada. Te contactaremos pronto.');
-                    window.location.href = 'entrenadores.html';
-                </script>";
+                header("Location: ../entrenadores.html?success=1");
+                exit;
             } else {
-                echo "<script>alert('Error: No se pudo enviar la solicitud. Por favor, inténtalo de nuevo.'); window.history.back();</script>";
+                header("Location: ../entrenadores.html?error=1");
+                exit;
             }
         } else {
-            echo "<script>alert('Error al enviar la solicitud: " . mysqli_stmt_error($stmt) . "'); window.history.back();</script>";
+            header("Location: ../entrenadores.html?error=1");
+            exit;
         }
         
         mysqli_stmt_close($stmt);
     } else {
-        echo "<script>alert('Error en el sistema: " . mysqli_error($conexion) . "'); window.history.back();</script>";
+        header("Location: ../entrenadores.html?error=1");
+        exit;
     }
 }
 
@@ -142,12 +167,12 @@ function procesarFormularioPlanes($conexion) {
 
     // Validaciones básicas
     if (empty($nombre) || empty($email) || empty($motivo) || empty($mensaje)) {
-        echo "<script>alert('Por favor, complete todos los campos obligatorios.'); window.history.back();</script>";
+        header("Location: ../planes.html?error=1");
         exit;
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "<script>alert('Por favor, ingrese un email válido.'); window.history.back();</script>";
+        header("Location: ../planes.html?error=1");
         exit;
     }
 
@@ -164,20 +189,21 @@ function procesarFormularioPlanes($conexion) {
         // Ejecutar la consulta
         if (mysqli_stmt_execute($stmt)) {
             if (mysqli_stmt_affected_rows($stmt) > 0) {
-                echo "<script>
-                    alert('¡Éxito! Tu solicitud de información sobre planes ha sido enviada. Te contactaremos pronto.');
-                    window.location.href = 'planes.html';
-                </script>";
+                header("Location: ../planes.html?success=1");
+                exit;
             } else {
-                echo "<script>alert('Error: No se pudo enviar la solicitud. Por favor, inténtalo de nuevo.'); window.history.back();</script>";
+                header("Location: ../planes.html?error=1");
+                exit;
             }
         } else {
-            echo "<script>alert('Error al enviar la solicitud: " . mysqli_stmt_error($stmt) . "'); window.history.back();</script>";
+            header("Location: ../planes.html?error=1");
+            exit;
         }
         
         mysqli_stmt_close($stmt);
     } else {
-        echo "<script>alert('Error en el sistema: " . mysqli_error($conexion) . "'); window.history.back();</script>";
+        header("Location: ../planes.html?error=1");
+        exit;
     }
 }
 
@@ -191,12 +217,12 @@ function procesarFormularioServicios($conexion) {
 
     // Validaciones básicas
     if (empty($nombre) || empty($email) || empty($motivo) || empty($mensaje)) {
-        echo "<script>alert('Por favor, complete todos los campos obligatorios.'); window.history.back();</script>";
+        header("Location: ../servicios.html?error=1");
         exit;
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "<script>alert('Por favor, ingrese un email válido.'); window.history.back();</script>";
+        header("Location: ../servicios.html?error=1");
         exit;
     }
 
@@ -213,20 +239,21 @@ function procesarFormularioServicios($conexion) {
         // Ejecutar la consulta
         if (mysqli_stmt_execute($stmt)) {
             if (mysqli_stmt_affected_rows($stmt) > 0) {
-                echo "<script>
-                    alert('¡Éxito! Tu solicitud de información sobre servicios ha sido enviada. Te contactaremos pronto.');
-                    window.location.href = 'servicios.html';
-                </script>";
+                header("Location: ../servicios.html?success=1");
+                exit;
             } else {
-                echo "<script>alert('Error: No se pudo enviar la solicitud. Por favor, inténtalo de nuevo.'); window.history.back();</script>";
+                header("Location: ../servicios.html?error=1");
+                exit;
             }
         } else {
-            echo "<script>alert('Error al enviar la solicitud: " . mysqli_stmt_error($stmt) . "'); window.history.back();</script>";
+            header("Location: ../servicios.html?error=1");
+            exit;
         }
         
         mysqli_stmt_close($stmt);
     } else {
-        echo "<script>alert('Error en el sistema: " . mysqli_error($conexion) . "'); window.history.back();</script>";
+        header("Location: ../servicios.html?error=1");
+        exit;
     }
 }
 
@@ -240,12 +267,12 @@ function procesarFormularioGeneral($conexion) {
 
     // Validaciones básicas
     if (empty($nombre) || empty($email) || empty($motivo) || empty($mensaje)) {
-        echo "<script>alert('Por favor, complete todos los campos obligatorios.'); window.history.back();</script>";
+        header("Location: ../index.html?error=1");
         exit;
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "<script>alert('Por favor, ingrese un email válido.'); window.history.back();</script>";
+        header("Location: ../index.html?error=1");
         exit;
     }
 
@@ -262,20 +289,21 @@ function procesarFormularioGeneral($conexion) {
         // Ejecutar la consulta
         if (mysqli_stmt_execute($stmt)) {
             if (mysqli_stmt_affected_rows($stmt) > 0) {
-                echo "<script>
-                    alert('¡Éxito! Tu mensaje ha sido enviado correctamente. Te contactaremos pronto.');
-                    window.location.href = 'index.html';
-                </script>";
+                header("Location: ../index.html?success=1");
+                exit;
             } else {
-                echo "<script>alert('Error: No se pudo enviar el mensaje. Por favor, inténtalo de nuevo.'); window.history.back();</script>";
+                header("Location: ../index.html?error=1");
+                exit;
             }
         } else {
-            echo "<script>alert('Error al enviar el mensaje: " . mysqli_stmt_error($stmt) . "'); window.history.back();</script>";
+            header("Location: ../index.html?error=1");
+            exit;
         }
         
         mysqli_stmt_close($stmt);
     } else {
-        echo "<script>alert('Error en el sistema: " . mysqli_error($conexion) . "'); window.history.back();</script>";
+        header("Location: ../index.html?error=1");
+        exit;
     }
 }
 ?>

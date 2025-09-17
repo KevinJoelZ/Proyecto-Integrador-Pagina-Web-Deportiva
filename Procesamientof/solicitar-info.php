@@ -1,6 +1,6 @@
 <?php
 // Incluir archivo de conexión
-include 'conexión.php';
+include '../PHP/conexión.php';
 
 // Verificar que la conexión esté activa
 if (!$conexion) {
@@ -30,14 +30,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Consulta SQL para insertar solicitud de información
-    $sql = "INSERT INTO solicitudes_info (nombre, email, telefono, servicio, plan, mensaje, fecha_solicitud, estado) VALUES (?, ?, ?, ?, ?, ?, ?, 'pendiente')";
+    $sql = "INSERT INTO solicitudes_servicios (nombre, email, telefono, motivo, mensaje, fecha_solicitud, estado) VALUES (?, ?, ?, ?, ?, ?, 'pendiente')";
     
     // Preparar la consulta
     $stmt = mysqli_prepare($conexion, $sql);
     
     if ($stmt) {
+        // Concatenar servicio y plan en motivo
+        $motivo = "Servicio: " . $servicio . " - Plan: " . ($plan ?: 'No especificado');
+        
         // Vincular parámetros
-        mysqli_stmt_bind_param($stmt, "sssssss", $nombre, $email, $telefono, $servicio, $plan, $mensaje, $fecha_solicitud);
+        mysqli_stmt_bind_param($stmt, "ssssss", $nombre, $email, $telefono, $motivo, $mensaje, $fecha_solicitud);
         
         // Ejecutar la consulta
         if (mysqli_stmt_execute($stmt)) {

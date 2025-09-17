@@ -1,6 +1,6 @@
 <?php
 // Archivo de prueba para verificar la conexión a la base de datos
-include 'conexión.php';
+include '../PHP/conexión.php';
 
 echo "<h2>Prueba de Conexión a Base de Datos</h2>";
 

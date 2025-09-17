@@ -8,6 +8,59 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body style="background: linear-gradient(180deg, #f7fbff 0%, #e3f0ff 100%);">
+
+<!-- Notificación Toast -->
+<div id="notification" class="notification hidden">
+    <span id="notification-message"></span>
+    <button id="close-notification" style="background: none; border: none; font-size: 1.2rem; cursor: pointer; color: inherit; padding: 0 0.5rem; float: right;">&times;</button>
+</div>
+
+<style>
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    min-width: 300px;
+    max-width: 400px;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    font-family: Arial, sans-serif;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+.notification.hidden {
+    opacity: 0;
+    transform: translateX(100%);
+}
+.notification.success {
+    background: linear-gradient(135deg, #4caf50, #45a049);
+    color: white;
+    border-left: 4px solid #81c784;
+}
+.notification.error {
+    background: linear-gradient(135deg, #f44336, #da190b);
+    color: white;
+    border-left: 4px solid #ef5350;
+}
+@media (max-width: 480px) {
+    .notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        min-width: auto;
+    }
+}
+</style>
     <header class="main-header">
         <nav class="main-nav">
             <div class="logo">
@@ -104,11 +157,12 @@
             </div>
         </section>
 
-        <!-- Sección Solicitar Información (debajo de las cardviews, antes de FAQ) -->
+         <!-- Sección Solicitar Información (debajo de las cardviews, antes de FAQ) -->
     <section id="solicitar-info" style="background: #fff; border-radius: 1.1rem; box-shadow: 0 2px 12px rgba(25,118,210,0.07); max-width: 600px; margin: calc(1rem - 2cm + 1cm) auto 2rem auto; padding: calc(2.5rem - 1cm) calc(1.5rem + 1cm) 2.5rem 1.5rem;">
             <h2 style="color: #1976d2; margin-bottom: 1.2rem;">Solicitar Información</h2>
             <p style="margin-bottom: 1.5rem;">Déjanos tus datos y te contactaremos para resolver tus dudas o ayudarte a inscribirte en el servicio que te interesa.</p>
-                                    <form action="procesar_formularios.php" method="POST">
+                                    <form action="Procesamientof/procesar_formularios.php" method="POST">
+                                        <input type="hidden" name="form_type" value="servicios">
                 <div style="margin-bottom: 1rem;">
                     <label for="nombre" style="display: block; margin-bottom: 0.3rem;">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" required style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
@@ -238,6 +292,49 @@
         }
     });
     </script>
-
-</body>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Manejo de notificaciones
+        const urlParams = new URLSearchParams(window.location.search);
+        const success = urlParams.get('success');
+        const error = urlParams.get('error');
+        const notification = document.getElementById('notification');
+        const messageEl = document.getElementById('notification-message');
+        const closeBtn = document.getElementById('close-notification');
+    
+        function showNotification(type, message) {
+            if (!notification || !messageEl) return;
+            messageEl.textContent = message;
+            notification.className = `notification ${type} show`;
+            setTimeout(() => {
+                hideNotification();
+            }, 5000);
+        }
+    
+        function hideNotification() {
+            notification.classList.add('hidden');
+            setTimeout(() => {
+                notification.classList.remove('show');
+                // Limpiar URL
+                if (window.history.replaceState) {
+                    const url = new URL(window.location);
+                    url.searchParams.delete('success');
+                    url.searchParams.delete('error');
+                    window.history.replaceState({}, document.title, url.pathname);
+                }
+            }, 300);
+        }
+    
+        if (success) {
+            showNotification('success', '¡Éxito! Tu solicitud de información sobre servicios ha sido enviada. Te contactaremos pronto.');
+        } else if (error) {
+            showNotification('error', 'Por favor, completa todos los campos obligatorios y verifica que tu email sea válido.');
+        }
+    
+        closeBtn.addEventListener('click', hideNotification);
+    });
+    </script>
+    
+    </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 // Archivo para procesar solicitudes específicas de entrenadores y planes
-include 'conexión.php';
+include '../PHP/conexión.php';
 
 // Verificar que la conexión esté activa
 if (!$conexion) {

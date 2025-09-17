@@ -8,6 +8,59 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body style="background: linear-gradient(180deg, #f7fbff 0%, #e3f0ff 100%);">
+
+<!-- Notificación Toast -->
+<div id="notification" class="notification hidden">
+    <span id="notification-message"></span>
+    <button id="close-notification" style="background: none; border: none; font-size: 1.2rem; cursor: pointer; color: inherit; padding: 0 0.5rem; float: right;">&times;</button>
+</div>
+
+<style>
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    min-width: 300px;
+    max-width: 400px;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    font-family: Arial, sans-serif;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+.notification.hidden {
+    opacity: 0;
+    transform: translateX(100%);
+}
+.notification.success {
+    background: linear-gradient(135deg, #4caf50, #45a049);
+    color: white;
+    border-left: 4px solid #81c784;
+}
+.notification.error {
+    background: linear-gradient(135deg, #f44336, #da190b);
+    color: white;
+    border-left: 4px solid #ef5350;
+}
+@media (max-width: 480px) {
+    .notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        min-width: auto;
+    }
+}
+</style>
     <header class="main-header">
         <nav class="main-nav">
             <div class="logo">
@@ -122,43 +175,71 @@
             </div>
         </section>
 
-        <!-- Formulario para solicitar información de planes - Card view horizontal y más grande -->
-    <section id="formulario-planes" style="background: #fff; border-radius: 1.1rem; box-shadow: 0 2px 12px rgba(25,118,210,0.07); max-width: 650px; margin: 2rem auto 1.2rem auto; padding: 0.5cm 1.4cm 1.2rem 0.7rem;">
-            <h2 style="color: #1976d2; margin-bottom: 1.5rem; text-align: center; font-size: 1.8rem;">Solicitar Información de Planes</h2>
-            <form action="procesar_formularios.php" method="POST" style="display: flex; flex-direction: row; gap: 1rem; align-items: flex-start;">
-                <div style="flex: 1; display: flex; flex-direction: column; gap: 1rem;">
-                    <div>
-                        <label for="nombre" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1976d2;">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" required>
-                    </div>
-                    <div>
-                        <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1976d2;">Correo electrónico:</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div>
-                        <label for="telefono" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1976d2;">Teléfono:</label>
-                        <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" placeholder="Ej: 0991234567">
-                    </div>
-                </div>
-                <div style="flex: 1; display: flex; flex-direction: column; gap: 1rem;">
-                    <div>
-                        <label for="motivo" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1976d2;">Motivo de contacto:</label>
-                        <select id="motivo" name="motivo" required>
-                            <option value="">Selecciona una opción</option>
-                            <option value="informacion">Solicitar información</option>
-                            <option value="soporte">Soporte técnico</option>
-                            <option value="entrenadores">Contactar entrenador</option>
-                            <option value="otros">Otros</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="mensaje" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1976d2;">Mensaje:</label>
-                        <textarea id="mensaje" name="mensaje" rows="4" required style="width: 100%; padding: 0.8rem; border-radius: 0.5rem; border: 1px solid #b0bec5; font-size: 1rem; resize: vertical;"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="margin-top: 1rem; padding: 0.8rem 2rem; font-size: 1.1rem; font-weight: 600;">Enviar Solicitud</button>
-                </div>
-            </form>
-        </section>
+    <!-- Formulario funcional para solicitar información de planes -->
+    <section id="formulario-planes" style="background: #fff; border-radius: 1.1rem; box-shadow: 0 2px 12px rgba(25,118,210,0.07); max-width: 600px; margin: 3rem auto 2rem auto; padding: calc(2.5rem - 2cm + 1cm) calc(1.5rem + 1cm) 2.5rem calc(1.5rem - 0.5cm + 0.5cm);">
+        <h2 style="color: #1976d2; margin-bottom: 1.2rem;">Solicitar Información de Planes</h2>
+        <form action="Procesamientof/procesar_formularios.php" method="POST">
+            <input type="hidden" name="form_type" value="planes">
+            <div style="margin-bottom: 1rem;">
+                <label for="nombre" style="display: block; margin-bottom: 0.3rem; font-weight: 600; color: #1976d2;">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <label for="email" style="display: block; margin-bottom: 0.3rem; font-weight: 600; color: #1976d2;">Correo electrónico:</label>
+                <input type="email" id="email" name="email" style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <label for="telefono" style="display: block; margin-bottom: 0.3rem; font-weight: 600; color: #1976d2;">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="Ej: 0991234567" style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <label for="motivo" style="display: block; margin-bottom: 0.3rem; font-weight: 600; color: #1976d2;">Motivo de contacto:</label>
+                <select id="motivo" name="motivo" style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
+                    <option value="">Selecciona una opción</option>
+                    <option value="informacion">Solicitar información</option>
+                    <option value="soporte">Soporte técnico</option>
+                    <option value="entrenadores">Contactar entrenador</option>
+                    <option value="otros">Otros</option>
+                </select>
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <label for="mensaje" style="display: block; margin-bottom: 0.3rem; font-weight: 600; color: #1976d2;">Mensaje:</label>
+                <textarea id="mensaje" name="mensaje" rows="3" style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </section>
+
+<!-- Bloque de Preguntas Frecuentes (FAQ) -->
+<section class="faq">
+    <h2 class="faq-title" style="text-align:center; color:#1976d2; font-weight:700; font-size:2.1rem; margin-bottom:1.2rem;">Preguntas Frecuentes sobre Nuestros Planes</h2>
+    <div class="faq-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; max-width:900px; margin:0 auto;">
+        <div class="faq-item" style="background:#fff; border-radius:1.1rem; box-shadow:0 2px 12px rgba(25,118,210,0.07); padding:1.2rem 1rem;">
+            <button class="faq-question" style="background:none; border:none; font-weight:600; font-size:1.1rem; color:#1976d2; display:flex; align-items:center; gap:0.7rem; cursor:pointer; width:100%; text-align:left;">
+                <i class="fas fa-info-circle" style="color:#ff9800;"></i> ¿Cuál es la diferencia entre los planes Básico, Estándar y Personalizado?
+            </button>
+            <div class="faq-answer" style="display:none; margin-top:0.7rem; color:#333;">El plan Básico ofrece rutinas personalizadas y seguimiento mensual. El Estándar incluye asesoría directa y evaluaciones trimestrales. El Personalizado añade entrenamiento 1 a 1 y seguimiento semanal para atención exclusiva.</div>
+        </div>
+        <div class="faq-item" style="background:#fff; border-radius:1.1rem; box-shadow:0 2px 12px rgba(25,118,210,0.07); padding:1.2rem 1rem;">
+            <button class="faq-question" style="background:none; border:none; font-weight:600; font-size:1.1rem; color:#1976d2; display:flex; align-items:center; gap:0.7rem; cursor:pointer; width:100%; text-align:left;">
+                <i class="fas fa-exchange-alt" style="color:#ff9800;"></i> ¿Puedo cambiar de plan en el futuro?
+            </button>
+            <div class="faq-answer" style="display:none; margin-top:0.7rem; color:#333;">Sí, puedes actualizar o cambiar tu plan en cualquier momento contactando a nuestro equipo de soporte a través del formulario o email.</div>
+        </div>
+        <div class="faq-item" style="background:#fff; border-radius:1.1rem; box-shadow:0 2px 12px rgba(25,118,210,0.07); padding:1.2rem 1rem;">
+            <button class="faq-question" style="background:none; border:none; font-weight:600; font-size:1.1rem; color:#1976d2; display:flex; align-items:center; gap:0.7rem; cursor:pointer; width:100%; text-align:left;">
+                <i class="fas fa-credit-card" style="color:#ff9800;"></i> ¿Cómo se realizan los pagos de los planes?
+            </button>
+            <div class="faq-answer" style="display:none; margin-top:0.7rem; color:#333;">Los pagos se procesan mensualmente de forma segura mediante tarjeta de crédito, débito o transferencia bancaria. No hay contratos a largo plazo.</div>
+        </div>
+        <div class="faq-item" style="background:#fff; border-radius:1.1rem; box-shadow:0 2px 12px rgba(25,118,210,0.07); padding:1.2rem 1rem;">
+            <button class="faq-question" style="background:none; border:none; font-weight:600; font-size:1.1rem; color:#1976d2; display:flex; align-items:center; gap:0.7rem; cursor:pointer; width:100%; text-align:left;">
+                <i class="fas fa-clock" style="color:#ff9800;"></i> ¿Cuánto tiempo dura cada plan y puedo cancelar?
+            </button>
+            <div class="faq-answer" style="display:none; margin-top:0.7rem; color:#333;">Todos los planes son mensuales y se renuevan automáticamente. Puedes cancelar en cualquier momento sin penalidades, contactando a soporte.</div>
+        </div>
+    </div>
+</section>
     </main>
   <footer class="main-footer">
     <div class="footer-content">
@@ -224,3 +305,62 @@
             });
         });
     </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Manejo de notificaciones
+    const urlParams = new URLSearchParams(window.location.search);
+    const success = urlParams.get('success');
+    const error = urlParams.get('error');
+    const notification = document.getElementById('notification');
+    const messageEl = document.getElementById('notification-message');
+    const closeBtn = document.getElementById('close-notification');
+
+    function showNotification(type, message) {
+        if (!notification || !messageEl) return;
+        messageEl.textContent = message;
+        notification.className = `notification ${type} show`;
+        setTimeout(() => {
+            hideNotification();
+        }, 5000);
+    }
+
+    function hideNotification() {
+        notification.classList.add('hidden');
+        setTimeout(() => {
+            notification.classList.remove('show');
+            // Limpiar URL
+            if (window.history.replaceState) {
+                const url = new URL(window.location);
+                url.searchParams.delete('success');
+                url.searchParams.delete('error');
+                window.history.replaceState({}, document.title, url.pathname);
+            }
+        }, 300);
+    }
+
+    if (success) {
+        showNotification('success', '¡Éxito! Tu solicitud de información sobre planes ha sido enviada. Te contactaremos pronto.');
+    } else if (error) {
+        showNotification('error', 'Completar campo');
+    }
+
+    closeBtn.addEventListener('click', hideNotification);
+});
+</script>
+<script>
+    // Acordeón para FAQ (varias abiertas)
+    document.addEventListener('DOMContentLoaded', function() {
+        const questions = document.querySelectorAll('.faq-question');
+        questions.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                } else {
+                    answer.style.display = 'block';
+                }
+            });
+        });
+    });
+</script>

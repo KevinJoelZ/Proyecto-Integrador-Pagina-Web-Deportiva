@@ -4,13 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DeporteFit - Plataforma de Entrenamiento Deportivo</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iOCIgZmlsbD0iIzRDQUY1MCIvPgo8Y2lyY2xlIGN4PSI4IiBjeT0iMTYiIHI9IjQiIGZpbGw9IiM0Q0FGNTAiLz4KPGNpcmNsZSBjeD0iMjQiIGN5PSIxNiIgcj0iNCIgZmlsbD0iIzRDQUY1MCIvPgo8L3N2Zz4K">
     <link rel="stylesheet" href="css/estilos.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body style="background: linear-gradient(180deg, #f7fbff 0%, #e3f0ff 100%);">
     <?php
+    session_start();
+    include_once 'conexión.php';
+    
+    // Verificar sesión
+    if (!isset($_SESSION['user_id']) || $_SESSION['user_rol'] !== 'client') {
+        header('Location: index.php');
+        exit;
+    }
+    
+    $user_nombre = $_SESSION['user_nombre'] ?? 'Cliente';
+    $user_email = $_SESSION['user_email'] ?? '';
+    
     include_once './template/headercliente.php';
     include_once './template/maincliente.php';
+    
+    // Sección de datos del usuario
+    echo '<div class="user-welcome" style="background: rgba(255,255,255,0.1); padding: 1rem; margin: 1rem; border-radius: 8px; text-align: center; color: #333;">';
+    echo '<h2>Bienvenido, ' . htmlspecialchars($user_nombre) . '!</h2>';
+    echo '<p>Email: ' . htmlspecialchars($user_email) . '</p>';
+    echo '<p>Accede a tus servicios personalizados y datos de entrenamiento.</p>';
+    echo '</div>';
     ?>
     
     <script>
