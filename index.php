@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,398 +8,296 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iOCIgZmlsbD0iIzRDQUY1MCIvPgo8Y2lyY2xlIGN4PSI4IiBjeT0iMTYiIHI9IjQiIGZpbGw9IiM0Q0FGNTAiLz4KPGNpcmNsZSBjeD0iMjQiIGN5PSIxNiIgcj0iNCIgZmlsbD0iIzRDQUY1MCIvPgo8L3N2Zz4K">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Firebase SDK -->
-    <script type="module">
-      import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js';
-      import { getAuth, signInWithPopup, GoogleAuthProvider } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js';
-      
-      const firebaseConfig = {
-        apiKey: "AIzaSyBZoUGrSk3V-yFW6QHxXLeXQfPMgnYUeQo",
-        authDomain: "proyectoweb-fc2d2.firebaseapp.com",
-        projectId: "proyectoweb-fc2d2",
-        storageBucket: "proyectoweb-fc2d2.appspot.com",
-        messagingSenderId: "508269230145",
-        appId: "1:508269230145:web:d183a7c70873785487eec0"
-      };
-
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      const provider = new GoogleAuthProvider();
-      
-      // Exponer para script global
-      window.auth = auth;
-      window.provider = provider;
-      window.signInWithPopup = signInWithPopup;
-      window.GoogleAuthProvider = GoogleAuthProvider;
-    </script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #0d2c45 0%, #1a4b6d 100%);
-            color: white;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-        
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
-        
-        .container {
-            position: relative;
-            z-index: 2;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        
-        .logo {
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .logo-icon {
-            font-size: 2.5rem;
-            color: #4CAF50;
-        }
-        
-        .logo-text {
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: linear-gradient(to right, #4CAF50, #8BC34A);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .hero {
-            margin-bottom: 3rem;
-            max-width: 800px;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-        
-        .hero p {
-            font-size: 1.4rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-        
-        .divider {
-            width: 100%;
-            max-width: 600px;
-            height: 2px;
-            background: linear-gradient(to right, transparent, #4CAF50, transparent);
-            margin: 2.5rem 0;
-        }
-        
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-        
-        .feature {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 2rem;
-            width: 250px;
-            transition: transform 0.3s ease;
-        }
-        
-        .feature:hover {
-            transform: translateY(-10px);
-        }
-        
-        .feature i {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #4CAF50;
-        }
-        
-        .feature h3 {
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-        
-        .google-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853, #4285F4);
-            background-size: 200% 100%;
-            animation: gradientShift 3s ease infinite;
-            color: white;
-            padding: 14px 28px;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            border: none;
-            outline: none;
-            margin-top: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .google-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: 0.5s;
-        }
-        
-        .google-btn:hover::before {
-            left: 100%;
-        }
-        
-        .google-btn:hover {
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-            transform: translateY(-3px);
-        }
-        
-        .google-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        .google-icon {
-            width: 22px;
-            height: 22px;
-            color: white; /* Blanco para contraste con gradiente */
-        }
-        
-        .footer {
-            margin-top: 4rem;
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.2rem;
-            }
-            
-            .features {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="./css/styleindex.css">
 </head>
+
 <body>
     <div id="particles-js"></div>
-    
+
     <div class="container">
         <div class="logo">
             <i class="fas fa-running logo-icon"></i>
             <span class="logo-text">DeporteFit</span>
         </div>
-        
+
         <div class="hero">
             <h1>Conecta con el mundo deportivo</h1>
             <p>Accede a estadísticas personalizadas, conecta con otros atletas y lleva tu rendimiento al siguiente nivel.</p>
         </div>
-        
+
         <div class="divider"></div>
-        
+
         <div class="features">
             <div class="feature">
                 <i class="fas fa-chart-line"></i>
                 <h3>Estadísticas Avanzadas</h3>
                 <p>Seguimiento detallado de tu progreso deportivo</p>
             </div>
-            
+
             <div class="feature">
                 <i class="fas fa-users"></i>
                 <h3>Comunidad Global</h3>
                 <p>Conecta con deportistas de todo el mundo</p>
             </div>
-            
+
             <div class="feature">
                 <i class="fas fa-trophy"></i>
                 <h3>Logros y Retos</h3>
                 <p>Supera tus límites y desbloquea achievements</p>
             </div>
         </div>
-        
-        <button class="google-btn">
+
+        <button id="googleSignIn" class="google-btn">
             <i class="fab fa-google google-icon"></i>
             Iniciar sesión con Google
         </button>
-        
+
+        <div id="loading" class="message loading" style="display: none;">Cargando...</div>
+        <div id="success" class="message success" style="display: none;">✅ ¡Inicio de sesión exitoso! Redirigiendo...</div>
+        <div id="error" class="message error" style="display: none;"></div>
+
         <div class="footer">
             <p>© 2025 DeporteFit. Todos los derechos reservados.</p>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": {
-                        "value": 80,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": "#ffffff"
-                    },
-                    "shape": {
-                        "type": ["circle", "polygon"],
-                        "polygon": {
-                            "sides": 6
-                        },
-                        "stroke": {
-                            "width": 0,
-                            "color": "#000000"
-                        }
-                    },
-                    "opacity": {
-                        "value": 0.5,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 1,
-                            "opacity_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "size": {
-                        "value": 5,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 3,
-                            "size_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": "#4CAF50",
-                        "opacity": 0.4,
-                        "width": 1
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 3,
-                        "direction": "none",
-                        "random": true,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                        "attract": {
-                            "enable": true,
-                            "rotateX": 600,
-                            "rotateY": 1200
-                        }
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "grab"
-                        },
-                        "onclick": {
-                            "enable": true,
-                            "mode": "push"
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {
-                            "distance": 140,
-                            "line_linked": {
-                                "opacity": 1
-                            }
-                        },
-                        "push": {
-                            "particles_nb": 4
-                        }
-                    }
-                },
-                "retina_detect": true
-            });
-        // Agregar event listener para el botón de Google
-        const googleBtn = document.querySelector('.google-btn');
-        googleBtn.addEventListener('click', async () => {
-            try {
-                const result = await signInWithPopup(window.auth, window.provider);
-                const credential = window.GoogleAuthProvider.credentialFromResult(result);
-                const idToken = credential.idToken;
+    <script src="./Scriptsindex/Particulas.js"></script>
+    <script type="module">
+        import {
+            initializeApp
+        } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import {
+            getAuth,
+            GoogleAuthProvider,
+            signInWithPopup,
+            onAuthStateChanged
+        } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
-                const response = await fetch('auth.php', {
+        const firebaseConfig = {
+            apiKey: "AIzaSyBZoUGrSk3V-yFW6QHxXLeXQfPMgnYUeQo",
+            authDomain: "proyectoweb-fc2d2.firebaseapp.com",
+            projectId: "proyectoweb-fc2d2",
+            storageBucket: "proyectoweb-fc2d2.firebasestorage.app",
+            messagingSenderId: "508269230145",
+            appId: "1:508269230145:web:d183a7c70873785487eec0",
+            measurementId: "G-3HX251Y5DH"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // Elementos del DOM
+        const googleSignInBtn = document.getElementById('googleSignIn');
+        const loadingDiv = document.getElementById('loading');
+        const successDiv = document.getElementById('success');
+        const errorDiv = document.getElementById('error');
+
+        // Función para mostrar mensajes
+        function showMessage(type, message = '') {
+            // Ocultar todos los mensajes
+            loadingDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            errorDiv.style.display = 'none';
+
+            // Mostrar el mensaje específico
+            switch (type) {
+                case 'loading':
+                    loadingDiv.style.display = 'block';
+                    break;
+                case 'success':
+                    successDiv.style.display = 'block';
+                    break;
+                case 'error':
+                    errorDiv.style.display = 'block';
+                    if (message) {
+                        errorDiv.textContent = '❌ ' + message;
+                    }
+                    break;
+            }
+        }
+
+        // Función para guardar usuario en la base de datos
+        async function saveUserToDatabase(user) {
+            const userData = {
+                uid: user.uid,
+                name: user.displayName,
+                email: user.email,
+                photoURL: user.photoURL,
+                emailVerified: user.emailVerified,
+                rol: "cliente"
+            };
+
+            try {
+                const response = await fetch('./login/guardar_usuario.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ id_token: idToken })
+                    body: JSON.stringify(userData)
                 });
 
-                const data = await response.json();
-
-                if (data.success) {
-                    window.location.href = data.redirect;
-                } else {
-                    alert('Error en autenticación: ' + data.error);
+                if (!response.ok) {
+                    //* throw new Error(HTTP error! status: ${response.status});
                 }
+
+                const result = await response.json();
+                console.log('Respuesta de guardar usuario:', result);
+
+                return result.success;
             } catch (error) {
-                console.error('Error:', error);
-                alert('Error al iniciar sesión con Google: ' + error.message);
+                console.error('Error al guardar usuario:', error);
+                throw error;
+            }
+        }
+
+        // Función para obtener el rol del usuario
+        async function getUserRole(uid) {
+            console.log('Obteniendo rol para UID:', uid);
+
+            try {
+                const response = await fetch('./login/obtener_rol.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        uid: uid
+                    })
+                });
+
+                if (!response.ok) {
+                    //* throw new Error(HTTP error! status: ${response.status});
+                }
+
+                const result = await response.json();
+                console.log('Respuesta de rol:', result);
+
+                return result.success ? result.rol : 'cliente';
+            } catch (error) {
+                console.error('Error al obtener rol:', error);
+                return 'cliente';
+            }
+        }
+
+        // Función principal de autenticación
+        async function signInWithGoogle() {
+            try {
+                showMessage('loading');
+                googleSignInBtn.disabled = true;
+
+                // Limpiar datos anteriores
+                sessionStorage.clear();
+
+                console.log('Iniciando autenticación...');
+
+                // Autenticar con Firebase
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+
+                console.log('Usuario autenticado:', user.displayName, user.email);
+
+                // Guardar en la base de datos
+                await saveUserToDatabase(user);
+
+                // Obtener el rol del usuario
+                const userRole = await getUserRole(user.uid);
+                console.log('Rol obtenido:', userRole);
+
+                // Guardar datos en sessionStorage
+                const userData = {
+                    uid: user.uid,
+                    name: user.displayName,
+                    email: user.email,
+                    photoURL: user.photoURL,
+                    rol: userRole
+                };
+
+                sessionStorage.setItem('user', JSON.stringify(userData));
+                sessionStorage.setItem('justLoggedIn', 'true');
+
+                showMessage('success');
+
+                // Redirigir después de 2 segundos
+                setTimeout(() => {
+                    if (userRole === 'admin') {
+                        window.location.href = 'admin.php';
+                    } else {
+                        window.location.href = 'cliente.php';
+                    }
+                }, 2000);
+
+            } catch (error) {
+                console.error('Error en la autenticación:', error);
+
+                let errorMessage = 'Error desconocido';
+
+                if (error.code) {
+                    switch (error.code) {
+                        case 'auth/popup-closed-by-user':
+                            errorMessage = 'Autenticación cancelada por el usuario';
+                            break;
+                        case 'auth/popup-blocked':
+                            errorMessage = 'El navegador bloqueó la ventana emergente';
+                            break;
+                        case 'auth/unauthorized-domain':
+                            errorMessage = 'Dominio no autorizado para Firebase';
+                            break;
+                        default:
+                            errorMessage = error.message || 'Error en la autenticación';
+                    }
+                } else {
+                    errorMessage = error.message || 'Error de conexión';
+                }
+
+                showMessage('error', errorMessage);
+            } finally {
+                googleSignInBtn.disabled = false;
+            }
+        }
+
+        // Event listener para el botón
+        googleSignInBtn.addEventListener('click', signInWithGoogle);
+
+        // Función para obtener parámetros de URL
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Verificar autenticación al cargar la página
+        onAuthStateChanged(auth, async (user) => {
+            // Si viene de logout, no verificar autenticación
+            if (getUrlParameter('action') === 'logout') {
+                console.log('Logout detectado, limpiando...');
+                sessionStorage.clear();
+                const newUrl = window.location.pathname;
+                window.history.replaceState(null, '', newUrl);
+                return;
+            }
+
+            if (user && sessionStorage.getItem('justLoggedIn') === 'true') {
+                console.log('Usuario recién autenticado, redirigiendo...');
+                sessionStorage.removeItem('justLoggedIn');
+
+                try {
+                    const userRole = await getUserRole(user.uid);
+                    if (userRole === 'admin') {
+                        window.location.href = 'admin.php';
+                    } else {
+                        window.location.href = 'cliente.php';
+                    }
+                } catch (error) {
+                    console.error('Error al obtener rol durante redirección:', error);
+                }
             }
         });
-        
-        // Cerrar DOMContentLoaded
-        });
+
+        // Log inicial para debugging
+        console.log('Firebase inicializado correctamente');
     </script>
+
+
 </body>
+
 </html>

@@ -15,7 +15,7 @@
                 <span style="font-size: 1.5rem; color: #fff; font-weight: 700; letter-spacing: 1px;">DeporteFit</span>
             </div>
             <ul class="main-menu">
-                <li><a href="index.html">Inicio</a></li>
+                <li><a href="cliente.php">Inicio</a></li>
                 <li><a href="servicios.html">Servicios</a></li>
                 <li><a href="entrenadores.html">Entrenadores</a></li>
                 <li><a href="planes.html">Planes y Precios</a></li>
@@ -23,9 +23,16 @@
             </ul>
         </nav>
     </header>
-                <div class="contacto-flex" style="display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap; margin: 2.2rem auto 2.2rem auto;">
-                    <div class="servicio-card mejorado" style="max-width: 500px; width: 500px; margin: 0; background: linear-gradient(135deg, #f7fbff 0%, #e3f0ff 100%);">
-                        <img src="imagenes/formulario.png" alt="Formulario de Contacto" style="height: 140px; object-fit: cover; border-radius: 12px 12px 0 0;">
+    <div class="contacto-flex" style="display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap; margin: 2.2rem auto 2.2rem auto;">
+        <div class="servicio-card mejorado" style="max-width: 500px; width: 500px; margin: 0; background: linear-gradient(135deg, #f7fbff 0%, #e3f0ff 100%);">
+            <img src="imagenes/formulario.png" alt="Formulario de Contacto" style="height: 140px; object-fit: cover; border-radius: 12px 12px 0 0;">
+            <div class="servicio-info" style="padding: 1.5rem 1.2rem; text-align: center;">
+                <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: #1976d2;">Formulario de Contacto</h3>
+                <form class="form-contacto" action="Procesamientof/procesar_formularios.php" method="POST" style="padding: 0; max-width: 100%;">
+                    <input type="hidden" name="form_type" value="contacto">
+                    <div style="margin-bottom: 1rem; display: flex; flex-direction: column; align-items: center;">
+                        <label for="nombre" style="display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; font-weight: 600; color: #333; margin-bottom: 0.5rem; width: 100%; justify-content: flex-start;"><i class="fas fa-user" style="color: #4fc3f7;"></i>Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" required style="padding: 0.8rem; font-size: 1rem; margin-bottom: 0; border: 2px solid #e3f2fd; border-radius: 8px; transition: border-color 0.3s; width: 100%; max-width: 300px;">
                         <div class="servicio-info" style="padding: 1.5rem 1.2rem; text-align: center;">
                             <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: #1976d2;">Formulario de Contacto</h3>
                             <form class="form-contacto" action="Procesamientof/procesar_formularios.php" method="POST" style="padding: 0; max-width: 100%;">

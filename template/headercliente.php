@@ -5,7 +5,7 @@
             <span style="font-size: 1.5rem; color: #fff; font-weight: 700; letter-spacing: 1px;">DeporteFit</span>
         </div>
         <ul class="main-menu">
-            <li><a href="index.html" class="activo">Inicio</a></li>
+            <li><a href="cliente.php" class="activo">Inicio</a></li>
             <li><a href="servicios.html">Servicios</a></li>
             <li><a href="entrenadores.html">Entrenadores</a></li>
             <li><a href="planes.html">Planes y Precios</a></li>

@@ -51,8 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     mysqli_close($conexion);
 } else {
-    // Si no es POST, redirigir a la página principal
-    header("Location: index.html");
+    // Si no es POST, redirigir a la página principal (cliente.php)
+    header("Location: ../cliente.php");
     exit;
 }
 
@@ -267,12 +267,12 @@ function procesarFormularioGeneral($conexion) {
 
     // Validaciones básicas
     if (empty($nombre) || empty($email) || empty($motivo) || empty($mensaje)) {
-        header("Location: ../index.html?error=1");
+        header("Location: ../cliente.php?error=1");
         exit;
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header("Location: ../index.html?error=1");
+        header("Location: ../cliente.php?error=1");
         exit;
     }
 
@@ -289,14 +289,14 @@ function procesarFormularioGeneral($conexion) {
         // Ejecutar la consulta
         if (mysqli_stmt_execute($stmt)) {
             if (mysqli_stmt_affected_rows($stmt) > 0) {
-                header("Location: ../index.html?success=1");
+                header("Location: ../cliente.php?success=1");
                 exit;
             } else {
-                header("Location: ../index.html?error=1");
+                header("Location: ../cliente.php?error=1");
                 exit;
             }
         } else {
-            header("Location: ../index.html?error=1");
+            header("Location: ../cliente.php?error=1");
             exit;
         }
         

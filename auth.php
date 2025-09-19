@@ -55,8 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $update_stmt->bind_param("sssi", $nombre, $foto_perfile, $mail_verificado, $user_id);
         $update_stmt->execute();
     } else {
-        // Insertar nuevo usuario como 'client'
-        $rol = 'client'; // Todos clients por defecto. Para admin, actualizar manualmente en BD: UPDATE usuarios SET rol='admin' WHERE email='admin@email.com';
+        // Insertar nuevo usuario como 'cliente'
+        $rol = 'cliente'; // Todos clientes por defecto. Para admin, actualizar manualmente en BD: UPDATE usuarios SET rol='admin' WHERE email='admin@email.com';
         $stmt = $conexion->prepare("INSERT INTO usuarios (uid, nombre, email, foto_perfile, mail_verificado, fecha_registro, ultima_conexion, estado, rol) VALUES (?, ?, ?, ?, ?, NOW(), NOW(), 'activo', ?)");
         $stmt->bind_param("sssiss", $uid, $nombre, $email, $foto_perfile, $mail_verificado, $rol);
         $stmt->execute();

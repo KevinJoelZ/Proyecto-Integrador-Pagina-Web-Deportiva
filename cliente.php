@@ -9,70 +9,158 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body style="background: linear-gradient(180deg, #f7fbff 0%, #e3f0ff 100%);">
-    <?php
-    session_start();
-    include_once 'conexión.php';
-    
-    // Verificar sesión
-    if (!isset($_SESSION['user_id']) || $_SESSION['user_rol'] !== 'client') {
-        header('Location: index.php');
-        exit;
-    }
-    
-    $user_nombre = $_SESSION['user_nombre'] ?? 'Cliente';
-    $user_email = $_SESSION['user_email'] ?? '';
-    
-    include_once './template/headercliente.php';
-    include_once './template/maincliente.php';
-    
-    // Sección de datos del usuario
-    echo '<div class="user-welcome" style="background: rgba(255,255,255,0.1); padding: 1rem; margin: 1rem; border-radius: 8px; text-align: center; color: #333;">';
-    echo '<h2>Bienvenido, ' . htmlspecialchars($user_nombre) . '!</h2>';
-    echo '<p>Email: ' . htmlspecialchars($user_email) . '</p>';
-    echo '<p>Accede a tus servicios personalizados y datos de entrenamiento.</p>';
-    echo '</div>';
-    ?>
-    
-    <script>
-    // Acordeón para FAQ y Blog/Noticias (solo una respuesta/card abierta a la vez)
-    window.addEventListener('load', function() {
-        // FAQ acordeón: abrir/cerrar individualmente
-        var questions = document.querySelectorAll('.faq-question');
-        questions.forEach(function(btn) {
-            btn.addEventListener('click', function() {
-                var answer = this.nextElementSibling;
-                if (answer.style.display === 'block' || answer.style.display === 'flex') {
-                    answer.style.display = 'none';
-                    this.classList.remove('active');
-                } else {
-                    answer.style.display = 'block';
-                    this.classList.add('active');
-                }
-            });
-        });
+    <!-- Encabezado público con navegación -->
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="logo">
+                <i class="fas fa-dumbbell" style="font-size: 2.2rem; color: #ffb74d;"></i>
+                <span style="font-size: 1.5rem; color: #fff; font-weight: 700; letter-spacing: 1px;">DeporteFit</span>
+            </div>
+            <ul class="main-menu">
+                <li><a href="cliente.php" class="activo">Inicio</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="entrenadores.html">Entrenadores</a></li>
+                <li><a href="planes.html">Planes y Precios</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        // Blog/Noticias: solo una card abierta a la vez con animación
-        var readMoreLinks = document.querySelectorAll('.read-more');
-        readMoreLinks.forEach(function(link) {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                var blogCard = this.closest('.blog-card');
-                var thisMore = blogCard.querySelector('.blog-more');
-                if (thisMore.style.display === 'block') {
-                    thisMore.style.display = 'none';
-                    thisMore.classList.remove('animating');
-                    this.textContent = 'Leer más';
-                } else {
-                    thisMore.style.display = 'block';
-                    thisMore.classList.add('animating');
-                    this.textContent = 'Leer menos';
-                    setTimeout(function(){
-                        thisMore.classList.remove('animating');
-                    }, 1200);
-                }
+    <!-- Hero con botón de Google -->
+    <main class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Transforma tu vida con entrenamiento deportivo profesional</h1>
+                <p class="hero-subtitle">La plataforma web en entrenamiento personalizado para múltiples deportes. Accede a cursos certificados, entrenadores expertos y programas diseñados para alcanzar tus objetivos deportivos desde cualquier lugar del mundo.</p>
+                <div class="hero-buttons">
+                    <a href="planes.html" class="btn btn-primary">Comenzar Ahora</a>
+                    <a href="servicios.html" class="btn btn-secondary">Ver Deportes</a>
+                    <button id="googleSignIn" class="btn btn-secondary" style="background:#fff; color:#333; border:1px solid #ddd; display:inline-flex; align-items:center; gap:.5rem;">
+                        <i class="fab fa-google" style="color:#DB4437;"></i>
+                        Iniciar sesión con Google
+                    </button>
+                </div>
+                <div id="loading" class="message loading" style="display:none; margin-top:.8rem; color:#1976d2;">Cargando...</div>
+                <div id="success" class="message success" style="display:none; margin-top:.8rem; color:#2e7d32;">✅ ¡Inicio de sesión exitoso! Redirigiendo...</div>
+                <div id="error" class="message error" style="display:none; margin-top:.8rem; color:#c62828;"></div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=80" alt="Entrenamiento deportivo">
+            </div>
+        </section>
+    </main>
+
+    <!-- Script de Firebase para login con Google -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBZoUGrSk3V-yFW6QHxXLeXQfPMgnYUeQo",
+            authDomain: "proyectoweb-fc2d2.firebaseapp.com",
+            projectId: "proyectoweb-fc2d2",
+            storageBucket: "proyectoweb-fc2d2.firebasestorage.app",
+            messagingSenderId: "508269230145",
+            appId: "1:508269230145:web:d183a7c70873785487eec0",
+            measurementId: "G-3HX251Y5DH"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        const googleSignInBtn = document.getElementById('googleSignIn');
+        const loadingDiv = document.getElementById('loading');
+        const successDiv = document.getElementById('success');
+        const errorDiv = document.getElementById('error');
+
+        function showMessage(type, message = '') {
+            loadingDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            errorDiv.style.display = 'none';
+            if (type === 'loading') loadingDiv.style.display = 'block';
+            if (type === 'success') successDiv.style.display = 'block';
+            if (type === 'error') {
+                errorDiv.style.display = 'block';
+                if (message) errorDiv.textContent = '❌ ' + message;
+            }
+        }
+
+        async function saveUserToDatabase(user) {
+            const userData = {
+                uid: user.uid,
+                name: user.displayName,
+                email: user.email,
+                photoURL: user.photoURL,
+                emailVerified: user.emailVerified,
+                rol: 'cliente'
+            };
+            const response = await fetch('./login/guardar_usuario.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
             });
+            return response.ok;
+        }
+
+        async function getUserRole(uid) {
+            const response = await fetch('./login/obtener_rol.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ uid })
+            });
+            if (!response.ok) return 'cliente';
+            const result = await response.json();
+            return result.success ? result.rol : 'cliente';
+        }
+
+        async function signInWithGoogle() {
+            try {
+                showMessage('loading');
+                googleSignInBtn.disabled = true;
+                sessionStorage.clear();
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+                await saveUserToDatabase(user);
+                const userRole = await getUserRole(user.uid);
+                const userData = {
+                    uid: user.uid, name: user.displayName, email: user.email, photoURL: user.photoURL, rol: userRole
+                };
+                sessionStorage.setItem('user', JSON.stringify(userData));
+                sessionStorage.setItem('justLoggedIn', 'true');
+                showMessage('success');
+                setTimeout(() => {
+                    if (userRole === 'admin') {
+                        window.location.href = 'admin.php';
+                    } else {
+                        window.location.href = 'cliente.php';
+                    }
+                }, 1200);
+            } catch (error) {
+                let msg = error?.message || 'Error en la autenticación';
+                if (error?.code === 'auth/popup-closed-by-user') msg = 'Autenticación cancelada por el usuario';
+                if (error?.code === 'auth/popup-blocked') msg = 'El navegador bloqueó la ventana emergente';
+                if (error?.code === 'auth/unauthorized-domain') msg = 'Dominio no autorizado para Firebase';
+                showMessage('error', msg);
+            } finally {
+                googleSignInBtn.disabled = false;
+            }
+        }
+
+        googleSignInBtn?.addEventListener('click', signInWithGoogle);
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user && sessionStorage.getItem('justLoggedIn') === 'true') {
+                sessionStorage.removeItem('justLoggedIn');
+                try {
+                    const userRole = await getUserRole(user.uid);
+                    if (userRole === 'admin') {
+                        window.location.href = 'admin.php';
+                    } else {
+                        window.location.href = 'cliente.php';
+                    }
+                } catch (e) { /* noop */ }
+            }
         });
-    });
     </script>
 
     <footer class="main-footer">
