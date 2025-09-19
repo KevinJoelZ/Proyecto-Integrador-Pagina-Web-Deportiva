@@ -24,13 +24,14 @@ function table_exists($conexion, $table) {
 
 try {
     if ($action === 'list_tables') {
-        // List simple of tables that likely store form info
-        $likely = ['solicitudes', 'solicitudes_info', 'contactos', 'contacto', 'formularios', 'planes_solicitados'];
-        $found = [];
-        foreach ($likely as $t) {
-            if (table_exists($conexion, $t)) { $found[] = $t; }
+        // List all tables from current database
+        $tables = [];
+        $sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = DATABASE() ORDER BY table_name";
+        $res = $conexion->query($sql);
+        if ($res) {
+            while ($row = $res->fetch_assoc()) { $tables[] = $row['table_name']; }
         }
-        echo json_encode(['success' => true, 'tables' => $found]);
+        echo json_encode(['success' => true, 'tables' => $tables]);
     } elseif ($action === 'fetch_table') {
         $table = preg_replace('/[^a-zA-Z0-9_]/', '', ($input['table'] ?? $_GET['table'] ?? ''));
         if ($table === '') throw new Exception('Tabla requerida');

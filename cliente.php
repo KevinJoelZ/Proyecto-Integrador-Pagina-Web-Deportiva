@@ -18,6 +18,10 @@
             <i class="fab fa-google" style="color:#DB4437;"></i>
             Iniciar sesión con Google
         </button>
+        <a href="admin.php" class="btn" style="background:#fff; color:#333; border:1px solid #ddd; display:inline-flex; align-items:center; gap:.5rem; text-decoration:none;">
+            <i class="fas fa-shield-alt" style="color:#1976d2;"></i>
+            Volver a Panel Admin
+        </a>
         <div id="loading" class="message loading" style="display:none; color:#1976d2; align-self:center;">Cargando...</div>
         <div id="success" class="message success" style="display:none; color:#2e7d32; align-self:center;">✅ ¡Inicio de sesión exitoso! Redirigiendo...</div>
         <div id="error" class="message error" style="display:none; color:#c62828; align-self:center;"></div>
@@ -145,6 +149,14 @@
         }
 
         googleSignInBtn?.addEventListener('click', signInWithGoogle);
+
+        // Si venimos desde admin, limpiar el flag para evitar redirección de rebote
+        try {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('from') === 'admin') {
+                sessionStorage.removeItem('justLoggedIn');
+            }
+        } catch(_) {}
 
         onAuthStateChanged(auth, async (user) => {
             if (user && sessionStorage.getItem('justLoggedIn') === 'true') {

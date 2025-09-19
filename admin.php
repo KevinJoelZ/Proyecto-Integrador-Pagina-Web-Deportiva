@@ -28,7 +28,7 @@ $user_email = $_SESSION['user_email'] ?? '';
   </div>
   <div class="actions">
     <span style="opacity:.9; margin-right:10px;"><i class="fas fa-user"></i> <?php echo htmlspecialchars($user_nombre); ?></span>
-    <a href="cliente.php"><i class="fas fa-home"></i> Ir al sitio</a>
+    <a href="cliente.php?from=admin"><i class="fas fa-home"></i> Ir al sitio</a>
     <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
   </div>
 </header>
@@ -77,7 +77,6 @@ $user_email = $_SESSION['user_email'] ?? '';
               <option value="planes">Planes</option>
               <option value="contacto">Contacto</option>
             </select>
-            <button class="btn" id="faq-reload"><i class="fas fa-sync"></i> Recargar</button>
           </div>
           <table class="table" id="faq-table">
             <thead><tr><th>ID</th><th>Página</th><th>Pregunta</th><th>Respuesta</th><th>Acciones</th></tr></thead>
@@ -136,22 +135,21 @@ $user_email = $_SESSION['user_email'] ?? '';
     </div>
 
     <div class="tab-content" id="tab-forms">
-      <div class="grid">
-        <div class="card">
-          <h3><i class="fas fa-database"></i> Tablas de Formularios</h3>
-          <div style="display:flex; gap:.6rem; align-items:center;">
-            <button class="btn" id="forms-scan"><i class="fas fa-sync"></i> Buscar Tablas</button>
-            <select id="forms-table" class="input" style="max-width:280px"></select>
-            <button class="btn primary" id="forms-cargar"><i class="fas fa-eye"></i> Cargar</button>
-          </div>
-          <div style="margin-top:10px;">
-            <table class="table" id="forms-table-data"><thead></thead><tbody></tbody></table>
-          </div>
+      <div class="card">
+        <h3><i class="fas fa-database"></i> Tablas de Formularios</h3>
+        <div style="display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; justify-content:center;">
+          <input list="forms-tables" id="forms-table" class="input" placeholder="Escribe o selecciona una tabla" style="max-width:360px" />
+          <datalist id="forms-tables"></datalist>
+          <button class="btn primary" id="forms-cargar"><i class="fas fa-eye"></i> Cargar</button>
         </div>
-        <div class="card">
-          <h3><i class="fas fa-lightbulb"></i> Sugerencias</h3>
-          <p class="muted">Se intentan detectar tablas comunes como <b>solicitudes</b>, <b>contacto</b> o similares. Puedes escribir manualmente el nombre si no aparece.</p>
+        <div style="margin-top:10px; overflow:auto;">
+          <table class="table" id="forms-table-data"><thead></thead><tbody></tbody></table>
         </div>
+      </div>
+      <div class="card" style="margin-top:12px;">
+        <h3><i class="fas fa-lightbulb"></i> Sugerencias</h3>
+        <p class="muted">Puedes escribir cualquier nombre de tabla existente en tu base de datos. Pulsa "Buscar Tablas" para ver todas las disponibles y elige desde la lista.
+        Algunas tablas habituales: <b>usuarios</b>, <b>solicitudes</b>, <b>contacto</b>, <b>formularios</b>, <b>planes</b>, etc.</p>
       </div>
     </div>
 
@@ -176,6 +174,7 @@ tabs.forEach(t => t.addEventListener('click', () => {
   if (id === 'faqs') loadFaqs();
   if (id === 'users') loadUsers();
   if (id === 'stats') loadStats();
+  if (id === 'forms') scanTables();
 }));
 
 // FAQs CRUD
@@ -244,8 +243,7 @@ document.querySelector('#faq-table tbody').addEventListener('click', async (e)=>
   }
 });
 
-// Filtros y recarga FAQs
-document.getElementById('faq-reload').addEventListener('click', loadFaqs);
+// Filtro FAQs
 document.getElementById('faq-filter-page').addEventListener('change', loadFaqs);
 
 // Usuarios
@@ -291,14 +289,14 @@ document.getElementById('stats-guardar').addEventListener('click', async ()=>{
 async function scanTables(){
   const res = await fetch('admin_api/forms.php?action=list_tables');
   const data = await res.json();
-  const sel = document.getElementById('forms-table');
-  sel.innerHTML = '';
+  const list = document.getElementById('forms-tables');
+  list.innerHTML = '';
   for (const t of (data.tables||[])){
-    const opt = document.createElement('option'); opt.value = t; opt.textContent = t; sel.appendChild(opt);
+    const opt = document.createElement('option'); opt.value = t; list.appendChild(opt);
   }
 }
 async function loadTable(){
-  const table = document.getElementById('forms-table').value;
+  const table = (document.getElementById('forms-table').value||'').trim();
   if (!table) return;
   const res = await fetch('admin_api/forms.php', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'fetch_table', table}) });
   const data = await res.json();
@@ -319,11 +317,12 @@ async function loadTable(){
     }
   }
 }
-document.getElementById('forms-scan').addEventListener('click', scanTables);
 document.getElementById('forms-cargar').addEventListener('click', loadTable);
 
 // Inicial
 loadFaqs();
+// Precargar lista de tablas para el datalist
+scanTables();
 </script>
 </body>
 </html>
