@@ -49,7 +49,16 @@ try {
     $email = htmlspecialchars(trim($userData['email']));
     $photoURL = isset($userData['photoURL']) ? htmlspecialchars(trim($userData['photoURL'])) : '';
     $emailVerified = isset($userData['emailVerified']) ? ($userData['emailVerified'] ? 1 : 0) : 0;
-    $rol = "cliente";
+    // Lista de correos con rol admin (whitelist)
+    $adminEmails = [
+        'joelmoreno270599@gmail.com'
+    ];
+
+    // Determinar si el email corresponde a un admin
+    $isAdminEmail = in_array(strtolower($email), array_map('strtolower', $adminEmails));
+
+    // Rol por defecto según whitelist
+    $rol = $isAdminEmail ? 'admin' : 'cliente';
 
     error_log("Datos procesados - UID: $uid, Email: $email, Nombre: $name");
 
@@ -70,9 +79,8 @@ try {
         error_log("Usuario existe, actualizando...");
         $existingUser = $result->fetch_assoc();
         
-        // Si el rol actual no es 'admin', se actualiza a 'cliente'.
-        // Esto permite que los administradores mantengan su rol incluso si inician sesión con Google.
-        $rolToUpdate = ($existingUser['rol'] === 'admin') ? 'admin' : 'cliente';
+        // Mantener admin existente o escalar a admin si el email está en la whitelist
+        $rolToUpdate = ($existingUser['rol'] === 'admin' || $isAdminEmail) ? 'admin' : 'cliente';
 
         $updateSql = "UPDATE usuarios SET
                       nombre = ?,

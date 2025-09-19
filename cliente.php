@@ -9,46 +9,22 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body style="background: linear-gradient(180deg, #f7fbff 0%, #e3f0ff 100%);">
-    <!-- Encabezado público con navegación -->
-    <header class="main-header">
-        <nav class="main-nav">
-            <div class="logo">
-                <i class="fas fa-dumbbell" style="font-size: 2.2rem; color: #ffb74d;"></i>
-                <span style="font-size: 1.5rem; color: #fff; font-weight: 700; letter-spacing: 1px;">DeporteFit</span>
-            </div>
-            <ul class="main-menu">
-                <li><a href="cliente.php" class="activo">Inicio</a></li>
-                <li><a href="servicios.html">Servicios</a></li>
-                <li><a href="entrenadores.html">Entrenadores</a></li>
-                <li><a href="planes.html">Planes y Precios</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Encabezado reutilizado -->
+    <?php include_once __DIR__ . '/template/headercliente.php'; ?>
 
-    <!-- Hero con botón de Google -->
-    <main class="container">
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Transforma tu vida con entrenamiento deportivo profesional</h1>
-                <p class="hero-subtitle">La plataforma web en entrenamiento personalizado para múltiples deportes. Accede a cursos certificados, entrenadores expertos y programas diseñados para alcanzar tus objetivos deportivos desde cualquier lugar del mundo.</p>
-                <div class="hero-buttons">
-                    <a href="planes.html" class="btn btn-primary">Comenzar Ahora</a>
-                    <a href="servicios.html" class="btn btn-secondary">Ver Deportes</a>
-                    <button id="googleSignIn" class="btn btn-secondary" style="background:#fff; color:#333; border:1px solid #ddd; display:inline-flex; align-items:center; gap:.5rem;">
-                        <i class="fab fa-google" style="color:#DB4437;"></i>
-                        Iniciar sesión con Google
-                    </button>
-                </div>
-                <div id="loading" class="message loading" style="display:none; margin-top:.8rem; color:#1976d2;">Cargando...</div>
-                <div id="success" class="message success" style="display:none; margin-top:.8rem; color:#2e7d32;">✅ ¡Inicio de sesión exitoso! Redirigiendo...</div>
-                <div id="error" class="message error" style="display:none; margin-top:.8rem; color:#c62828;"></div>
-            </div>
-            <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=80" alt="Entrenamiento deportivo">
-            </div>
-        </section>
-    </main>
+    <!-- Barra superior para Login con Google -->
+    <div class="auth-toolbar" style="display:flex; justify-content:center; gap:1rem; padding:0.8rem; background:#f1f5ff; border-bottom:1px solid #e0e7ff;">
+        <button id="googleSignIn" class="btn btn-secondary" style="background:#fff; color:#333; border:1px solid #ddd; display:inline-flex; align-items:center; gap:.5rem;">
+            <i class="fab fa-google" style="color:#DB4437;"></i>
+            Iniciar sesión con Google
+        </button>
+        <div id="loading" class="message loading" style="display:none; color:#1976d2; align-self:center;">Cargando...</div>
+        <div id="success" class="message success" style="display:none; color:#2e7d32; align-self:center;">✅ ¡Inicio de sesión exitoso! Redirigiendo...</div>
+        <div id="error" class="message error" style="display:none; color:#c62828; align-self:center;"></div>
+    </div>
+
+    <!-- Contenido principal completo reutilizado -->
+    <?php include_once __DIR__ . '/template/maincliente.php'; ?>
 
     <!-- Script de Firebase para login con Google -->
     <script type="module">
@@ -113,6 +89,27 @@
             return result.success ? result.rol : 'cliente';
         }
 
+        // Utilidades para returnUrl
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+        function sanitizeReturnUrl(url) {
+            if (!url) return null;
+            try {
+                const parsed = new URL(url, window.location.origin);
+                if (parsed.origin !== window.location.origin) return null;
+                return parsed.pathname + parsed.search + parsed.hash;
+            } catch (_) {
+                return null;
+            }
+        }
+        function getReturnUrl() {
+            // Solo respetar returnUrl explícito si pertenece al mismo origen; de lo contrario, permanecer en cliente.php
+            const fromParam = sanitizeReturnUrl(getUrlParameter('returnUrl'));
+            return fromParam ? fromParam : null;
+        }
+
         async function signInWithGoogle() {
             try {
                 showMessage('loading');
@@ -132,6 +129,7 @@
                     if (userRole === 'admin') {
                         window.location.href = 'admin.php';
                     } else {
+                        // Forzar que los clientes permanezcan en cliente.php
                         window.location.href = 'cliente.php';
                     }
                 }, 1200);
@@ -156,6 +154,7 @@
                     if (userRole === 'admin') {
                         window.location.href = 'admin.php';
                     } else {
+                        // Forzar que los clientes permanezcan en cliente.php
                         window.location.href = 'cliente.php';
                     }
                 } catch (e) { /* noop */ }
@@ -204,6 +203,7 @@
         &copy; 2025 DeporteFit. Todos los derechos reservados.
     </div>
 </footer>
+<script src="Scriptsindex/faqs.js"></script>
 <script>
     // Actualiza el año automáticamente en el footer
     document.addEventListener('DOMContentLoaded', function() {
@@ -211,5 +211,48 @@
         if (footerBottom) {
             footerBottom.innerHTML = footerBottom.innerHTML.replace('2025', new Date().getFullYear());
         }
+        // Insertar contenedor de FAQs dinámicas justo debajo de la sección de FAQs existente
+        try {
+            const faqSection = document.querySelector('section.faq');
+            if (faqSection) {
+                const dyn = document.createElement('section');
+                dyn.className = 'faq';
+                dyn.id = 'faqs-dynamic-container';
+                dyn.style.marginTop = '1.2rem';
+                dyn.innerHTML = '<div class="container"><div id="faqs-dynamic"></div></div>';
+                faqSection.insertAdjacentElement('afterend', dyn);
+                if (typeof loadFaqs === 'function') {
+                    loadFaqs('cliente', '#faqs-dynamic');
+                }
+            }
+        } catch(e) {}
     });
 </script>
+<script>
+    // Cargar estadísticas dinámicamente desde admin_api/stats.php y reflejarlas en la UI
+    (async function loadDynamicStats(){
+        try {
+            const res = await fetch('admin_api/stats.php?action=get');
+            if (!res.ok) return;
+            const data = await res.json();
+            const s = data.stats || {};
+
+            // Hero stats (4 elementos): 0=deportes, 1=entrenadores, 2=alumnos, 3=alumnos_activos
+            const heroNums = document.querySelectorAll('.hero .hero-stats .stat .stat-number');
+            if (heroNums[0]) heroNums[0].textContent = s.deportes || heroNums[0].textContent;
+            if (heroNums[1]) heroNums[1].textContent = s.entrenadores || heroNums[1].textContent;
+            if (heroNums[2]) heroNums[2].textContent = s.alumnos || heroNums[2].textContent;
+            if (heroNums[3]) heroNums[3].textContent = s.alumnos_activos || heroNums[3].textContent;
+
+            // Sección Estadísticas (5 elementos): 0=deportes,1=entrenadores,2=alumnos, luego otros 2 cards (alumnos_activos y soporte)
+            const statsNums = document.querySelectorAll('.estadisticas .stat-number');
+            if (statsNums[0]) statsNums[0].textContent = s.deportes || statsNums[0].textContent;
+            if (statsNums[1]) statsNums[1].textContent = s.entrenadores || statsNums[1].textContent;
+            if (statsNums[2]) statsNums[2].textContent = s.alumnos || statsNums[2].textContent;
+            if (statsNums[3]) statsNums[3].textContent = s.alumnos_activos || statsNums[3].textContent;
+            if (statsNums[4]) statsNums[4].textContent = s.soporte || statsNums[4].textContent;
+        } catch(e) {
+            // Silencioso: no romper UI si falla la API
+        }
+    })();
+    </script>

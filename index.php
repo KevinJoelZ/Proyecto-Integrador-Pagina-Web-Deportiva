@@ -20,6 +20,33 @@
             <span class="logo-text">DeporteFit</span>
         </div>
 
+        <!-- Modal de selección de cuenta -->
+        <div id="accountModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:1000; align-items:center; justify-content:center;">
+            <div style="background:#fff; width:90%; max-width:420px; border-radius:14px; box-shadow:0 12px 40px rgba(0,0,0,.18); overflow:hidden;">
+                <div style="padding:16px 18px; background:#f7fbff; border-bottom:1px solid #e5e7eb; display:flex; align-items:center; gap:.6rem;">
+                    <i class="fas fa-user-check" style="color:#4CAF50;"></i>
+                    <strong>Selecciona el correo para iniciar sesión</strong>
+                </div>
+                <div style="padding:16px 18px; display:flex; flex-direction:column; gap:.6rem;">
+                    <button class="account-option" data-email="kevinjoelzapata1999@gmail.com" style="display:flex; align-items:center; gap:.7rem; padding:10px 12px; border:1px solid #e5e7eb; border-radius:10px; background:#fff; cursor:pointer;">
+                        <i class="fas fa-envelope" style="color:#1976d2;"></i>
+                        <div style="text-align:left;">
+                            <div style="font-weight:700; color:#111827;">Cliente</div>
+                            <div style="color:#374151; font-size:.92rem;">kevinjoelzapata1999@gmail.com</div>
+                        </div>
+                    </button>
+                    <button class="account-option" data-email="joelmoreno270599@gmail.com" style="display:flex; align-items:center; gap:.7rem; padding:10px 12px; border:1px solid #e5e7eb; border-radius:10px; background:#fff; cursor:pointer;">
+                        <i class="fas fa-user-shield" style="color:#ff9800;"></i>
+                        <div style="text-align:left;">
+                            <div style="font-weight:700; color:#111827;">Administrador</div>
+                            <div style="color:#374151; font-size:.92rem;">joelmoreno270599@gmail.com</div>
+                        </div>
+                    </button>
+                    <button id="closeAccountModal" style="margin-top:6px; align-self:flex-end; background:#fff; color:#374151; border:1px solid #e5e7eb; padding:8px 10px; border-radius:8px; cursor:pointer;">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
         <div class="hero">
             <h1>Conecta con el mundo deportivo</h1>
             <p>Accede a estadísticas personalizadas, conecta con otros atletas y lleva tu rendimiento al siguiente nivel.</p>
@@ -53,26 +80,19 @@
         </button>
 
         <div id="loading" class="message loading" style="display: none;">Cargando...</div>
-        <div id="success" class="message success" style="display: none;">✅ ¡Inicio de sesión exitoso! Redirigiendo...</div>
+        <div id="success" class="message success" style="display: none;">¡Inicio de sesión exitoso! Redirigiendo...</div>
         <div id="error" class="message error" style="display: none;"></div>
 
         <div class="footer">
-            <p>© 2025 DeporteFit. Todos los derechos reservados.</p>
+            <p> 2025 DeporteFit. Todos los derechos reservados.</p>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="./Scriptsindex/Particulas.js"></script>
     <script type="module">
-        import {
-            initializeApp
-        } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import {
-            getAuth,
-            GoogleAuthProvider,
-            signInWithPopup,
-            onAuthStateChanged
-        } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyBZoUGrSk3V-yFW6QHxXLeXQfPMgnYUeQo",
@@ -92,15 +112,14 @@
         const loadingDiv = document.getElementById('loading');
         const successDiv = document.getElementById('success');
         const errorDiv = document.getElementById('error');
+        const accountModal = document.getElementById('accountModal');
+        let selectedEmail = null;
 
         // Función para mostrar mensajes
         function showMessage(type, message = '') {
-            // Ocultar todos los mensajes
             loadingDiv.style.display = 'none';
             successDiv.style.display = 'none';
             errorDiv.style.display = 'none';
-
-            // Mostrar el mensaje específico
             switch (type) {
                 case 'loading':
                     loadingDiv.style.display = 'block';
@@ -110,14 +129,12 @@
                     break;
                 case 'error':
                     errorDiv.style.display = 'block';
-                    if (message) {
-                        errorDiv.textContent = '❌ ' + message;
-                    }
+                    if (message) errorDiv.textContent = ' ' + message;
                     break;
             }
         }
 
-        // Función para guardar usuario en la base de datos
+        // Guardar usuario en BD
         async function saveUserToDatabase(user) {
             const userData = {
                 uid: user.uid,
@@ -127,84 +144,70 @@
                 emailVerified: user.emailVerified,
                 rol: "cliente"
             };
-
-            try {
-                const response = await fetch('./login/guardar_usuario.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(userData)
-                });
-
-                if (!response.ok) {
-                    //* throw new Error(HTTP error! status: ${response.status});
-                }
-
-                const result = await response.json();
-                console.log('Respuesta de guardar usuario:', result);
-
-                return result.success;
-            } catch (error) {
-                console.error('Error al guardar usuario:', error);
-                throw error;
-            }
+            const response = await fetch('./login/guardar_usuario.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            });
+            const result = await response.json().catch(() => ({ success: false }));
+            return result.success;
         }
 
-        // Función para obtener el rol del usuario
+        // Obtener rol desde BD
         async function getUserRole(uid) {
-            console.log('Obteniendo rol para UID:', uid);
-
             try {
                 const response = await fetch('./login/obtener_rol.php', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        uid: uid
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ uid })
                 });
-
-                if (!response.ok) {
-                    //* throw new Error(HTTP error! status: ${response.status});
-                }
-
                 const result = await response.json();
-                console.log('Respuesta de rol:', result);
-
                 return result.success ? result.rol : 'cliente';
-            } catch (error) {
-                console.error('Error al obtener rol:', error);
+            } catch (e) {
                 return 'cliente';
             }
         }
 
-        // Función principal de autenticación
+        // Parámetros de URL
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Sanitizar returnUrl para evitar open redirects
+        function sanitizeReturnUrl(url) {
+            if (!url) return null;
+            try {
+                const parsed = new URL(url, window.location.origin);
+                if (parsed.origin !== window.location.origin) return null;
+                return parsed.pathname + parsed.search + parsed.hash;
+            } catch (_) {
+                return null;
+            }
+        }
+        function getReturnUrl() {
+            return sanitizeReturnUrl(getUrlParameter('returnUrl'));
+        }
+
+        // Login con Google
         async function signInWithGoogle() {
             try {
                 showMessage('loading');
                 googleSignInBtn.disabled = true;
-
-                // Limpiar datos anteriores
                 sessionStorage.clear();
-
-                console.log('Iniciando autenticación...');
-
-                // Autenticar con Firebase
                 const result = await signInWithPopup(auth, provider);
                 const user = result.user;
 
-                console.log('Usuario autenticado:', user.displayName, user.email);
+                // Verificar que el correo coincida con el seleccionado
+                if (selectedEmail && user.email.toLowerCase() !== selectedEmail.toLowerCase()) {
+                    await signOut(auth).catch(() => {});
+                    showMessage('error', 'Debes iniciar sesión con el correo seleccionado: ' + selectedEmail);
+                    return;
+                }
 
-                // Guardar en la base de datos
                 await saveUserToDatabase(user);
-
-                // Obtener el rol del usuario
                 const userRole = await getUserRole(user.uid);
-                console.log('Rol obtenido:', userRole);
 
-                // Guardar datos en sessionStorage
                 const userData = {
                     uid: user.uid,
                     name: user.displayName,
@@ -212,88 +215,72 @@
                     photoURL: user.photoURL,
                     rol: userRole
                 };
-
                 sessionStorage.setItem('user', JSON.stringify(userData));
                 sessionStorage.setItem('justLoggedIn', 'true');
 
                 showMessage('success');
-
-                // Redirigir después de 2 segundos
-                setTimeout(() => {
+                setTimeout(async () => {
                     if (userRole === 'admin') {
+                        // Crear sesión PHP para que admin.php no rebote
+                        try { await fetch('./login/crear_sesion.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ uid: user.uid }) }); } catch (e) {}
                         window.location.href = 'admin.php';
                     } else {
-                        window.location.href = 'cliente.php';
+                        const returnUrl = getReturnUrl();
+                        window.location.href = returnUrl ? returnUrl : 'cliente.php';
                     }
                 }, 2000);
-
             } catch (error) {
                 console.error('Error en la autenticación:', error);
-
-                let errorMessage = 'Error desconocido';
-
-                if (error.code) {
-                    switch (error.code) {
-                        case 'auth/popup-closed-by-user':
-                            errorMessage = 'Autenticación cancelada por el usuario';
-                            break;
-                        case 'auth/popup-blocked':
-                            errorMessage = 'El navegador bloqueó la ventana emergente';
-                            break;
-                        case 'auth/unauthorized-domain':
-                            errorMessage = 'Dominio no autorizado para Firebase';
-                            break;
-                        default:
-                            errorMessage = error.message || 'Error en la autenticación';
-                    }
-                } else {
-                    errorMessage = error.message || 'Error de conexión';
-                }
-
-                showMessage('error', errorMessage);
+                showMessage('error', error.message || 'Error de autenticación');
             } finally {
                 googleSignInBtn.disabled = false;
             }
         }
 
-        // Event listener para el botón
-        googleSignInBtn.addEventListener('click', signInWithGoogle);
-
-        // Función para obtener parámetros de URL
-        function getUrlParameter(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
+        // Abrir modal de selección antes de login
+        function openAccountModal() {
+            accountModal.style.display = 'flex';
         }
+        function closeAccountModal() {
+            accountModal.style.display = 'none';
+        }
+        document.getElementById('closeAccountModal').addEventListener('click', () => { selectedEmail = null; closeAccountModal(); });
+        accountModal.addEventListener('click', (e) => { if (e.target === accountModal) { selectedEmail = null; closeAccountModal(); } });
+        document.querySelectorAll('.account-option').forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectedEmail = btn.getAttribute('data-email');
+                closeAccountModal();
+                signInWithGoogle();
+            });
+        });
+        // Click del botón principal abre el modal
+        googleSignInBtn.addEventListener('click', openAccountModal);
 
-        // Verificar autenticación al cargar la página
+        // onAuthStateChanged para redirección post-login
         onAuthStateChanged(auth, async (user) => {
-            // Si viene de logout, no verificar autenticación
             if (getUrlParameter('action') === 'logout') {
-                console.log('Logout detectado, limpiando...');
                 sessionStorage.clear();
                 const newUrl = window.location.pathname;
                 window.history.replaceState(null, '', newUrl);
                 return;
             }
-
             if (user && sessionStorage.getItem('justLoggedIn') === 'true') {
-                console.log('Usuario recién autenticado, redirigiendo...');
                 sessionStorage.removeItem('justLoggedIn');
-
                 try {
                     const userRole = await getUserRole(user.uid);
                     if (userRole === 'admin') {
+                        try { await fetch('./login/crear_sesion.php', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ uid: user.uid }) }); } catch(e){}
                         window.location.href = 'admin.php';
                     } else {
-                        window.location.href = 'cliente.php';
+                        const returnUrl = getReturnUrl();
+                        window.location.href = returnUrl ? returnUrl : 'cliente.php';
                     }
-                } catch (error) {
-                    console.error('Error al obtener rol durante redirección:', error);
+                } catch (e) {
+                    console.error('Error al obtener rol durante redirección:', e);
                 }
             }
         });
 
-        // Log inicial para debugging
         console.log('Firebase inicializado correctamente');
     </script>
 
