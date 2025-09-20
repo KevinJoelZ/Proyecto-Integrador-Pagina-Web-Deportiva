@@ -18,9 +18,13 @@
             <i class="fab fa-google" style="color:#DB4437;"></i>
             Iniciar sesión con Google
         </button>
-        <a href="admin.php" class="btn" style="background:#fff; color:#333; border:1px solid #ddd; display:inline-flex; align-items:center; gap:.5rem; text-decoration:none;">
+        <a href="admin.php" id="goAdminBtn" class="btn" style="display:none; background:#fff; color:#333; border:1px solid #ddd; display:inline-flex; align-items:center; gap:.5rem; text-decoration:none;">
             <i class="fas fa-shield-alt" style="color:#1976d2;"></i>
             Volver a Panel Admin
+        </a>
+        <a href="#" id="clientLogout" class="btn" style="display:none; background:#fff; color:#333; border:1px solid #ddd; display:inline-flex; align-items:center; gap:.5rem; text-decoration:none;">
+            <i class="fas fa-sign-out-alt" style="color:#c62828;"></i>
+            Cerrar sesión
         </a>
         <div id="loading" class="message loading" style="display:none; color:#1976d2; align-self:center;">Cargando...</div>
         <div id="success" class="message success" style="display:none; color:#2e7d32; align-self:center;">✅ ¡Inicio de sesión exitoso! Redirigiendo...</div>
@@ -33,7 +37,7 @@
     <!-- Script de Firebase para login con Google -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyBZoUGrSk3V-yFW6QHxXLeXQfPMgnYUeQo",
@@ -150,6 +154,35 @@
 
         googleSignInBtn?.addEventListener('click', signInWithGoogle);
 
+        // Mostrar/ocultar botón de Cerrar sesión para el cliente específico
+        const clientLogoutBtn = document.getElementById('clientLogout');
+        function isClientUser(){
+            try {
+                const u = JSON.parse(sessionStorage.getItem('user')||'{}');
+                return (u.rol === 'cliente' && (u.email||'').toLowerCase() === 'kevinjoelzapata1999@gmail.com');
+            } catch { return false; }
+        }
+        function isAdminUser(){
+            try {
+                const u = JSON.parse(sessionStorage.getItem('user')||'{}');
+                return (u.rol === 'admin' || (u.email||'').toLowerCase() === 'joelmoreno270599@gmail.com');
+            } catch { return false; }
+        }
+        function refreshAuthButtons(){
+            const goAdminBtn = document.getElementById('goAdminBtn');
+            if (isClientUser()) clientLogoutBtn.style.display = 'inline-flex';
+            else clientLogoutBtn.style.display = 'none';
+            if (goAdminBtn) goAdminBtn.style.display = isAdminUser() ? 'inline-flex' : 'none';
+        }
+        clientLogoutBtn.addEventListener('click', async (e)=>{
+            e.preventDefault();
+            try { await signOut(auth); } catch(e){}
+            try { await fetch('logout.php').catch(()=>{}); } catch(e){}
+            sessionStorage.clear();
+            window.location.href = 'index.php';
+        });
+        refreshAuthButtons();
+
         // Si venimos desde admin, limpiar el flag para evitar redirección de rebote
         try {
             const params = new URLSearchParams(window.location.search);
@@ -159,6 +192,7 @@
         } catch(_) {}
 
         onAuthStateChanged(auth, async (user) => {
+            refreshAuthButtons();
             if (user && sessionStorage.getItem('justLoggedIn') === 'true') {
                 sessionStorage.removeItem('justLoggedIn');
                 try {

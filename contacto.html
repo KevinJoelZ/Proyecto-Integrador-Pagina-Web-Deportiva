@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto | Entrenamiento Deportivo</title>
-    <base href="/P%C3%A1gina_deportiva/">
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/estilos.css?v=2">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body style="background: linear-gradient(180deg, #f7fbff 0%, #e3f0ff 100%);">
@@ -24,6 +23,7 @@
             </ul>
         </nav>
     </header>
+    <main class="container">
     <div class="contacto-flex" style="display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap; margin: 2.2rem auto 2.2rem auto;">
         <div class="servicio-card mejorado" style="max-width: 500px; width: 500px; margin: 0; background: linear-gradient(135deg, #f7fbff 0%, #e3f0ff 100%);">
             <img src="imagenes/formulario.png" alt="Formulario de Contacto" style="height: 140px; object-fit: cover; border-radius: 12px 12px 0 0;">
@@ -34,44 +34,37 @@
                     <div style="margin-bottom: 1rem; display: flex; flex-direction: column; align-items: center;">
                         <label for="nombre" style="display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; font-weight: 600; color: #333; margin-bottom: 0.5rem; width: 100%; justify-content: flex-start;"><i class="fas fa-user" style="color: #4fc3f7;"></i>Nombre:</label>
                         <input type="text" id="nombre" name="nombre" required style="padding: 0.8rem; font-size: 1rem; margin-bottom: 0; border: 2px solid #e3f2fd; border-radius: 8px; transition: border-color 0.3s; width: 100%; max-width: 300px;">
-                        <div class="servicio-info" style="padding: 1.5rem 1.2rem; text-align: center;">
-                            <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: #1976d2;">Formulario de Contacto</h3>
-                            <form class="form-contacto" action="Procesamientof/procesar_formularios.php" method="POST" style="padding: 0; max-width: 100%;">
-                                <input type="hidden" name="form_type" value="contacto">
-                                            <div style="margin-bottom: 1rem; display: flex; flex-direction: column; align-items: center;">
-                                                <label for="nombre" style="display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; font-weight: 600; color: #333; margin-bottom: 0.5rem; width: 100%; justify-content: flex-start;"><i class="fas fa-user" style="color: #4fc3f7;"></i>Nombre:</label>
-                                                <input type="text" id="nombre" name="nombre" required style="padding: 0.8rem; font-size: 1rem; margin-bottom: 0; border: 2px solid #e3f2fd; border-radius: 8px; transition: border-color 0.3s; width: 100%; max-width: 300px;">
-                                            </div>
-                                <div style="margin-bottom: 1rem; display: flex; flex-direction: column; align-items: center;">
-                                    <label for="email" style="display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; font-weight: 600; color: #333; margin-bottom: 0.5rem; width: 100%; justify-content: flex-start;"><i class="fas fa-envelope" style="color: #4fc3f7;"></i>Correo electrónico:</label>
-                                    <input type="email" id="email" name="email" required style="padding: 0.8rem; font-size: 1rem; margin-bottom: 0; border: 2px solid #e3f2fd; border-radius: 8px; transition: border-color 0.3s; width: 100%; max-width: 300px;">
-                                </div>
-                                <div style="margin-bottom: 1rem; display: flex; flex-direction: column; align-items: center;">
-                                    <label for="telefono" style="display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; font-weight: 600; color: #333; margin-bottom: 0.5rem; width: 100%; justify-content: flex-start;"><i class="fas fa-phone" style="color: #4fc3f7;"></i>Teléfono:</label>
-                                    <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" placeholder="Ej: 0991234567" style="padding: 0.8rem; font-size: 1rem; margin-bottom: 0; border: 2px solid #e3f2fd; border-radius: 8px; transition: border-color 0.3s; width: 100%; max-width: 300px;">
-                                </div>
-                                <div style="margin-bottom: 1rem; display: flex; flex-direction: column; align-items: center;">
-                                    <label for="motivo" style="display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; font-weight: 600; color: #333; margin-bottom: 0.5rem; width: 100%; justify-content: flex-start;"><i class="fas fa-question-circle" style="color: #4fc3f7;"></i>Motivo de contacto:</label>
-                                    <select id="motivo" name="motivo" required style="padding: 0.8rem; font-size: 1rem; margin-bottom: 0; border: 2px solid #e3f2fd; border-radius: 8px; transition: border-color 0.3s; background: white; width: 100%; max-width: 300px;">
-                                        <option value="">Selecciona una opción</option>
-                                        <option value="informacion">Solicitar información</option>
-                                        <option value="soporte">Soporte técnico</option>
-                                        <option value="entrenadores">Contactar entrenador</option>
-                                        <option value="otros">Otros</option>
-                                    </select>
-                                </div>
-                                <div style="margin-bottom: 1rem; display: flex; flex-direction: column; align-items: center;">
-                                    <label for="mensaje" style="display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; font-weight: 600; color: #333; margin-bottom: 0.5rem; width: 100%; justify-content: flex-start;"><i class="fas fa-comment" style="color: #4fc3f7;"></i>Mensaje:</label>
-                                    <textarea id="mensaje" name="mensaje" rows="4" required style="padding: 0.8rem; font-size: 1rem; margin-bottom: 0; border: 2px solid #e3f2fd; border-radius: 8px; transition: border-color 0.3s; resize: vertical; min-height: 80px; width: 100%; max-width: 300px;"></textarea>
-                                </div>
-                                <div class="privacidad" style="margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.5rem; justify-content: center;">
-                                    <input type="checkbox" id="privacidad" name="privacidad" required style="transform: scale(1.2);">
-                                    <label for="privacidad" style="font-size: 0.95rem; color: #555; cursor: pointer; text-align: center;">Acepto la <a href="#" style="color: #1976d2;">política de privacidad</a></label>
-                                </div>
-                                <button type="submit" class="btn btn-primary" style="padding: 0.9rem 2rem; font-size: 1.05rem; background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%); border: none; border-radius: 25px; transition: transform 0.3s, box-shadow 0.3s;">Enviar Mensaje</button>
-                            </form>
-                        </div>
                     </div>
+                    <div style="margin-bottom: 1rem; display: flex; flex-direction: column; align-items: center;">
+                        <label for="email" style="display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; font-weight: 600; color: #333; margin-bottom: 0.5rem; width: 100%; justify-content: flex-start;"><i class="fas fa-envelope" style="color: #4fc3f7;"></i>Correo electrónico:</label>
+                        <input type="email" id="email" name="email" required style="padding: 0.8rem; font-size: 1rem; margin-bottom: 0; border: 2px solid #e3f2fd; border-radius: 8px; transition: border-color 0.3s; width: 100%; max-width: 300px;">
+                    </div>
+                    <div style="margin-bottom: 1rem; display: flex; flex-direction: column; align-items: center;">
+                        <label for="telefono" style="display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; font-weight: 600; color: #333; margin-bottom: 0.5rem; width: 100%; justify-content: flex-start;"><i class="fas fa-phone" style="color: #4fc3f7;"></i>Teléfono:</label>
+                        <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" placeholder="Ej: 0991234567" style="padding: 0.8rem; font-size: 1rem; margin-bottom: 0; border: 2px solid #e3f2fd; border-radius: 8px; transition: border-color 0.3s; width: 100%; max-width: 300px;">
+                    </div>
+                    <div style="margin-bottom: 1rem; display: flex; flex-direction: column; align-items: center;">
+                        <label for="motivo" style="display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; font-weight: 600; color: #333; margin-bottom: 0.5rem; width: 100%; justify-content: flex-start;"><i class="fas fa-question-circle" style="color: #4fc3f7;"></i>Motivo de contacto:</label>
+                        <select id="motivo" name="motivo" required style="padding: 0.8rem; font-size: 1rem; margin-bottom: 0; border: 2px solid #e3f2fd; border-radius: 8px; transition: border-color 0.3s; background: white; width: 100%; max-width: 300px;">
+                            <option value="">Selecciona una opción</option>
+                            <option value="informacion">Solicitar información</option>
+                            <option value="soporte">Soporte técnico</option>
+                            <option value="entrenadores">Contactar entrenador</option>
+                            <option value="otros">Otros</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 1rem; display: flex; flex-direction: column; align-items: center;">
+                        <label for="mensaje" style="display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; font-weight: 600; color: #333; margin-bottom: 0.5rem; width: 100%; justify-content: flex-start;"><i class="fas fa-comment" style="color: #4fc3f7;"></i>Mensaje:</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" required style="padding: 0.8rem; font-size: 1rem; margin-bottom: 0; border: 2px solid #e3f2fd; border-radius: 8px; transition: border-color 0.3s; resize: vertical; min-height: 80px; width: 100%; max-width: 300px;"></textarea>
+                    </div>
+                    <div class="privacidad" style="margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.5rem; justify-content: center;">
+                        <input type="checkbox" id="privacidad" name="privacidad" required style="transform: scale(1.2);">
+                        <label for="privacidad" style="font-size: 0.95rem; color: #555; cursor: pointer; text-align: center;">Acepto la <a href="#" style="color: #1976d2;">política de privacidad</a></label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="padding: 0.9rem 2rem; font-size: 1.05rem; background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%); border: none; border-radius: 25px; transition: transform 0.3s, box-shadow 0.3s;">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
                     <div class="servicio-card mejorado" style="max-width: 500px; width: 500px; margin: 0; background: linear-gradient(135deg, #f7fbff 0%, #e3f0ff 100%); min-height: 480px; display: flex; flex-direction: column;">
                         <img src="imagenes/contacto.jpg" alt="Datos de Contacto" style="height: 140px; object-fit: cover; border-radius: 12px 12px 0 0; flex-shrink: 0;">
                         <div class="servicio-info" style="padding: 1.5rem 1.2rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
