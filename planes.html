@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planes y Precios | Entrenamiento Deportivo</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="css/estilos.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -182,19 +183,19 @@
             <input type="hidden" name="form_type" value="planes">
             <div style="margin-bottom: 1rem;">
                 <label for="nombre" style="display: block; margin-bottom: 0.3rem; font-weight: 600; color: #1976d2;">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
+                <input type="text" id="nombre" name="nombre" required style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
             </div>
             <div style="margin-bottom: 1rem;">
                 <label for="email" style="display: block; margin-bottom: 0.3rem; font-weight: 600; color: #1976d2;">Correo electrónico:</label>
-                <input type="email" id="email" name="email" style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
+                <input type="email" id="email" name="email" required style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
             </div>
             <div style="margin-bottom: 1rem;">
                 <label for="telefono" style="display: block; margin-bottom: 0.3rem; font-weight: 600; color: #1976d2;">Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" placeholder="Ej: 0991234567" style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
+                <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" placeholder="Ej: 0991234567" style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
             </div>
             <div style="margin-bottom: 1rem;">
                 <label for="motivo" style="display: block; margin-bottom: 0.3rem; font-weight: 600; color: #1976d2;">Motivo de contacto:</label>
-                <select id="motivo" name="motivo" style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
+                <select id="motivo" name="motivo" required style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
                     <option value="">Selecciona una opción</option>
                     <option value="informacion">Solicitar información</option>
                     <option value="soporte">Soporte técnico</option>
@@ -204,7 +205,7 @@
             </div>
             <div style="margin-bottom: 1rem;">
                 <label for="mensaje" style="display: block; margin-bottom: 0.3rem; font-weight: 600; color: #1976d2;">Mensaje:</label>
-                <textarea id="mensaje" name="mensaje" rows="3" style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;"></textarea>
+                <textarea id="mensaje" name="mensaje" rows="3" required style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
@@ -290,10 +291,13 @@
         }
 
         // Mostrar la sección de confirmación correspondiente al hacer clic en "Elegir Plan"
-        document.querySelectorAll('.btn-primary').forEach(button => {
+        // Importante: limitar a enlaces (a.btn-primary) para no interferir con el botón de enviar del formulario
+        document.querySelectorAll('a.btn-primary').forEach(button => {
             button.addEventListener('click', (e) => {
+                const href = button.getAttribute('href');
+                if (!href || !href.startsWith('#confirmar-')) return; // Solo manejar anclas de confirmación
                 e.preventDefault();
-                const targetId = button.getAttribute('href').substring(1);
+                const targetId = href.substring(1);
                 document.querySelectorAll('section[id^="confirmar-"]').forEach(section => {
                     section.style.display = 'none';
                 });

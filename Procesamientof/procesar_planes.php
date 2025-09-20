@@ -28,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Consulta SQL para insertar en la tabla `solicitudes planes`
-    $sql = "INSERT INTO `solicitudes planes` (nombre, email, telefono, motivo, mensaje, fecha_solicitud) VALUES (?, ?, ?, ?, ?, NOW())";
+    // Consulta SQL para insertar en la tabla solicitudes_planes (nombre correcto sin espacios)
+    $sql = "INSERT INTO solicitudes_planes (nombre, email, telefono, motivo, mensaje, fecha_solicitud) VALUES (?, ?, ?, ?, ?, NOW())";
 
     // Preparar la consulta
     $stmt = mysqli_prepare($conexion, $sql);
