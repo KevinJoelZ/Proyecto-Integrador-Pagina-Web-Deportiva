@@ -17,8 +17,10 @@ async function loadFaqs(pageSlug, containerSelector){
     // Build collapsible list styled similar to existing FAQ cards
     const list = document.createElement('div');
     list.style.display = 'grid';
+    // Formato menos compacto para 'servicios' (similar a entrenadores)
+    const isServicios = String(pageSlug||'').toLowerCase() === 'servicios';
     list.style.gridTemplateColumns = '1fr 1fr';
-    list.style.gap = '1.2rem';
+    list.style.gap = isServicios ? '1.6rem' : '1.2rem';
     list.style.maxWidth = '900px';
     list.style.margin = '0 auto';
 
@@ -28,14 +30,14 @@ async function loadFaqs(pageSlug, containerSelector){
       item.style.background = '#fff';
       item.style.borderRadius = '1.1rem';
       item.style.boxShadow = '0 2px 12px rgba(25,118,210,0.07)';
-      item.style.padding = '1.2rem 1rem';
+      item.style.padding = isServicios ? '1.4rem 1.2rem' : '1.2rem 1rem';
 
       const btn = document.createElement('button');
       btn.className = 'faq-question';
       btn.style.background = 'none';
       btn.style.border = 'none';
       btn.style.fontWeight = '600';
-      btn.style.fontSize = '1.05rem';
+      btn.style.fontSize = isServicios ? '1.12rem' : '1.05rem';
       btn.style.color = '#1976d2';
       btn.style.display = 'flex';
       btn.style.alignItems = 'center';
@@ -48,7 +50,7 @@ async function loadFaqs(pageSlug, containerSelector){
       const ans = document.createElement('div');
       ans.className = 'faq-answer';
       ans.style.display = 'none';
-      ans.style.marginTop = '.7rem';
+      ans.style.marginTop = isServicios ? '.85rem' : '.7rem';
       ans.style.color = '#333';
       ans.innerText = it.respuesta || '';
 

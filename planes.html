@@ -78,7 +78,7 @@
         </nav>
     </header>
         <div class="planes-grid">
-            <div class="servicio-card mejorado" style="display: flex; flex-direction: column;">
+            <div class="servicio-card mejorado" style="display: flex; flex-direction: column; background:#fff; border-radius:1.1rem; box-shadow:0 8px 24px rgba(25,118,210,0.12); border:1px solid #e6eefc;">
             <img src="imagenes/Basico.jpg" alt="Plan Básico" style="width:100%; height:200px; object-fit:cover;">
                 <div class="servicio-info">
                     <span class="etiqueta">Básico</span>
@@ -89,10 +89,10 @@
                         <li>Seguimiento mensual</li>
                         <li>Comunidad online</li>
                     </ul>
-                    <a href="#confirmar-basico" class="btn btn-primary" style="text-decoration:none;">Elegir Plan</a>
+                    <a href="#" class="btn btn-primary" data-plan="Básico" data-price="$20/mes" style="text-decoration:none;">Elegir Plan</a>
                 </div>
             </div>
-            <div class="servicio-card mejorado" style="display: flex; flex-direction: column;">
+            <div class="servicio-card mejorado" style="display: flex; flex-direction: column; background:#fff; border-radius:1.1rem; box-shadow:0 8px 24px rgba(25,118,210,0.12); border:1px solid #e6eefc;">
                 <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=400&q=80" alt="Plan Estándar" style="width:100%; height:200px; object-fit:cover;">
                 <div class="servicio-info">
                     <span class="etiqueta">Estándar</span>
@@ -104,10 +104,10 @@
                         <li>Rutinas avanzadas</li>
                         <li>Evaluación física trimestral</li>
                     </ul>
-                    <a href="#confirmar-estandar" class="btn btn-primary" style="text-decoration:none;">Elegir Plan</a>
+                    <a href="#" class="btn btn-primary" data-plan="Estándar" data-price="$30/mes" style="text-decoration:none;">Elegir Plan</a>
                 </div>
             </div>
-            <div class="servicio-card mejorado" style="display: flex; flex-direction: column;">
+            <div class="servicio-card mejorado" style="display: flex; flex-direction: column; background:#fff; border-radius:1.1rem; box-shadow:0 8px 24px rgba(25,118,210,0.12); border:1px solid #e6eefc;">
                 <img src="imagenes/personalizado 2.jpg" alt="Plan Personalizado" style="width:100%; height:200px; object-fit:cover;">
                 <div class="servicio-info">
                     <span class="etiqueta">Personalizado</span>
@@ -119,41 +119,42 @@
                         <li>Seguimiento semanal</li>
                         <li>Acceso a eventos exclusivos</li>
                     </ul>
-                    <a href="#confirmar-personalizado" class="btn btn-primary" style="text-decoration:none;">Elegir Plan</a>
+                    <a href="#" class="btn btn-primary" data-plan="Personalizado" data-price="$35/mes" style="text-decoration:none;">Elegir Plan</a>
                 </div>
             </div>
         </div>
-        <!-- Sección de confirmación de planes -->
-        <section id="confirmar-basico" style="display:none; position:relative; z-index:10; background:#fff; border-radius:1rem; box-shadow:0 2px 12px rgba(25,118,210,0.12); padding:2rem; max-width:400px; margin:2rem auto; text-align:center;">
-            <h2 style="color:#1976d2; font-size:1.5rem; font-weight:700; margin-bottom:1rem;">Confirmar Plan Básico</h2>
-            <p>¿Deseas elegir el <strong>Plan Básico</strong> por $20/mes?</p>
-            <button onclick="confirmarPlan('Básico')" style="background:#1976d2; color:#fff; border:none; border-radius:0.5rem; padding:0.7rem 1.5rem; font-size:1rem; font-weight:600; cursor:pointer; margin-top:1rem;">Confirmar</button>
-        </section>
-        <section id="confirmar-estandar" style="display:none; position:relative; z-index:10; background:#fff; border-radius:1rem; box-shadow:0 2px 12px rgba(25,118,210,0.12); padding:2rem; max-width:400px; margin:2rem auto; text-align:center;">
-            <h2 style="color:#1976d2; font-size:1.5rem; font-weight:700; margin-bottom:1rem;">Confirmar Plan Estándar</h2>
-            <p>¿Deseas elegir el <strong>Plan Estándar</strong> por $30/mes?</p>
-            <button onclick="confirmarPlan('Estándar')" style="background:#1976d2; color:#fff; border:none; border-radius:0.5rem; padding:0.7rem 1.5rem; font-size:1rem; font-weight:600; cursor:pointer; margin-top:1rem;">Confirmar</button>
-        </section>
-        <section id="confirmar-personalizado" style="display:none; position:relative; z-index:10; background:#fff; border-radius:1rem; box-shadow:0 2px 12px rgba(25,118,210,0.12); padding:2rem; max-width:400px; margin:2rem auto; text-align:center;">
-            <h2 style="color:#1976d2; font-size:1.5rem; font-weight:700; margin-bottom:1rem;">Confirmar Plan Personalizado</h2>
-            <p>¿Deseas elegir el <strong>Plan Personalizado</strong> por $35/mes?</p>
-            <button onclick="confirmarPlan('Personalizado')" style="background:#1976d2; color:#fff; border:none; border-radius:0.5rem; padding:0.7rem 1.5rem; font-size:1rem; font-weight:600; cursor:pointer; margin-top:1rem;">Confirmar</button>
-        </section>
+        <!-- Modal reutilizable de confirmación de plan -->
+        <div id="planConfirmModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:1000; align-items:center; justify-content:center;">
+          <div style="background:#fff; width:90%; max-width:460px; border-radius:14px; box-shadow:0 12px 40px rgba(0,0,0,.18); overflow:hidden;">
+            <div style="padding:16px 18px; background:#f7fbff; border-bottom:1px solid #e5e7eb; display:flex; align-items:center; gap:.6rem;">
+              <i class="fas fa-clipboard-check" style="color:#1976d2;"></i>
+              <strong>Confirmar Plan</strong>
+            </div>
+            <div style="padding:16px 18px;">
+              <p style="margin:0 0 .6rem 0; color:#374151;">Vas a elegir el <strong id="modalPlanName">Plan</strong>.</p>
+              <p style="margin:0 0 1rem 0; color:#6b7280;">Precio: <span id="modalPlanPrice"></span></p>
+              <div style="display:flex; gap:.6rem; justify-content:flex-end;">
+                <button id="cancelConfirmPlan" style="background:#fff; color:#374151; border:1px solid #e5e7eb; padding:.55rem .9rem; border-radius:8px; cursor:pointer;">Cancelar</button>
+                <button id="doConfirmPlan" style="background:#1976d2; color:#fff; border:1px solid #1976d2; padding:.55rem 1rem; border-radius:8px; cursor:pointer;">Confirmar</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- Sección de descripción de los planes -->
         <section class="detalle-planes" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 1.2rem;">
             <h2 style="width:100%; text-align:center; margin-top:0.7rem; margin-bottom:0.9rem; font-size:2rem; font-weight:700; color:#1976d2;">Descripción de los Planes</h2>
             <div style="display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2rem; width: 100%;">
-                <div class="detalle-plan" style="flex: 1; min-width: 220px; max-width: 340px; background: #fff; border-radius: 1rem; padding: 1.2rem; display: flex; flex-direction: column; align-items: center;">
+                <div class="detalle-plan" style="flex: 1; min-width: 220px; max-width: 340px; background: #fff; border-radius: 1rem; padding: 1.2rem; display: flex; flex-direction: column; align-items: center; box-shadow: 0 8px 24px rgba(25,118,210,0.12); border: 1px solid #e6eefc;">
                     <h3 style="margin-bottom: 0.7rem;">Plan Básico</h3>
-                    <p style="margin: 0; text-align: center;">Ideal para quienes inician en el entrenamiento deportivo y buscan una guía sencilla pero efectiva. Incluye rutinas personalizadas adaptadas a tu nivel, acceso a la comunidad online para resolver dudas y motivarte, y seguimiento mensual para ajustar tu progreso.</p>
+                    <p style="margin: 0; text-align: justify;">Ideal para quienes inician en el entrenamiento deportivo y buscan una guía sencilla pero efectiva. Incluye rutinas personalizadas adaptadas a tu nivel, acceso a la comunidad online para resolver dudas y motivarte, y seguimiento mensual para ajustar tu progreso.</p>
                     </div>
-                <div class="detalle-plan" style="flex: 1; min-width: 220px; max-width: 340px; background: #fff; border-radius: 1rem; padding: 1.2rem; display: flex; flex-direction: column; align-items: center;">
+                <div class="detalle-plan" style="flex: 1; min-width: 220px; max-width: 340px; background: #fff; border-radius: 1rem; padding: 1.2rem; display: flex; flex-direction: column; align-items: center; box-shadow: 0 8px 24px rgba(25,118,210,0.12); border: 1px solid #e6eefc;">
                     <h3 style="margin-bottom: 0.7rem;">Plan Estándar</h3>
-                    <p style="margin: 0; text-align: center;">Perfecto para deportistas que desean avanzar más rápido y con mayor soporte. Además de todo lo del plan básico, tendrás asesoría directa con entrenadores certificados, rutinas avanzadas para mejorar tu rendimiento y una evaluación física trimestral para medir tus avances.</p>
+                    <p style="margin: 0; text-align: justify;">Perfecto para deportistas que desean avanzar más rápido y con mayor soporte. Además de todo lo del plan básico, tendrás asesoría directa con entrenadores certificados, rutinas avanzadas para mejorar tu rendimiento y una evaluación física trimestral para medir tus avances.</p>
                 </div>
-                <div class="detalle-plan" style="flex: 1; min-width: 220px; max-width: 340px; background: #fff; border-radius: 1rem; padding: 1.2rem; display: flex; flex-direction: column; align-items: center;">
+                <div class="detalle-plan" style="flex: 1; min-width: 220px; max-width: 340px; background: #fff; border-radius: 1rem; padding: 1.2rem; display: flex; flex-direction: column; align-items: center; box-shadow: 0 8px 24px rgba(25,118,210,0.12); border: 1px solid #e6eefc;">
                     <h3 style="margin-bottom: 0.7rem;">Plan Personalizado</h3>
-                    <p style="margin: 0; text-align: center;">La opción más completa, pensada para quienes buscan resultados óptimos y atención exclusiva. Incluye todo lo del plan estándar, entrenamiento 1 a 1 con un entrenador dedicado, seguimiento semanal y acceso a eventos exclusivos para potenciar tu experiencia deportiva.</p>
+                    <p style="margin: 0; text-align: justify;">La opción más completa, pensada para quienes buscan resultados óptimos y atención exclusiva. Incluye todo lo del plan estándar, entrenamiento 1 a 1 con un entrenador dedicado, seguimiento semanal y acceso a eventos exclusivos para potenciar tu experiencia deportiva.</p>
                 </div>
             </div>
         </section>
@@ -161,17 +162,17 @@
         <section class="detalle-precios" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 1.2rem;">
             <h2 style="width:100%; text-align:center; margin-top:0.7rem; margin-bottom:0.9rem; font-size:2rem; font-weight:700; color:#1976d2;">Justificación de los Planes</h2>
             <div style="display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2rem; width: 100%;">
-                <div class="detalle-precio" style="flex: 1; min-width: 220px; max-width: 340px; background: #fff; border-radius: 1rem; padding: 1.2rem; display: flex; flex-direction: column; align-items: center;">
+                <div class="detalle-precio" style="flex: 1; min-width: 220px; max-width: 340px; background: #fff; border-radius: 1rem; padding: 1.2rem; display: flex; flex-direction: column; align-items: center; box-shadow: 0 8px 24px rgba(25,118,210,0.12); border: 1px solid #e6eefc;">
                     <h3 style="margin-bottom: 0.7rem;">Plan Básico - $20/mes</h3>
-                    <p style="margin: 0; text-align: center;">Este plan tiene un precio accesible para que cualquier persona pueda comenzar su camino deportivo con asesoría profesional. El costo cubre el acceso a rutinas personalizadas y la comunidad, permitiendo mantener la calidad del servicio a bajo costo.</p>
+                    <p style="margin: 0; text-align: justify;">Este plan tiene un precio accesible para que cualquier persona pueda comenzar su camino deportivo con asesoría profesional. El costo cubre el acceso a rutinas personalizadas y la comunidad, permitiendo mantener la calidad del servicio a bajo costo.</p>
                     </div>
-                <div class="detalle-precio" style="flex: 1; min-width: 220px; max-width: 340px; background: #fff; border-radius: 1rem; padding: 1.2rem; display: flex; flex-direction: column; align-items: center;">
+                <div class="detalle-precio" style="flex: 1; min-width: 220px; max-width: 340px; background: #fff; border-radius: 1rem; padding: 1.2rem; display: flex; flex-direction: column; align-items: center; box-shadow: 0 8px 24px rgba(25,118,210,0.12); border: 1px solid #e6eefc;">
                     <h3 style="margin-bottom: 0.7rem;">Plan Estándar - $30/mes</h3>
-                    <p style="margin: 0; text-align: center;">El precio refleja el valor añadido de la asesoría directa con entrenadores y las rutinas avanzadas. Es ideal para quienes buscan un acompañamiento más cercano y herramientas adicionales para progresar más rápido.</p>
+                    <p style="margin: 0; text-align: justify;">El precio refleja el valor añadido de la asesoría directa con entrenadores y las rutinas avanzadas. Es ideal para quienes buscan un acompañamiento más cercano y herramientas adicionales para progresar más rápido.</p>
                 </div>
-                <div class="detalle-precio" style="flex: 1; min-width: 220px; max-width: 340px; background: #fff; border-radius: 1rem; padding: 1.2rem; display: flex; flex-direction: column; align-items: center;">
+                <div class="detalle-precio" style="flex: 1; min-width: 220px; max-width: 340px; background: #fff; border-radius: 1rem; padding: 1.2rem; display: flex; flex-direction: column; align-items: center; box-shadow: 0 8px 24px rgba(25,118,210,0.12); border: 1px solid #e6eefc;">
                     <h3 style="margin-bottom: 0.7rem;">Plan Personalizado - $35/mes</h3>
-                    <p style="margin: 0; text-align: center;">Este plan está diseñado para quienes desean atención exclusiva y resultados sobresalientes. El precio incluye sesiones 1 a 1, seguimiento semanal y acceso a eventos exclusivos, justificando la inversión para un servicio premium y personalizado.</p>
+                    <p style="margin: 0; text-align: justify;">Este plan está diseñado para quienes desean atención exclusiva y resultados sobresalientes. El precio incluye sesiones 1 a 1, seguimiento semanal y acceso a eventos exclusivos, justificando la inversión para un servicio premium y personalizado.</p>
                 </div>
             </div>
         </section>
@@ -181,6 +182,7 @@
         <h2 style="color: #1976d2; margin-bottom: 1.2rem;">Solicitar Información de Planes</h2>
         <form action="Procesamientof/procesar_formularios.php" method="POST">
             <input type="hidden" name="form_type" value="planes">
+            <input type="hidden" name="plan_elegido" id="plan_elegido" value="">
             <div style="margin-bottom: 1rem;">
                 <label for="nombre" style="display: block; margin-bottom: 0.3rem; font-weight: 600; color: #1976d2;">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required style="width: 100%; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #b0bec5;">
@@ -284,74 +286,133 @@
     </div>
 </footer>
     <script>
-        // Función para mostrar la sección de confirmación del plan seleccionado
-        function confirmarPlan(plan) {
-            alert(`Has confirmado el ${plan}. Nos pondremos en contacto contigo pronto.`);
-            // Aquí podrías agregar lógica adicional, como enviar la selección al servidor
-        }
-
-        // Mostrar la sección de confirmación correspondiente al hacer clic en "Elegir Plan"
-        // Importante: limitar a enlaces (a.btn-primary) para no interferir con el botón de enviar del formulario
-        document.querySelectorAll('a.btn-primary').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const href = button.getAttribute('href');
-                if (!href || !href.startsWith('#confirmar-')) return; // Solo manejar anclas de confirmación
-                e.preventDefault();
-                const targetId = href.substring(1);
-                document.querySelectorAll('section[id^="confirmar-"]').forEach(section => {
-                    section.style.display = 'none';
-                });
-                const targetSection = document.getElementById(targetId);
-                if (targetSection) {
-                    targetSection.style.display = 'block';
-                    targetSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
+        // Script legacy de confirmación por anclas eliminado. La confirmación ahora usa un modal.
     </script>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Manejo de notificaciones
-    const urlParams = new URLSearchParams(window.location.search);
-    const success = urlParams.get('success');
-    const error = urlParams.get('error');
-    const notification = document.getElementById('notification');
-    const messageEl = document.getElementById('notification-message');
-    const closeBtn = document.getElementById('close-notification');
+    <script>
+        // Modal de confirmación de Plan
+        (function(){
+          const modal = document.getElementById('planConfirmModal');
+          const planNameEl = document.getElementById('modalPlanName');
+          const planPriceEl = document.getElementById('modalPlanPrice');
+          const cancelBtn = document.getElementById('cancelConfirmPlan');
+          const confirmBtn = document.getElementById('doConfirmPlan');
+          const hiddenPlan = document.getElementById('plan_elegido');
+          let currentPlan = null;
 
-    function showNotification(type, message) {
-        if (!notification || !messageEl) return;
-        messageEl.textContent = message;
-        notification.className = `notification ${type} show`;
-        setTimeout(() => {
-            hideNotification();
-        }, 5000);
-    }
+          function openModal(name, price){
+            currentPlan = { name, price };
+            planNameEl.textContent = `Plan ${name}`;
+            planPriceEl.textContent = price || '';
+            modal.style.display = 'flex';
+          }
+          function closeModal(){ modal.style.display = 'none'; }
 
-    function hideNotification() {
-        notification.classList.add('hidden');
-        setTimeout(() => {
-            notification.classList.remove('show');
-            // Limpiar URL
-            if (window.history.replaceState) {
-                const url = new URL(window.location);
-                url.searchParams.delete('success');
-                url.searchParams.delete('error');
-                window.history.replaceState({}, document.title, url.pathname);
+          // Abrir modal al hacer clic en Elegir Plan
+          document.querySelectorAll('.planes-grid a.btn-primary').forEach(a=>{
+            a.addEventListener('click', (e)=>{
+              const name = a.getAttribute('data-plan');
+              const price = a.getAttribute('data-price');
+              if (!name) return; // otros botones conservan su comportamiento
+              e.preventDefault();
+              openModal(name, price);
+            });
+          });
+
+          cancelBtn?.addEventListener('click', closeModal);
+          modal?.addEventListener('click', (e)=>{ if (e.target === modal) closeModal(); });
+          confirmBtn?.addEventListener('click', async ()=>{
+            if (!currentPlan) return;
+            // Guardar el plan elegido en el formulario
+            hiddenPlan.value = currentPlan.name;
+            closeModal();
+            // Feedback visual en el botón seleccionado (opcional)
+            try {
+              const btn = document.querySelector(`.planes-grid a.btn-primary[data-plan="${currentPlan.name}"]`);
+              if (btn){ btn.textContent = 'Plan seleccionado ✓'; btn.style.opacity = '0.9'; }
+            } catch(_){ }
+            // Enviar al backend para guardar la elección
+            try {
+              // Intentar obtener email del almacenamiento del navegador si existe
+              const storedEmail = (window.sessionStorage && (sessionStorage.getItem('user_email') || sessionStorage.getItem('email'))) 
+                                  || (window.localStorage && (localStorage.getItem('user_email') || localStorage.getItem('email')))
+                                  || null;
+              const res = await fetch('admin_api/planes.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'save_choice', plan: currentPlan.name, price: currentPlan.price, email: storedEmail })
+              });
+              const data = await res.json();
+              showPlanToast(data?.success ? `Elegiste el plan ${currentPlan.name}.` : (data?.message || 'No se pudo guardar tu elección'));
+            } catch (e) {
+              showPlanToast('No se pudo guardar tu elección');
             }
-        }, 300);
-    }
+            // Desplazar al formulario para completar y enviar
+            document.getElementById('formulario-planes')?.scrollIntoView({ behavior: 'smooth' });
+          });
 
-    if (success) {
-        showNotification('success', '¡Éxito! Tu solicitud de información sobre planes ha sido enviada. Te contactaremos pronto.');
-    } else if (error) {
-        showNotification('error', 'Completar campo');
-    }
+          // Toast ligero para confirmación
+          function showPlanToast(message){
+            let toast = document.getElementById('plan-toast');
+            if (!toast){
+              toast = document.createElement('div');
+              toast.id = 'plan-toast';
+              toast.style.position = 'fixed';
+              toast.style.top = '20px';
+              toast.style.right = '20px';
+              toast.style.zIndex = '1100';
+              toast.style.background = 'linear-gradient(135deg, #4caf50, #45a049)';
+              toast.style.color = '#fff';
+              toast.style.padding = '0.75rem 1rem';
+              toast.style.borderRadius = '10px';
+              toast.style.boxShadow = '0 8px 24px rgba(0,0,0,0.18)';
+              toast.style.fontWeight = '600';
+              toast.style.opacity = '0';
+              toast.style.transition = 'opacity .3s ease';
+              document.body.appendChild(toast);
+            }
+            toast.textContent = message;
+            requestAnimationFrame(()=>{ toast.style.opacity = '1'; });
+            setTimeout(()=>{
+              toast.style.opacity = '0';
+              setTimeout(()=>{ toast.remove(); }, 300);
+            }, 3000);
+          }
+        })();
+    </script>
+    <script>
+      // Notificación de éxito/error al volver del envío del formulario
+      document.addEventListener('DOMContentLoaded', function(){
+        const notification = document.getElementById('notification');
+        const messageEl = document.getElementById('notification-message');
+        const closeBtn = document.getElementById('close-notification');
+        if (!notification || !messageEl) return;
+        const params = new URLSearchParams(window.location.search);
+        const success = params.get('success');
+        const error = params.get('error');
 
-    closeBtn.addEventListener('click', hideNotification);
-});
-</script>
+        function show(type, text){
+          notification.className = `notification ${type} show`;
+          messageEl.textContent = text;
+          setTimeout(()=>{ hide(); }, 5000);
+        }
+        function hide(){
+          notification.classList.add('hidden');
+          setTimeout(()=>{
+            notification.classList.remove('show');
+            if (window.history.replaceState){
+              const url = new URL(window.location);
+              url.searchParams.delete('success');
+              url.searchParams.delete('error');
+              window.history.replaceState({}, document.title, url.pathname);
+            }
+          }, 300);
+        }
+        closeBtn?.addEventListener('click', hide);
+        if (success) show('success', '¡Éxito! Tu solicitud sobre planes ha sido enviada, te contactaremos pronto.');
+        else if (error) show('error', 'Por favor, completa los campos requeridos del formulario.');
+      });
+    </script>
 <script>
     // Acordeón para FAQ (varias abiertas)
     document.addEventListener('DOMContentLoaded', function() {

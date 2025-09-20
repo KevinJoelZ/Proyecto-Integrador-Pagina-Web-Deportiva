@@ -68,9 +68,9 @@
             </div>
 
             <div class="feature">
-                <i class="fas fa-trophy"></i>
-                <h3>Logros y Retos</h3>
-                <p>Supera tus límites y desbloquea achievements</p>
+                <i class="fas fa-layer-group"></i>
+                <h3>Servicios y Planes</h3>
+                <p>Descubre nuestros servicios y planes: elige el que mejor se adapte a tus objetivos.</p>
             </div>
         </div>
 
@@ -225,6 +225,8 @@
                         try { await fetch('./login/crear_sesion.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ uid: user.uid }) }); } catch (e) {}
                         window.location.href = 'admin.php';
                     } else {
+                        // Crear sesión PHP también para clientes (para usar APIs que requieren $_SESSION)
+                        try { await fetch('./login/crear_sesion.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ uid: user.uid }) }); } catch (e) {}
                         const returnUrl = getReturnUrl();
                         window.location.href = returnUrl ? returnUrl : 'cliente.php';
                     }
@@ -272,6 +274,8 @@
                         try { await fetch('./login/crear_sesion.php', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ uid: user.uid }) }); } catch(e){}
                         window.location.href = 'admin.php';
                     } else {
+                        // Crear sesión PHP también para clientes
+                        try { await fetch('./login/crear_sesion.php', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ uid: user.uid }) }); } catch(e){}
                         const returnUrl = getReturnUrl();
                         window.location.href = returnUrl ? returnUrl : 'cliente.php';
                     }

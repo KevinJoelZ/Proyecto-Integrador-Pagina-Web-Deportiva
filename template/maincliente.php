@@ -386,4 +386,35 @@
             <!-- NOTA: Los artículos del blog anteriores son ejemplos. Reemplazar con contenido real del blog -->
         </div>
     </section>
+    <script>
+    // Toggle de FAQs estáticas (mostrar respuesta al hacer clic)
+    document.addEventListener('DOMContentLoaded', function(){
+        try {
+            document.querySelectorAll('.faq .faq-item').forEach(function(item){
+                const btn = item.querySelector('.faq-question');
+                const ans = item.querySelector('.faq-answer');
+                if (!btn || !ans) return;
+                // Ocultas por defecto; se muestran al hacer clic
+                if (ans.style.display === '') ans.style.display = 'none';
+                btn.addEventListener('click', function(){
+                    ans.style.display = (ans.style.display === 'none') ? 'block' : 'none';
+                });
+            });
+        } catch(e) {}
+
+        // Toggle para "Leer más" en noticias y consejos
+        try {
+            document.querySelectorAll('.blog-card .read-more').forEach(function(link){
+                link.addEventListener('click', function(ev){
+                    ev.preventDefault();
+                    const more = link.parentElement.querySelector('.blog-more');
+                    if (!more) return;
+                    const isHidden = (more.style.display === '' || more.style.display === 'none');
+                    more.style.display = isHidden ? 'block' : 'none';
+                    link.textContent = isHidden ? 'Leer menos' : 'Leer más';
+                });
+            });
+        } catch(e) {}
+    });
+    </script>
 </main>
