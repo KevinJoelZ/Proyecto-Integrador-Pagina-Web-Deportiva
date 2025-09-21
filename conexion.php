@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost';
-$usuario = 'root';
-$contraseña = '';
-$base_datos = 'guardarbd';
+$host = 'sql107.infinityfree.com';
+$usuario = 'if0_39340780';
+$contraseña = 'Vd30M31z3a';
+$base_datos = 'if0_39340780_guardar_base_datos';
 
 $conexion = new mysqli($host, $usuario, $contraseña, $base_datos);
 
@@ -14,4 +14,11 @@ if ($conexion->connect_error) {
 }
 
 $conexion->set_charset("utf8mb4");
+// Ajustar zona horaria para que NOW() y TIMESTAMP reflejen hora local
+// PHP
+if (function_exists('date_default_timezone_set')) {
+    @date_default_timezone_set('America/Guayaquil');
+}
+// MySQL (por conexión)
+@$conexion->query("SET time_zone = '-05:00'");
 ?>

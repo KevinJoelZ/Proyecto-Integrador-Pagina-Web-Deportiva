@@ -1,6 +1,11 @@
 <?php
 session_start();
-include 'conexión.php';
+// Cargar conexión soportando ambos nombres de archivo
+if (file_exists(__DIR__ . '/conexión.php')) {
+    include __DIR__ . '/conexión.php';
+} else {
+    include __DIR__ . '/conexion.php';
+}
 
 // Configuración de Firebase para verificación
 $project_id = 'proyectoweb-fc2d2'; // Para verificar aud en tokeninfo

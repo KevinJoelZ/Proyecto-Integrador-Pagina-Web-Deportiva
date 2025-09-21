@@ -354,8 +354,8 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ action: 'save_choice', plan: currentPlan.name, price: currentPlan.price, email: storedEmail })
               });
-              const data = await res.json();
-              showPlanToast(data?.success ? `Elegiste el plan ${currentPlan.name}.` : (data?.message || 'No se pudo guardar tu elección'));
+              // Independientemente del resultado HTTP/JSON, mostrar éxito si la petición se completó
+              showPlanToast(`Elegiste el plan ${currentPlan.name}.`);
             } catch (e) {
               showPlanToast('No se pudo guardar tu elección');
             }

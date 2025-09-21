@@ -1,6 +1,11 @@
 <?php
 // Incluir archivo de conexión
-include 'conexión.php';
+// Soportar ambos nombres de archivo en hosting (con y sin tilde)
+if (file_exists(__DIR__ . '/conexión.php')) {
+    include __DIR__ . '/conexión.php';
+} else {
+    include __DIR__ . '/conexion.php';
+}
 
 // Verificar que la conexión esté activa
 if (!$conexion) {

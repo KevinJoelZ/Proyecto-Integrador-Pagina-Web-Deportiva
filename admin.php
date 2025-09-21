@@ -11,7 +11,12 @@
 <body>
 <?php
 session_start();
-require_once __DIR__ . '/conexión.php';
+// Cargar conexión soportando ambos nombres de archivo
+if (file_exists(__DIR__ . '/conexión.php')) {
+    require_once __DIR__ . '/conexión.php';
+} else {
+    require_once __DIR__ . '/conexion.php';
+}
 // Guard de admin
 if (!isset($_SESSION['user_id']) || ($_SESSION['user_rol'] ?? '') !== 'admin') {
     header('Location: index.php');

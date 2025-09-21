@@ -9,7 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-require_once __DIR__ . '/../conexion.php';
+// Cargar conexión soportando ambos nombres de archivo
+if (file_exists(__DIR__ . '/../conexión.php')) {
+    require_once __DIR__ . '/../conexión.php';
+} else {
+    require_once __DIR__ . '/../conexion.php';
+}
 
 try {
     $q = "SELECT id, uid, nombre, email, rol, ultima_conexion FROM usuarios ORDER BY ultima_conexion DESC, id DESC LIMIT 200";

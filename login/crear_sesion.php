@@ -10,7 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-require_once __DIR__ . '/../conexion.php';
+// Cargar conexión soportando ambos nombres de archivo
+if (file_exists(__DIR__ . '/../conexión.php')) {
+    require_once __DIR__ . '/../conexión.php';
+} else {
+    require_once __DIR__ . '/../conexion.php';
+}
 
 try {
     $input = json_decode(file_get_contents('php://input'), true) ?? [];

@@ -1,5 +1,14 @@
 <?php
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(204);
+    exit;
+}
+
 session_start();
 
 // Incluir conexión a la base de datos (usar el mismo archivo que el resto del proyecto)
@@ -30,6 +39,9 @@ if ($action === 'save_choice') {
     $plan = trim((string)($payload['plan'] ?? ''));
     $price = trim((string)($payload['price'] ?? ''));
     $user_email = isset($_SESSION['user_email']) ? (string)$_SESSION['user_email'] : null;
+    if (!$user_email) {
+        $user_email = isset($payload['email']) ? trim((string)$payload['email']) : null;
+    }
 
     if ($plan === '') {
         echo json_encode(['success' => false, 'message' => 'Plan requerido']);
@@ -50,20 +62,21 @@ if ($action === 'save_choice') {
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
     @$conexion->query($createSql);
 
-    // Insertar selección
-    $stmt = $conexion->prepare("INSERT INTO planes_seleccionados (plan, price, user_email) VALUES (?, ?, ?)");
+    // Insertar selección (forzar created_at en hora local -05:00)
+    $stmt = $conexion->prepare("INSERT INTO planes_seleccionados (plan, price, user_email, created_at) VALUES (?, ?, ?, CONVERT_TZ(UTC_TIMESTAMP(), '+00:00', '-05:00'))");
     if (!$stmt) {
-        echo json_encode(['success' => false, 'message' => 'Error de preparación']);
+        echo json_encode(['success' => false, 'message' => 'Error de preparación: ' . $conexion->error]);
         exit;
     }
     $stmt->bind_param('sss', $plan, $price, $user_email);
     $ok = $stmt->execute();
+    $err = $stmt->error;
     $stmt->close();
 
     if ($ok) {
         echo json_encode(['success' => true]);
     } else {
-        echo json_encode(['success' => false, 'message' => 'No se pudo guardar']);
+        echo json_encode(['success' => false, 'message' => 'No se pudo guardar: ' . $err]);
     }
     exit;
 }
