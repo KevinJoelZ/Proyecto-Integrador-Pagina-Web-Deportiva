@@ -15,10 +15,10 @@ session_start();
 $conexionIncluded = false;
 try {
     if (file_exists(__DIR__ . '/../conexión.php')) { // con tilde
-        require_once __DIR__ . '/../conexión.php';
+        ob_start(); require_once __DIR__ . '/../conexión.php'; ob_end_clean();
         $conexionIncluded = true;
     } elseif (file_exists(__DIR__ . '/../conexion.php')) {
-        require_once __DIR__ . '/../conexion.php';
+        ob_start(); require_once __DIR__ . '/../conexion.php'; ob_end_clean();
         $conexionIncluded = true;
     }
 } catch (Throwable $e) {
@@ -29,6 +29,7 @@ if (!$conexionIncluded || !isset($conexion)) {
     echo json_encode(['success' => false, 'message' => 'Conexión no disponible']);
     exit;
 }
+
 
 // Leer cuerpo JSON
 $raw = file_get_contents('php://input');
@@ -62,13 +63,15 @@ if ($action === 'save_choice') {
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
     @$conexion->query($createSql);
 
-    // Insertar selección (forzar created_at en hora local -05:00)
-    $stmt = $conexion->prepare("INSERT INTO planes_seleccionados (plan, price, user_email, created_at) VALUES (?, ?, ?, CONVERT_TZ(UTC_TIMESTAMP(), '+00:00', '-05:00'))");
+    // Insertar selección con hora local desde PHP para que se vea exacta en la BD
+    if (function_exists('date_default_timezone_set')) { @date_default_timezone_set('America/Guayaquil'); }
+    $now = date('Y-m-d H:i:s');
+    $stmt = $conexion->prepare("INSERT INTO planes_seleccionados (plan, price, user_email, created_at) VALUES (?, ?, ?, ?)");
     if (!$stmt) {
         echo json_encode(['success' => false, 'message' => 'Error de preparación: ' . $conexion->error]);
         exit;
     }
-    $stmt->bind_param('sss', $plan, $price, $user_email);
+    $stmt->bind_param('ssss', $plan, $price, $user_email, $now);
     $ok = $stmt->execute();
     $err = $stmt->error;
     $stmt->close();

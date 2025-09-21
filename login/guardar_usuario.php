@@ -19,11 +19,35 @@ try {
     // Log para debug
     error_log("Iniciando proceso de guardado de usuario");
     
-    // Incluir conexión a la base de datos
-    require_once '../conexion.php';
-    
+    // Incluir conexión a la base de datos (silenciar cualquier salida accidental)
+    ob_start();
+    if (file_exists(__DIR__ . '/../conexión.php')) {
+        require_once __DIR__ . '/../conexión.php';
+    } else {
+        require_once __DIR__ . '/../conexion.php';
+    }
+    ob_end_clean();
+    // Fijar zona horaria para esta conexión (evita desfase de 2 horas)
+    @$conexion->query("SET time_zone='-05:00'");
     
     error_log("Conexión establecida correctamente");
+
+    // Asegurar tabla usuarios (si no existe)
+    @$conexion->query("CREATE TABLE IF NOT EXISTS usuarios (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        uid VARCHAR(255) UNIQUE,
+        nombre VARCHAR(255) NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        foto_perfil TEXT,
+        email_verificado TINYINT(1) DEFAULT 0,
+        fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        ultima_conexion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        estado ENUM('activo','inactivo') DEFAULT 'activo',
+        rol ENUM('admin','cliente') DEFAULT 'cliente'
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+
+    // Preparar hora local desde PHP para guardar de forma consistente
+    $now = date('Y-m-d H:i:s');
 
     // Leer datos JSON del cuerpo de la petición
     $input = file_get_contents('php://input');
@@ -87,7 +111,7 @@ try {
                       email = ?,
                       foto_perfil = ?,
                       email_verificado = ?,
-                      ultima_conexion = NOW(),
+                      ultima_conexion = ?,
                       rol = ?
                       WHERE uid = ?";
        
@@ -96,7 +120,7 @@ try {
             throw new Exception('Error al preparar consulta de actualización: ' . $conexion->error);
         }
         
-        $updateStmt->bind_param('sssiss', $name, $email, $photoURL, $emailVerified, $rolToUpdate, $uid);
+        $updateStmt->bind_param('sssisss', $name, $email, $photoURL, $emailVerified, $now, $rolToUpdate, $uid);
        
         if ($updateStmt->execute()) {   
             error_log("Usuario actualizado exitosamente");
@@ -114,14 +138,14 @@ try {
         // Usuario nuevo, insertar
         error_log("Usuario nuevo, insertando...");
         $insertSql = "INSERT INTO usuarios (uid, nombre, email, foto_perfil, email_verificado, fecha_registro, ultima_conexion, rol)
-                      VALUES (?, ?, ?, ?, ?, NOW(), NOW(), ?)";
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         $insertStmt = $conexion->prepare($insertSql);
         if (!$insertStmt) {
             throw new Exception('Error al preparar consulta de inserción: ' . $conexion->error);
         }
         
-        $insertStmt->bind_param('ssssis', $uid, $name, $email, $photoURL, $emailVerified, $rol);
+        $insertStmt->bind_param('ssssisss', $uid, $name, $email, $photoURL, $emailVerified, $now, $now, $rol);
        
         if ($insertStmt->execute()) {
             $newUserId = $conexion->insert_id;

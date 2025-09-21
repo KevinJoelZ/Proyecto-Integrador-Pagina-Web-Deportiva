@@ -9,7 +9,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-require_once __DIR__ . '/../conexion.php';
+// Cargar conexión (con y sin tilde) y fijar zona horaria de la sesión MySQL
+ob_start();
+if (file_exists(__DIR__ . '/../conexión.php')) {
+    require_once __DIR__ . '/../conexión.php';
+} else {
+    require_once __DIR__ . '/../conexion.php';
+}
+ob_end_clean();
+// Opcional: intentar fijar zona horaria de MySQL (no imprescindible si usamos timestamp PHP)
+@$conexion->query("SET time_zone='-05:00'");
 
 // Auto-crear tabla faqs si no existe
 $conexion->query("CREATE TABLE IF NOT EXISTS faqs (
@@ -73,8 +82,10 @@ try {
             $respuesta = trim($input['respuesta'] ?? '');
             $page_slug = sanitize_page($input['page'] ?? 'cliente');
             if ($pregunta === '' || $respuesta === '') throw new Exception('Pregunta y respuesta son requeridas');
-            $stmt = $conexion->prepare("INSERT INTO faqs (pregunta, respuesta, page_slug) VALUES (?, ?, ?)");
-            $stmt->bind_param('sss', $pregunta, $respuesta, $page_slug);
+            if (function_exists('date_default_timezone_set')) { @date_default_timezone_set('America/Guayaquil'); }
+            $now = date('Y-m-d H:i:s');
+            $stmt = $conexion->prepare("INSERT INTO faqs (pregunta, respuesta, page_slug, creado_en, actualizado_en) VALUES (?, ?, ?, ?, ?)\n");
+            $stmt->bind_param('sssss', $pregunta, $respuesta, $page_slug, $now, $now);
             $stmt->execute();
             echo json_encode(['success' => true, 'id' => $stmt->insert_id]);
             break;
@@ -84,8 +95,10 @@ try {
             $respuesta = trim($input['respuesta'] ?? '');
             $page_slug = sanitize_page($input['page'] ?? 'cliente');
             if ($id <= 0 || $pregunta === '' || $respuesta === '') throw new Exception('Datos inválidos');
-            $stmt = $conexion->prepare("UPDATE faqs SET pregunta = ?, respuesta = ?, page_slug = ? WHERE id = ?");
-            $stmt->bind_param('sssi', $pregunta, $respuesta, $page_slug, $id);
+            if (function_exists('date_default_timezone_set')) { @date_default_timezone_set('America/Guayaquil'); }
+            $now = date('Y-m-d H:i:s');
+            $stmt = $conexion->prepare("UPDATE faqs SET pregunta = ?, respuesta = ?, page_slug = ?, actualizado_en = ? WHERE id = ?");
+            $stmt->bind_param('ssssi', $pregunta, $respuesta, $page_slug, $now, $id);
             $stmt->execute();
             echo json_encode(['success' => true]);
             break;

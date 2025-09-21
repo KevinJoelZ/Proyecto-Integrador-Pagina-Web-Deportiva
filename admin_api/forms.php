@@ -1,5 +1,7 @@
 <?php
 header('Content-Type: application/json');
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
@@ -11,30 +13,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 // Cargar conexión soportando ambos nombres de archivo
 if (file_exists(__DIR__ . '/../conexión.php')) {
-    require_once __DIR__ . '/../conexión.php';
+    ob_start(); require_once __DIR__ . '/../conexión.php'; ob_end_clean();
 } else {
-    require_once __DIR__ . '/../conexion.php';
+    ob_start(); require_once __DIR__ . '/../conexion.php'; ob_end_clean();
 }
 
 $input = json_decode(file_get_contents('php://input'), true) ?? [];
 $action = $_GET['action'] ?? $input['action'] ?? 'list';
 
 function table_exists($conexion, $table) {
-    $stmt = $conexion->prepare("SELECT 1 FROM information_schema.tables WHERE table_schema = DATABASE() AND table_name = ? LIMIT 1");
-    $stmt->bind_param('s', $table);
-    $stmt->execute();
-    $res = $stmt->get_result();
+    // Sanitizar nombre de tabla (ya viene filtrado, reforzamos)
+    $t = preg_replace('/[^a-zA-Z0-9_]/', '', $table);
+    if ($t === '') return false;
+    // MariaDB no soporta placeholders en SHOW TABLES LIKE, usar concatenación segura
+    $like = $conexion->real_escape_string($t);
+    $res = $conexion->query("SHOW TABLES LIKE '" . $like . "'");
     return $res && $res->num_rows > 0;
 }
 
 try {
     if ($action === 'list_tables') {
-        // List all tables from current database
+        // Listar tablas usando SHOW TABLES (compatible con hostings restringidos)
         $tables = [];
-        $sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = DATABASE() ORDER BY table_name";
-        $res = $conexion->query($sql);
+        $res = $conexion->query("SHOW TABLES");
         if ($res) {
-            while ($row = $res->fetch_assoc()) { $tables[] = $row['table_name']; }
+            while ($row = $res->fetch_array(MYSQLI_NUM)) { $tables[] = $row[0]; }
+        } else {
+            // Fallback en algunos hostings
+            $res2 = $conexion->query("SHOW FULL TABLES");
+            if ($res2) {
+                while ($row = $res2->fetch_array(MYSQLI_NUM)) { $tables[] = $row[0]; }
+            } else {
+                throw new Exception('No se pudo listar tablas');
+            }
         }
         echo json_encode(['success' => true, 'tables' => $tables]);
     } elseif ($action === 'fetch_table') {
@@ -55,3 +66,4 @@ try {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 }
+

@@ -145,7 +145,9 @@ $user_email = $_SESSION['user_email'] ?? '';
         <div style="display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; justify-content:center;">
           <input list="forms-tables" id="forms-table" class="input" placeholder="Escribe o selecciona una tabla" style="max-width:360px" />
           <datalist id="forms-tables"></datalist>
+          <button class="btn" id="forms-buscar"><i class="fas fa-search"></i> Buscar Tablas</button>
           <button class="btn primary" id="forms-cargar"><i class="fas fa-eye"></i> Cargar</button>
+          <span id="forms-notice" class="notice"></span>
         </div>
         <div style="margin-top:10px; overflow:auto;">
           <table class="table" id="forms-table-data"><thead></thead><tbody></tbody></table>
@@ -292,37 +294,86 @@ document.getElementById('stats-guardar').addEventListener('click', async ()=>{
 
 // Formularios
 async function scanTables(){
-  const res = await fetch('admin_api/forms.php?action=list_tables');
-  const data = await res.json();
-  const list = document.getElementById('forms-tables');
-  list.innerHTML = '';
-  for (const t of (data.tables||[])){
-    const opt = document.createElement('option'); opt.value = t; list.appendChild(opt);
+  const notice = document.getElementById('forms-notice');
+  notice.textContent = '';
+  try {
+    const res = await fetch('admin_api/forms.php?action=list_tables', {cache:'no-store'});
+    const data = await res.json();
+    const list = document.getElementById('forms-tables');
+    const input = document.getElementById('forms-table');
+    list.innerHTML = '';
+    for (const t of (data.tables||[])){
+      const opt = document.createElement('option'); opt.value = t; list.appendChild(opt);
+    }
+    if (!data.tables || !data.tables.length){
+      notice.textContent = 'No se encontraron tablas en la base de datos.';
+      notice.className = 'notice error';
+    } else {
+      notice.textContent = `Tablas encontradas: ${data.tables.length}`;
+      notice.className = 'notice success';
+      // Si no hay una tabla escrita, seleccionar la primera automáticamente
+      if (input && !input.value) {
+        input.value = data.tables[0];
+      }
+    }
+  } catch(e){
+    notice.textContent = 'No se pudo listar tablas';
+    notice.className = 'notice error';
   }
 }
 async function loadTable(){
   const table = (document.getElementById('forms-table').value||'').trim();
-  if (!table) return;
-  const res = await fetch('admin_api/forms.php', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'fetch_table', table}) });
-  const data = await res.json();
-  const thead = document.querySelector('#forms-table-data thead');
-  const tbody = document.querySelector('#forms-table-data tbody');
-  thead.innerHTML = '';
-  tbody.innerHTML = '';
-  const items = data.items || [];
-  if (items.length){
-    const cols = Object.keys(items[0]);
-    const trh = document.createElement('tr');
-    trh.innerHTML = cols.map(c=>`<th>${escapeHtml(c)}</th>`).join('');
-    thead.appendChild(trh);
-    for (const row of items){
-      const tr = document.createElement('tr');
-      tr.innerHTML = Object.values(row).map(v=>`<td>${escapeHtml(String(v??''))}</td>`).join('');
-      tbody.appendChild(tr);
+  if (!table) {
+    // Intentar obtener lista y elegir la primera automáticamente
+    try {
+      const res = await fetch('admin_api/forms.php?action=list_tables', {cache:'no-store'});
+      const data = await res.json();
+      const tables = data.tables||[];
+      if (tables.length){
+        document.getElementById('forms-table').value = tables[0];
+      } else {
+        return;
+      }
+    } catch(_) { return; }
+  }
+  const notice = document.getElementById('forms-notice');
+  notice.textContent = '';
+  try {
+    const res = await fetch('admin_api/forms.php', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'fetch_table', table}), cache:'no-store' });
+    const data = await res.json();
+    const thead = document.querySelector('#forms-table-data thead');
+    const tbody = document.querySelector('#forms-table-data tbody');
+    thead.innerHTML = '';
+    tbody.innerHTML = '';
+    if (!data.success){
+      notice.textContent = data.message || 'No se pudo cargar la tabla';
+      notice.className = 'notice error';
+      return;
     }
+    const items = data.items || [];
+    if (items.length){
+      const cols = Object.keys(items[0]);
+      const trh = document.createElement('tr');
+      trh.innerHTML = cols.map(c=>`<th>${escapeHtml(c)}</th>`).join('');
+      thead.appendChild(trh);
+      for (const row of items){
+        const tr = document.createElement('tr');
+        tr.innerHTML = Object.values(row).map(v=>`<td>${escapeHtml(String(v??''))}</td>`).join('');
+        tbody.appendChild(tr);
+      }
+      notice.textContent = `Filas cargadas: ${items.length}`;
+      notice.className = 'notice success';
+    } else {
+      notice.textContent = 'La tabla no tiene datos';
+      notice.className = 'notice';
+    }
+  } catch(e){
+    notice.textContent = 'Error al cargar la tabla';
+    notice.className = 'notice error';
   }
 }
 document.getElementById('forms-cargar').addEventListener('click', loadTable);
+document.getElementById('forms-buscar').addEventListener('click', scanTables);
 
 // Inicial
 loadFaqs();

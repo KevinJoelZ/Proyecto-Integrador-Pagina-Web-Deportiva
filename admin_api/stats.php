@@ -10,13 +10,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Cargar conexión soportando ambos nombres de archivo
+ob_start();
 if (file_exists(__DIR__ . '/../conexión.php')) {
     require_once __DIR__ . '/../conexión.php';
 } else {
     require_once __DIR__ . '/../conexion.php';
 }
+// Descartar cualquier salida accidental del archivo de conexión
+ob_end_clean();
 
 // Auto-crear tabla de estadísticas si no existe
+$conexion->query("SET time_zone='-05:00'");
 $conexion->query("CREATE TABLE IF NOT EXISTS site_stats (
   id INT AUTO_INCREMENT PRIMARY KEY,
   stat_key VARCHAR(64) UNIQUE,
@@ -51,11 +55,14 @@ try {
   } elseif ($action === 'set') {
     $stats = $input['stats'] ?? [];
     if (!is_array($stats)) throw new Exception('Formato inválido');
-    $stmt = $conexion->prepare("INSERT INTO site_stats (stat_key, stat_value) VALUES (?, ?) ON DUPLICATE KEY UPDATE stat_value = VALUES(stat_value)");
+    // Hora local desde PHP para updated_at (funciona si la columna es DATETIME o TIMESTAMP)
+    if (function_exists('date_default_timezone_set')) { @date_default_timezone_set('America/Guayaquil'); }
+    $now = date('Y-m-d H:i:s');
+    $stmt = $conexion->prepare("INSERT INTO site_stats (stat_key, stat_value, updated_at) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE stat_value = VALUES(stat_value), updated_at = VALUES(updated_at)");
     foreach ($stats as $k => $v) {
       $key = substr(trim($k), 0, 64);
       $val = substr(trim((string)$v), 0, 255);
-      $stmt->bind_param('ss', $key, $val);
+      $stmt->bind_param('sss', $key, $val, $now);
       $stmt->execute();
     }
     echo json_encode(['success' => true]);
