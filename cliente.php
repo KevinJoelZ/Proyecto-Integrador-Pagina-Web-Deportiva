@@ -159,7 +159,8 @@
         function isClientUser(){
             try {
                 const u = JSON.parse(sessionStorage.getItem('user')||'{}');
-                return (u.rol === 'cliente' && (u.email||'').toLowerCase() === 'kevinjoelzapata1999@gmail.com');
+                // Mostrar el botón de cerrar sesión para cualquier cliente, sin restringir por email
+                return (u.rol === 'cliente');
             } catch { return false; }
         }
         function isAdminUser(){

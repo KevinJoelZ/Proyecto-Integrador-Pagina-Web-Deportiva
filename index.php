@@ -28,11 +28,11 @@
                     <strong>Selecciona el correo para iniciar sesión</strong>
                 </div>
                 <div style="padding:16px 18px; display:flex; flex-direction:column; gap:.6rem;">
-                    <button class="account-option" data-email="kevinjoelzapata1999@gmail.com" style="display:flex; align-items:center; gap:.7rem; padding:10px 12px; border:1px solid #e5e7eb; border-radius:10px; background:#fff; cursor:pointer;">
+                    <button class="account-option" data-email="" style="display:flex; align-items:center; gap:.7rem; padding:10px 12px; border:1px solid #e5e7eb; border-radius:10px; background:#fff; cursor:pointer;">
                         <i class="fas fa-envelope" style="color:#1976d2;"></i>
                         <div style="text-align:left;">
                             <div style="font-weight:700; color:#111827;">Cliente</div>
-                            <div style="color:#374151; font-size:.92rem;">kevinjoelzapata1999@gmail.com</div>
+                            <div style="color:#374151; font-size:.92rem;">Cualquier correo de Google</div>
                         </div>
                     </button>
                     <button class="account-option" data-email="joelmoreno270599@gmail.com" style="display:flex; align-items:center; gap:.7rem; padding:10px 12px; border:1px solid #e5e7eb; border-radius:10px; background:#fff; cursor:pointer;">
@@ -250,7 +250,8 @@
         accountModal.addEventListener('click', (e) => { if (e.target === accountModal) { selectedEmail = null; closeAccountModal(); } });
         document.querySelectorAll('.account-option').forEach(btn => {
             btn.addEventListener('click', () => {
-                selectedEmail = btn.getAttribute('data-email');
+                const email = (btn.getAttribute('data-email') || '').trim();
+                selectedEmail = email !== '' ? email : null; // Cliente: sin restricción de correo; Admin: restringido al correo indicado
                 closeAccountModal();
                 signInWithGoogle();
             });
